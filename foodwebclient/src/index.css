@@ -17,5 +17,9 @@ li {
 a {
   text-decoration: none;
 }
+h1 {
+  font-size: 6rem;
+  color: #fff;
+}
 :root {
 }
