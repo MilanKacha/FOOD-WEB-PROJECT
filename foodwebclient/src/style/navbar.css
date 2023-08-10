@@ -1,0 +1,76 @@
+.navbar {
+  display: flex;
+  font-size: 1.9rem;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid red;
+  width: 100%;
+  height: 7rem;
+  background: transparent;
+}
+
+.navbar .nav-app {
+  margin: 0 2rem;
+}
+.navbar .nav-menu {
+  display: flex;
+  flex-direction: row;
+}
+.nav-menu-ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0 2rem;
+  gap: 2rem;
+}
+.nav_toggler div {
+  width: 2.5rem;
+  height: 0.2rem;
+  margin: 0.4rem;
+  background: black;
+  transition: 0.4s ease-in;
+}
+.nav_toggler {
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav_toggler {
+    display: block;
+  }
+  .nav-menu-ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50vh;
+    background: gray;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(100%);
+    transition: 0.5s ease-in;
+  }
+  .navbar .nav-menu .nav-menu-ul li:nth-child(1) {
+    margin-top: 4rem;
+  }
+  .nav-menu .nav_toggler {
+    z-index: 999;
+  }
+}
+
+/* Nav Active Class */
+.nav-active {
+  transform: translateX(0);
+}
+
+/* Toggler Icon Animation */
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-4px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-4px, -5px);
+}
