@@ -1,3 +1,11 @@
+header {
+  background-image: url("../assests/bg.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  width: 100%;
+}
+
 .navbar {
   display: flex;
   font-size: 1.9rem;
@@ -8,7 +16,6 @@
   background: transparent;
   position: relative;
   color: white;
-
   z-index: 999;
 }
 
@@ -36,6 +43,25 @@
 .nav_toggler {
   cursor: pointer;
   display: none;
+}
+
+/* hero-after navbar */
+.hero-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 7rem;
+}
+.hero-content-text {
+  margin-left: 7rem;
+}
+.hero-content-img img {
+  width: 40rem;
+  height: 40rem;
+  margin-right: 7rem;
 }
 
 @media screen and (max-width: 768px) {

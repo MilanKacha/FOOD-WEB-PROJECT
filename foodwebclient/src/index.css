@@ -7,6 +7,7 @@
 }
 body {
   font-family: "Poppins", sans-serif;
+  /* overflow-x: hidden; */
 }
 html {
   font-size: 62.5%;
@@ -21,5 +22,6 @@ h1 {
   font-size: 6rem;
   color: #fff;
 }
+
 :root {
 }
