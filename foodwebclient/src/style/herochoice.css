@@ -1,0 +1,31 @@
+.choice-card-wrapper .choice-card {
+  position: relative;
+  overflow: hidden;
+}
+.choice-card img {
+  object-fit: cover;
+  height: 25rem;
+  width: 100%;
+  border-radius: 5px;
+  filter: brightness(80%);
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+.choice-card img:hover {
+  transform: scale(1.2);
+}
+
+.choice-card .choice-content {
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  z-index: 999;
+}
+
+.choice-card .choice-heading {
+  font-size: 3rem;
+}
+.choice-card .choice-text {
+  font-size: 1.4rem;
+  bottom: 3rem;
+}
