@@ -2,16 +2,14 @@
   width: 100%;
   padding: 4rem 0;
 }
-
+.slider-heading {
+  color: black;
+}
 .card-wrapper {
   width: 80%;
   margin: 2rem auto;
 }
-.card-wrapper .slider-heading {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  font-weight: 400;
-}
+
 .slide img {
   width: 80%;
   height: 80%;

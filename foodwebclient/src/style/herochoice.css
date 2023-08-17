@@ -2,6 +2,10 @@
   position: relative;
   overflow: hidden;
 }
+.choice-card-wrapper .choice-card {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
 .choice-card img {
   object-fit: cover;
   height: 25rem;
@@ -28,4 +32,8 @@
 .choice-card .choice-text {
   font-size: 1.4rem;
   bottom: 3rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }

@@ -5,13 +5,43 @@
 
 .hero-brands {
   width: 100%;
+  background: gray;
 }
 /* choice section start here */
 .hero-choice-section {
   width: 100%;
-  padding: 2rem;
+  padding: 0 2rem;
+  margin: 5rem auto;
 }
 .choice {
   display: flex;
   justify-content: space-around;
+}
+/* Location */
+.hero-location-section {
+  background-color: black;
+}
+.hero-location-section .location,
+.hero-location-text {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hero-location-text {
+  margin-top: 3rem;
+}
+
+.location-button {
+  align-items: center;
+}
+.button-invisible {
+  visibility: hidden;
+}
+
+/* collection */
+.hero-deal-section {
+  width: 100%;
+  height: 80rem;
 }
