@@ -9,6 +9,18 @@
 .home {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(
+      rgba(230, 103, 103, 0.6),
+      rgba(239, 137, 137, 0.6)
+    ),
+    url(../assests/back.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .hero-brands {
@@ -65,4 +77,15 @@
 }
 .hero-collection-section .heading .heading-text {
   font-size: 2rem;
+}
+
+/* faq-section */
+.faq-section {
+  width: 100%;
+  background: #fff;
+}
+/* Get App */
+.hero-getapp-section {
+  width: 100%;
+  background: rgb(243, 153, 153);
 }

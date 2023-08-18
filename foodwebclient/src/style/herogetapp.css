@@ -1,0 +1,30 @@
+.getapp-container .getapp-wrapper {
+  display: flex;
+  width: 90%;
+  margin: 3rem auto;
+}
+.getapp-container .getapp-wrapper .getapp-content {
+  display: flex;
+  flex-direction: column;
+}
+.getapp-container .getapp-wrapper .getapp-content {
+  margin: auto;
+}
+.getapp-container .getapp-wrapper .getapp-content .getapp-heading {
+  font-size: 5rem;
+  line-height: 8rem;
+}
+.getapp-container .getapp-wrapper .getapp-content .getapp-text {
+  font-size: 2rem;
+  line-height: 4rem;
+}
+.getapp-container .getapp-wrapper .getapp-content .getapp-icon {
+  display: flex;
+  width: 20rem;
+}
+.getapp-container .getapp-wrapper .getapp-content .getapp-icon img {
+  margin: 3rem 3rem 0 0;
+}
+.getapp-container .getapp-wrapper .getapp-img {
+  margin: 0 auto;
+}

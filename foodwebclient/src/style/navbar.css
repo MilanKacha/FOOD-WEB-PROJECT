@@ -58,10 +58,20 @@ header {
 .hero-content-text {
   margin-left: 7rem;
 }
-.hero-content-img img {
+.hero-content-img {
   width: 40rem;
   height: 40rem;
-  margin-right: 7rem;
+  margin-right: 10rem;
+  overflow: inline-block;
+  display: block;
+  transition: transform 3s;
+}
+.hero-content-img img {
+  width: 100%;
+  height: 100%;
+}
+.hero-content-img:hover {
+  transform: rotate(270deg);
 }
 
 @media screen and (max-width: 768px) {

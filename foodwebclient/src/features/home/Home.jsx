@@ -15,6 +15,7 @@ import HeroCollectionDetails from "./HeroCollectionDetails";
 import Collection2 from "../../assests/hero-collec/collection2.avif";
 import Collection1 from "../../assests/hero-collec/collection1.avif";
 import Collection3 from "../../assests/hero-collec/collection3.avif";
+import HeroGetApp from "./HeroGetApp";
 
 const HeroChoiceData = [
   {
@@ -142,7 +143,6 @@ const Home = () => {
             ))}
           </div>
         </section>
-
         <section className="hero-collection-section">
           <h2 className="heading">
             Collections
@@ -186,6 +186,9 @@ const Home = () => {
           {FqaDetails.map((faq, index) => (
             <Herofaq key={index} data={faq} />
           ))}
+        </section>
+        <section className="hero-getapp-section">
+          <HeroGetApp />
         </section>
       </main>
     </>
