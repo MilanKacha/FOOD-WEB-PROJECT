@@ -1,12 +1,17 @@
+.hero-deal-section .herodeal-card-wrapper:nth-child(even):before {
+  right: auto;
+  left: 60%;
+}
+
 .herodeal-card-wrapper {
   /* border: 2px solid green; */
   width: 100%;
-  height: 80vh;
+  /* height: 900px; */
   background: white;
   position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
+  overflow: hidden;
   justify-content: center;
 }
 .herodeal-card-wrapper:before {
@@ -25,11 +30,8 @@
   left: 60%;
 }
 .herodeal-img img {
-  position: absolute;
   width: 55rem;
   height: 35rem;
-  top: 20%;
-  left: 15%;
   border-radius: 10px;
   box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
   -webkit-box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
@@ -48,61 +50,53 @@
   /* border: 2px solid green; */
 }
 .herodeal-content {
+  padding: 100px 0px;
   width: 100%;
   height: 100%;
 }
 /* card css */
 .herodeal-card-content {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  margin: 0 0 0 8rem;
 }
+
 .herodeal-card-content h2 {
-  font-size: 3rem;
-  font-family: "Kalam", cursive;
+  margin: 0 0px 2rem;
+  font-size: 3.5rem;
+  line-height: 4rem;
+  font-weight: 600;
   color: black;
   text-align: center;
-  margin: 2rem 0;
 }
 .herodeal-card-content p {
   font-size: 2rem;
-  font-family: "Kalam", cursive;
   color: black;
-  margin: 0 3rem;
   text-align: justify;
+  line-height: 3rem;
 }
-/* image position for even */
-.even-image img {
-  position: absolute;
+.hero-deal-section
+  .herodeal-card-wrapper:nth-child(even)
+  .herodealCard
+  .herodeal-card-content {
+  margin: 0 8rem 0 0;
+}
+.heroDealImgWrap {
+}
+.heroDealImgWrap {
+  position: relative;
   width: 55rem;
-  height: 35rem;
-  top: 20%;
-  right: 15%;
+  z-index: 1;
+  flex-shrink: 0;
   border-radius: 10px;
-  box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  -webkit-box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  -moz-box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  line-height: 0px;
 }
-.even-image img:hover {
-  transform: translateY(-10px);
+.heroDealImgWrap img {
+  height: 100%;
 }
-.herodeal-content .herodeal-text {
-  width: 35rem;
-  height: 34rem;
-  position: absolute;
-  top: 20%;
-  right: 10%;
-  /* border: 2px solid green; */
+.hero-deal-section .herodeal-card-wrapper:nth-child(even) .herodeal-content {
+  flex-direction: row-reverse;
 }
-.herodeal-text-even {
-  width: 35rem;
-  height: 34rem;
-  position: absolute;
-  top: 20%;
-  left: 10%;
+.herodeal-content {
+  display: flex;
+  align-items: center;
 }

@@ -1,0 +1,29 @@
+.herofaq-wrapper {
+  width: 80%;
+  border: 1px solid black;
+  margin: 2rem auto;
+  border-radius: 5px;
+}
+.herofaq-wrapper .question-wrapper,
+.herofaq-answer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 2rem 2rem;
+}
+
+.plus-icon {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+.open .plus-icon {
+  transform: rotate(45deg);
+}
+.herofaq-wrapper .herofaq-answer {
+  display: none;
+  overflow: hidden;
+}
+.open .herofaq-answer {
+  display: block;
+}
