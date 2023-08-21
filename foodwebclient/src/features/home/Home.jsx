@@ -161,6 +161,7 @@ const Home = () => {
         <section className="hero-brands">
           <HeroSlider />
         </section>
+        section.hero-
         <section className="hero-deal-section">
           {DealsData.map((deal, index) => (
             <HeroDeal key={index} data={deal} index={index} />
@@ -176,7 +177,9 @@ const Home = () => {
             ))}
           </div>
           {visible !== Locations.length ? (
-            <Button onClick={showMoreItems}>AddMore</Button>
+            <Button onClick={showMoreItems} className="primary">
+              AddMore
+            </Button>
           ) : (
             <Button onClick={showLessItems}>Addless</Button>
           )}

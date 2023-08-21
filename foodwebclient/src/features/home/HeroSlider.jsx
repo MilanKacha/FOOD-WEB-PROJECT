@@ -29,12 +29,13 @@ const images = [
 const HeroSlider = () => {
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 700,
     slidesToShow: 6,
     slidesToScroll: 1,
     adaptiveHeight: true,
     initialSlide: 0,
+    centerMode: true,
     responsive: [
       {
         breakpoint: 1024,
