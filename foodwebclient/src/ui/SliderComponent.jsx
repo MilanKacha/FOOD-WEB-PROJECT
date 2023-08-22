@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import Button from "../ui/Button";
 
-const SliderComponent = (props) => {
+const SliderComponent = ({ heading, data }) => {
   const sliderRef = useRef(null);
   console.log(sliderRef.current);
   const settings = {
@@ -46,14 +46,14 @@ const SliderComponent = (props) => {
       },
     ],
   };
-  const sliderClasses = props.className
-    ? props.className + " " + "slider-content"
-    : "slider-content" + " " + props.title + "-slider";
+  const sliderClasses = data.className
+    ? data.className + " " + "slider-content"
+    : "slider-content" + " " + data.title + "-slider";
   return (
     <div>
       <div className="container">
         <div className={sliderClasses}>
-          <h2 style={{ color: "black" }}> {props.title} </h2>
+          <h2 style={{ color: "black" }}> {heading} </h2>
           <div className="slider-button" style={{ display: "flex" }}>
             <div>
               <BsFillArrowLeftCircleFill
@@ -73,9 +73,8 @@ const SliderComponent = (props) => {
             </div>
           </div>
         </div>
-
         <Slider ref={sliderRef} {...settings}>
-          {props.slide.map((slide, index) => (
+          {data.map((slide, index) => (
             <div key={index}>
               <div className="card">
                 <div className="slider-img">
@@ -85,10 +84,13 @@ const SliderComponent = (props) => {
                   <h2 style={{ color: "black" }}>
                     {slide.heading ? `${slide.heading}` : "Gujarati thali"}
                   </h2>
+
                   <h3 style={{ color: "black" }}>
+                    {slide.price ? `${slide.price}` : "Get Up To 40% off"}(
                     {slide.description
                       ? `${slide.description}`
                       : "Get Up To 40% off"}
+                    )
                   </h3>
                   <Button>
                     {slide.button ? `${slide.button}` : "View More"}

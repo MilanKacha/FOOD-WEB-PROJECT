@@ -16,6 +16,17 @@ import Collection2 from "../../assests/hero-collec/collection2.avif";
 import Collection1 from "../../assests/hero-collec/collection1.avif";
 import Collection3 from "../../assests/hero-collec/collection3.avif";
 import HeroGetApp from "./HeroGetApp";
+import Biriyani from "../../assests/hero-popular/biryani.avif";
+import BurgurP from "../../assests/hero-popular/BurgurMan.avif";
+import Cack from "../../assests/hero-popular/cack.avif";
+import Dosa from "../../assests/hero-popular/dosa.avif";
+import Idali from "../../assests/hero-popular/idali.avif";
+import Paratha from "../../assests/hero-popular/Paratha.avif";
+import Pizza from "../../assests/hero-popular/Pizza.avif";
+import SandWhich from "../../assests/hero-popular/sandwhich.avif";
+import Tanduri from "../../assests/hero-popular/Tanduri.avif";
+import Vada from "../../assests/hero-popular/vada.avif";
+import SliderComponent from "../../ui/SliderComponent";
 
 const HeroChoiceData = [
   {
@@ -51,6 +62,64 @@ const Locations = [
   { id: 10, location: "Indiranagar", places: "495 places" },
   { id: 11, location: "Indiranagar", places: "495 places" },
   { id: 12, location: "Indiranagar", places: "495 places" },
+];
+const PopularItem = [
+  {
+    imageSrc: Dosa,
+    heading: "Podi Dosai",
+    description: "Get Up To 50% off",
+    price: "₹145",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Idali,
+    heading: "Idly [2 Nos]",
+    description: "Get Up To 50% off",
+    price: "₹70",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Tanduri,
+    heading: "Tandoori Paneer",
+    description: "Get Up To 50% off",
+    price: "₹165",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Pizza,
+    heading: "Vegetariana Pizza",
+    description: "Get Up To 50% off",
+    price: "₹₹495",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Biriyani,
+    heading: "Biryani",
+    description: "Get Up To 50% off",
+    price: "₹125",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Cack,
+    heading: "Cack",
+    description: "Get Up To 50% off",
+    price: "₹645",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Paratha,
+    heading: "Aloo Paratha",
+    description: "Get Up To 50% off",
+    price: "₹149",
+    button: "Order Now",
+  },
+  {
+    imageSrc: Vada,
+    heading: "Medhu Vadai",
+    description: "Get Up To 50% off",
+    price: "₹50",
+    button: "Order Now",
+  },
 ];
 
 const DealsData = [
@@ -136,6 +205,7 @@ const Home = () => {
         <section className="hero-section">
           <Navbar />
         </section>
+
         <section className="hero-choice-section">
           <div className="choice">
             {HeroChoiceData.map((item) => (
@@ -143,6 +213,11 @@ const Home = () => {
             ))}
           </div>
         </section>
+
+        <section className="popular-item">
+          <SliderComponent data={PopularItem} heading={"Popular Item"} />
+        </section>
+
         <section className="hero-collection-section">
           <h2 className="heading">
             Collections
@@ -158,15 +233,17 @@ const Home = () => {
             ))}
           </div>
         </section>
+
         <section className="hero-brands">
           <HeroSlider />
         </section>
-        section.hero-
+
         <section className="hero-deal-section">
           {DealsData.map((deal, index) => (
             <HeroDeal key={index} data={deal} index={index} />
           ))}
         </section>
+
         <section className="hero-location-section">
           <div className="hero-location-text">
             <h2>Popular localities in and around Bengaluru</h2>
