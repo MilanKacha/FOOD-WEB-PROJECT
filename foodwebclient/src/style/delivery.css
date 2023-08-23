@@ -1,0 +1,10 @@
+.restorsntname-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns in each row */
+  gap: 3rem;
+  padding: 20px;
+}
+.restorantname-section h2 {
+  margin: 4rem 3rem 0 0;
+  text-align: center;
+}

@@ -1,0 +1,10 @@
+.navbar {
+  background-color: #fff;
+  border: 2px solid red;
+}
+.navbar-list {
+  display: flex;
+}
+.navbar-list li {
+  margin: 0 2rem;
+}

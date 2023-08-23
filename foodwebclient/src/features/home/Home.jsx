@@ -218,6 +218,10 @@ const Home = () => {
           <SliderComponent data={PopularItem} heading={"Popular Item"} />
         </section>
 
+        <section className="popular-item">
+          <SliderComponent data={PopularItem} heading={"Popular Item"} />
+        </section>
+
         <section className="hero-collection-section">
           <h2 className="heading">
             Collections

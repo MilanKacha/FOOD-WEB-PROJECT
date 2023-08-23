@@ -5,6 +5,8 @@ import SliderComponent from "./ui/SliderComponent";
 import img1 from "../src/assests/hero-choice/club.jpg";
 import img2 from "../src/assests/hero-choice/dining.avif";
 import "./App.css";
+import Footer from "./features/Navbar/Footer";
+import Delivery from "./features/delivery/Delivery";
 
 function App() {
   const slides2 = [
@@ -20,8 +22,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <Home />
-        {/* <SliderComponent slide={slides1} /> */}
+        <Delivery />
       </div>
     </>
   );

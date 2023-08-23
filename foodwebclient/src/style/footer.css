@@ -1,0 +1,27 @@
+.footer-container {
+  width: 80%;
+  margin: 3rem auto;
+}
+
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-wrapper .app-icon {
+  width: 15rem;
+}
+.footer-wrapper .app-icon img {
+  border-radius: 5px;
+}
+.footer-wrapper h3 {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+.footer-wrapper .text {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+.footer-wrapper .icon {
+  font-size: 3rem;
+  margin: 1rem 0;
+}

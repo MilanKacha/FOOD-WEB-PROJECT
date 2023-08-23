@@ -9,9 +9,9 @@
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* min-height: 100vh;
   background: linear-gradient(
-      rgba(230, 103, 103, 0.6),
+      rgba(230, 103, 103, 0.3),
       rgba(239, 137, 137, 0.6)
     ),
     url(../assests/back.jpg) no-repeat;
@@ -20,7 +20,7 @@
   background-attachment: fixed;
   z-index: 0;
   overflow: hidden;
-  position: relative;
+  position: relative; */
 }
 
 .hero-brands {
