@@ -7,6 +7,7 @@ import img2 from "../src/assests/hero-choice/dining.avif";
 import "./App.css";
 import Footer from "./features/Navbar/Footer";
 import Delivery from "./features/delivery/Delivery";
+import RestorantDetails from "./features/restorantdetails/RestorantDetails";
 
 function App() {
   const slides2 = [
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <Delivery />
+        <RestorantDetails />
       </div>
     </>
   );

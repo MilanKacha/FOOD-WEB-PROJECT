@@ -1,0 +1,12 @@
+.restorantmenu-wrapper {
+  display: flex;
+}
+.restorant-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 2px solid black;
+}
+.restorant-menu {
+  flex: 4;
+}
