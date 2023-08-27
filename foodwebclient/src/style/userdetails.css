@@ -1,0 +1,26 @@
+.userdetails .userdetails-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  background: rgb(251, 182, 182);
+}
+
+.userdetails .userdetails-wrapper .userdetails-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.userdetails .userdetails-wrapper .userdetails-content span {
+  margin: 0.5rem;
+}
+
+.userdetails .userdetails-wrapper .profile-img img {
+  border-radius: 50%;
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+}

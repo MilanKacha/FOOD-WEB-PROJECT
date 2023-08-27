@@ -1,12 +1,21 @@
 .restorantmenu-wrapper {
   display: flex;
+  height: 80vh;
+  border-top: 1px solid #dedcdc;
 }
 .restorant-item {
   display: flex;
   flex: 1;
   flex-direction: column;
-  border: 2px solid black;
+  border-right: 1px solid #dedcdc;
+  font-size: 1.8rem;
+  box-sizing: border-box;
 }
+.restorant-item span {
+  margin: 1rem 0 1rem 3rem;
+}
+
 .restorant-menu {
   flex: 4;
+  overflow-y: auto;
 }

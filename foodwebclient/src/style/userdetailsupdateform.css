@@ -1,0 +1,29 @@
+.updateform-heading {
+  display: flex;
+}
+
+form div {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+form div label {
+  font-size: 1.3rem;
+}
+
+form div select {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+}
+form div input {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+}
+.userprofile-button Button {
+  width: 15rem;
+}
+.userprofile-button {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}

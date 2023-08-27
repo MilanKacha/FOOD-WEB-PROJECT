@@ -1,0 +1,11 @@
+.restorant-contant {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+.restorant-contant h2 {
+  font-size: 4rem;
+}
+.restorant-contant span {
+  margin: 0.5rem;
+}
