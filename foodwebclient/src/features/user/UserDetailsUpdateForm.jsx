@@ -1,14 +1,51 @@
+import { useReducer, useState } from "react";
 import "../../style/userdetailsupdateform.css";
 import Button from "../../ui/Button";
-import { Country, State } from "country-state-city";
+import { State } from "country-state-city";
+
+const initialState = {
+  username: "",
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  pincode: "",
+  state: "",
+  country: "",
+};
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "RESET_FORM":
+      return initialState;
+    default:
+      return state;
+  }
+};
 
 const UserDetailsUpdateForm = ({ closeModal }) => {
+  const [formData, dispatch] = useReducer(formReducer, initialState);
+
+  const handelInputChange = (field, value) => {
+    dispatch({ type: "UPDATE_FIELD", field, value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Todo Add form submit data in dispatch function
+
+    console.log(formData);
+
+    // reset form after submmision
+    dispatch({ type: "RESET_FORM" });
+  };
+
   return (
     <>
       <div className="updateprofile">
-        <form
-        //   onSubmit={handleSubmit}
-        >
+        <form action="" onSubmit={handleSubmit}>
           <h2 style={{ color: "black" }} className="updateform-heading">
             Update Your Profile
           </h2>
@@ -16,10 +53,10 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
             <label htmlFor="name">Name:</label>
             <input
               type="text"
-              id="name"
-              name="name"
-              // value={formData.name}
-              // onChange={handleInputChange}
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={(e) => handelInputChange("username", e.target.value)}
             />
           </div>
           <div>
@@ -28,23 +65,27 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
               type="email"
               id="email"
               name="email"
-              // value={formData.email}
-              // onChange={handleInputChange}
+              value={formData.email}
+              onChange={(e) => handelInputChange("email", e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="email">Phone no:</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              // value={formData.email}
-              // onChange={handleInputChange}
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={(e) => handelInputChange("phone", e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="email">State:</label>
-            <select>
+            <select
+              value={formData.state}
+              onChange={(e) => handelInputChange("state", e.target.value)}
+            >
+              <option value="">--Select your state--</option>
               {State.getStatesOfCountry("IN").map((state) => (
                 <option>{state.name}</option>
               ))}
@@ -52,46 +93,49 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
           </div>
           <div>
             <label htmlFor="email">Country:</label>
-            <select>
-              {Country.getAllCountries().map((country) => (
-                <option>{country.name}</option>
-              ))}
+            <select
+              value={formData.country}
+              onChange={(e) => handelInputChange("country", e.target.value)}
+            >
+              <option value="">--Select your country--</option>
+              <option>India</option>
             </select>
           </div>
           <div>
             <label htmlFor="email">Street:</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              // value={formData.email}
-              // onChange={handleInputChange}
+              type="text"
+              id="street"
+              name="street"
+              value={formData.street}
+              onChange={(e) => handelInputChange("street", e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="email">City:</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              // value={formData.email}
-              // onChange={handleInputChange}
+              type="text"
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={(e) => handelInputChange("city", e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="email">Pincode:</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              // value={formData.email}
-              // onChange={handleInputChange}
+              type="number"
+              id="pincode"
+              name="pincode"
+              value={formData.pincode}
+              onChange={(e) => handelInputChange("pincode", e.target.value)}
             />
           </div>
 
           <div className="userprofile-button">
             <Button onClick={closeModal}>Cancel</Button>
-            <Button>Submit</Button>
+            {/* Todo when submit go to user profile page */}
+            <Button type="submit">Submit</Button>
           </div>
         </form>
       </div>
