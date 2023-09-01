@@ -10,6 +10,9 @@ const CartDetails = () => {
           <h2 style={{ color: "black" }} className="cart-heading">
             Cart
           </h2>
+          <div style={{ color: "blue" }} className="cartitem-continueshopping">
+            Continue Shopping
+          </div>
           <div className="cartitem">
             <div className="cartitem-img">
               <img src={Mini} alt="" />
@@ -52,10 +55,12 @@ const CartDetails = () => {
           </div>
 
           <div className="cartitem-subtotal">
-            <h3 style={{ color: "black" }} className="subtotal">
-              SubTotal: 3333
-            </h3>
+            <div style={{ color: "black" }} className="subtotal">
+              SubTotal: 3333 <span> / Total Item In Cart: 2</span>
+            </div>
           </div>
+          {/* Todo when check out page add ordernow */}
+          <div className="cartitem-subtotal">Checkout</div>
         </div>
       </div>
     </>

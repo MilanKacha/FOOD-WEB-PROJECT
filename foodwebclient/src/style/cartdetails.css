@@ -5,8 +5,17 @@
 .cart-wrapper .cart-heading {
   font-weight: 500;
   background: rgb(188, 186, 186);
-  text-align: center;
+  display: flex;
   border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.cartitem-continueshopping {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 2rem 1rem 0;
+  cursor: pointer;
 }
 .cartitem {
   padding: 1rem;
@@ -61,10 +70,16 @@
   width: 10rem;
 }
 .cartitem-subtotal h3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.cartitem-subtotal {
   font-size: 2rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   background: rgb(188, 186, 186);
   padding: 1rem;
   border-radius: 1rem;
+  margin: 0.5rem 0;
 }

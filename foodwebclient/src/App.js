@@ -12,12 +12,13 @@ import Modal from "./ui/Modal";
 import UserDetails from "./features/user/UserDetails";
 import OrderSuccess from "./features/order/OrderSuccess";
 import CartDetails from "./features/cart/CartDetails";
+import OrderCheckOut from "./features/order/OrderCheckOut";
 
 function App() {
   return (
     <>
       <div className="app">
-        <CartDetails />
+        <OrderCheckOut />
       </div>
     </>
   );
