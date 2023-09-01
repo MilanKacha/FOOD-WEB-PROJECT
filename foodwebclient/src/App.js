@@ -10,12 +10,14 @@ import Delivery from "./features/delivery/Delivery";
 import RestorantDetails from "./features/restorantdetails/RestorantDetails";
 import Modal from "./ui/Modal";
 import UserDetails from "./features/user/UserDetails";
+import OrderSuccess from "./features/order/OrderSuccess";
+import CartDetails from "./features/cart/CartDetails";
 
 function App() {
   return (
     <>
       <div className="app">
-        <UserDetails />
+        <CartDetails />
       </div>
     </>
   );

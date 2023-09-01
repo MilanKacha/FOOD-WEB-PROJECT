@@ -11,7 +11,7 @@ const FoodItem = ({ item }) => {
           </div>
           <div className="food-content">
             <h3 style={{ color: "black" }}>
-              {item.foodtitle}{" "}
+              {item.foodtitle}
               <span style={{ fontWeight: 400 }} className="food-rating">
                 [4.9star (136-rating)]
               </span>
