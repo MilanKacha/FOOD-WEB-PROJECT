@@ -238,9 +238,9 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="hero-brands">
+        {/* <section className="hero-brands">
           <HeroSlider />
-        </section>
+        </section> */}
 
         <section className="hero-deal-section">
           {DealsData.map((deal, index) => (
