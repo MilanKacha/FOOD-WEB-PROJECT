@@ -1,4 +1,5 @@
 const User = require("../modal/UserModal");
+const { promisify } = require("util"); // use for built in promisify in protect route
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -6,6 +7,7 @@ const catchAsync = require("../utils/catchAsync");
 
 // for genrate jwt token
 function generateToken(userId) {
+  // Todo process.env
   return jwt.sign({ userId }, "your-secret-key", { expiresIn: "1h" });
 }
 
@@ -50,6 +52,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 });
 
+// User login
 exports.logIn = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -73,82 +76,40 @@ exports.logIn = catchAsync(async (req, res, next) => {
   });
 });
 
-// User login
-// exports.login = async (req, res) => {
-//   const { email, password } = req.body;
+// protected route
+exports.protect = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+  //1)Getting token and check of it's there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "You are not Logged In! Please login to get access" });
+  }
+  // console.log(token);
+  // 2)validate the token
+  const decode = await promisify(jwt.verify)(token, "your-secret-key");
+  // console.log(decode); // return jwt payload
+  // 3)check if user still exist
+  const freshUser = await User.findById(decode.userId);
+  if (!freshUser) {
+    return res
+      .status(401)
+      .json({ message: "The user belonging to this does no longer exist" });
+  }
 
-//   try {
-//     const user = await User.findOne({ email }).select("password");
-
-//     if (!user) {
-//       return res
-//         .status(401)
-//         .json({ message: "Authentication failed: User not found" });
-//     }
-
-//     // console.log("Stored Hashed Password:", user.password);
-
-//     // Compare the provided password with the hashed password in the database
-//     const isMatch = await bcrypt.compare(password, user.password);
-
-//     // console.log("Password Comparison Result:", isMatch);
-
-//     if (!isMatch) {
-//       return res
-//         .status(401)
-//         .json({ message: "Authentication failed: Password does not match" });
-//     }
-
-//     // If the passwords match, continue with successful login logic
-//     // Generate a JWT token and set it in a cookie if needed
-
-//     res.status(200).json({ message: "Login successful" });
-//   } catch (error) {
-//     console.error("Login Error:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
+  req.user = freshUser; // protected route get access(use in updateMe) || Grant access to protected route
+  next(); // for protected after route
+});
 
 // User logout (clear the JWT cookie)
 exports.logout = (req, res) => {
   res.clearCookie("jwt");
   res.status(200).json({ message: "Logged out successfully" });
 };
-
-// exports.signUp = async (req, res) => {
-//   const salt = crypto.randomBytes(16);
-//   crypto.pbkdf2(
-//     req.body.password,
-//     salt,
-//     310000,
-//     32,
-//     "sha256",
-//     async (err, hashedPassword) => {
-//       if (err) {
-//         return res.status(500).json({ message: "Password hashing error" });
-//       }
-
-//       const user = new User({
-//         ...req.body,
-//         password: hashedPassword.toString("hex"),
-//         salt: salt.toString("hex"),
-//       });
-
-//       try {
-//         await user.save();
-
-//         const token = generateToken(user._id);
-
-//         // Set a cookie with the JWT token
-//         res.cookie("jwt", token, { httpOnly: true });
-
-//         res
-//           .status(201)
-//           .json({ message: "User registered successfully", token });
-//       } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: "User registration error" });
-//       }
-//     }
-//   );
-// };

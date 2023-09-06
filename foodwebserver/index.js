@@ -11,7 +11,7 @@ const restorantRoute = require("./routes/restorantRoutes");
 const userRoute = require("./routes/userRoutes");
 const User = require("./modal/UserModal");
 
-// middlewares
+//1) middlewares
 server.use(express.json()); // to parse req.body
 // docs of express-session npm
 server.use(
@@ -24,7 +24,13 @@ server.use(
 );
 server.use(passport.initialize());
 server.use(passport.session());
-// Routes
+
+// protect route
+// server.use((req, res, next) => {
+//   console.log(req.headers);
+// });
+
+//3) Routes
 server.use("/api/v1/", productRoute);
 server.use("/api/v1/restorant", restorantRoute);
 server.use("/api/v1/users", userRoute);
