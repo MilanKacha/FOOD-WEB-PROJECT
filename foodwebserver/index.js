@@ -8,6 +8,7 @@ const hpp = require("hpp");
 const productRoute = require("./routes/productRoutes");
 const restorantRoute = require("./routes/restorantRoutes");
 const userRoute = require("./routes/userRoutes");
+const cartRoute = require("./routes/cartRoutes");
 
 //1) middlewares
 server.use(express.json()); // to parse req.body
@@ -35,5 +36,6 @@ server.use(hpp());
 server.use("/api/v1/", productRoute);
 server.use("/api/v1/restorant", restorantRoute);
 server.use("/api/v1/users", userRoute);
+server.use("/api/v1/cart", cartRoute);
 
 module.exports = server;
