@@ -6,7 +6,7 @@ import img1 from "../src/assests/hero-choice/club.jpg";
 import img2 from "../src/assests/hero-choice/dining.avif";
 import "./App.css";
 import Footer from "./features/Navbar/Footer";
-import Delivery from "./features/delivery/Delivery";
+import Delivery from "./features/delivery/component/Delivery";
 import RestorantDetails from "./features/restorantdetails/RestorantDetails";
 import Modal from "./ui/Modal";
 import UserDetails from "./features/user/UserDetails";
@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <Home />
+        <Delivery />
       </div>
     </>
   );

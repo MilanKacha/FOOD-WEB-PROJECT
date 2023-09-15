@@ -5,7 +5,7 @@ const RestorantCard = ({ props }) => {
   return (
     <div className="restorsntname-card-wrapper">
       <div className="restorsntname-img">
-        <img src={props.img} alt="" />
+        <img src={props.image} alt="" />
       </div>
       <div className="restorsntname-content">
         <div id="name-rating">
@@ -13,12 +13,12 @@ const RestorantCard = ({ props }) => {
             style={{ color: "black" }}
             className="restorsntname-restorantname"
           >
-            {props.name}
+            {props.restorantname}
           </h3>
-          <span className="restorsntname-rating">{props.rating}</span>
+          <span className="restorsntname-rating">{props.ratingsAverage}</span>
         </div>
         <div id="description-price">
-          <span className="restorsntname-description">{}</span>
+          <span className="restorsntname-description">{props.desc}</span>
           <span className="restorsntname-price">₹200 for one</span>
         </div>
         <div id="delivery-time">

@@ -4,6 +4,7 @@ import Button from "../../ui/Button";
 import { State } from "country-state-city";
 
 const initialState = {
+  profilepicture: null,
   username: "",
   email: "",
   phone: "",
@@ -18,12 +19,19 @@ const formReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_FIELD":
       return { ...state, [action.field]: action.value };
+    case "UPDATE_PROFILE_PICTURE":
+      return { ...state, profilePicture: action.file };
     case "RESET_FORM":
       return initialState;
     default:
       return state;
   }
 };
+
+// const handleImageChange = (e) => {
+//   const file = e.target.files[0];
+//   dispatch({ type: "UPDATE_PROFILE_PICTURE", file });
+// };
 
 const UserDetailsUpdateForm = ({ closeModal }) => {
   const [formData, dispatch] = useReducer(formReducer, initialState);
@@ -50,6 +58,15 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
             Update Your Profile
           </h2>
           <div>
+            <label htmlFor="name">Profile Picture:</label>
+            <input
+              type="file"
+              id="profilepicture"
+              name="prifilepicture"
+              onChange={(e) =>
+                handelInputChange("profilepicture", e.target.value)
+              }
+            />
             <label htmlFor="name">Name:</label>
             <input
               type="text"
