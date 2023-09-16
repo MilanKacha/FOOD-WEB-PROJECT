@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../../../style/delivery.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRestorantAsync, selectAllRestorants } from "../RestorantSlice";
+import { Link, useParams } from "react-router-dom";
 
 import HeaderOption from "../../Navbar/HeaderOption";
 import HeaderFilter from "../../Navbar/HeaderFilter";
@@ -211,12 +212,13 @@ import SliderComponent from "../../../ui/SliderComponent";
 
 const Delivery = () => {
   const RestorantData = useSelector(selectAllRestorants);
+
   const dispatch = useDispatch();
   console.log(RestorantData);
-
   useEffect(() => {
     dispatch(fetchAllRestorantAsync());
   }, [dispatch]);
+
   return (
     <div>
       <HeaderOption />
@@ -230,7 +232,9 @@ const Delivery = () => {
         <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
         <div className="restorsntname-container">
           {RestorantData.map((item, index) => (
-            <RestorantCard props={item} key={index} />
+            <Link to={`/restaurant/${item._id}`}>
+              <RestorantCard props={item} key={index} />
+            </Link>
           ))}
         </div>
       </section>

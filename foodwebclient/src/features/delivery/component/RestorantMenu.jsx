@@ -1,6 +1,6 @@
-import "../../style/restorantmenu.css";
-import FoodItem from "../../ui/FoodItem";
-import Mini from "../../assests/fooditem/mini.avif";
+import "../../../style/restorantmenu.css";
+import FoodItem from "../../../ui/FoodItem";
+import Mini from "../../../assests/fooditem/mini.avif";
 
 const foodItemData = [
   {
@@ -61,7 +61,7 @@ const foodItemData = [
   },
 ];
 
-const RestorantMenu = () => {
+const RestorantMenu = ({ ProductsByrestaurant }) => {
   return (
     <div className="restorantmenu-wrapper">
       <div className="restorant-item">
@@ -76,8 +76,8 @@ const RestorantMenu = () => {
         <span>Pavbhaji(34)</span>
       </div>
       <div className="restorant-menu">
-        {foodItemData.map((item, index) => (
-          <FoodItem key={index} item={item} />
+        {ProductsByrestaurant.map((product, index) => (
+          <FoodItem key={index} product={product} />
         ))}
       </div>
     </div>

@@ -1,17 +1,17 @@
 import "../../src/style/fooditem.css";
 import Button from "./Button";
 
-const FoodItem = ({ item }) => {
+const FoodItem = ({ product }) => {
   return (
     <>
       <div className="fooditem">
         <div className="fooditem-wrapper">
           <div className="food-img">
-            <img src={item.img} alt="" />
+            <img src={product.image} alt="" />
           </div>
           <div className="food-content">
             <h3 style={{ color: "black" }}>
-              {item.foodtitle}
+              {/* {item.foodtitle} */}
               <span style={{ fontWeight: 400 }} className="food-rating">
                 [4.9star (136-rating)]
               </span>
