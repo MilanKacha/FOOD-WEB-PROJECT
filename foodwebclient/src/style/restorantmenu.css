@@ -19,3 +19,6 @@
   flex: 4;
   overflow-y: auto;
 }
+.active {
+  color: red;
+}

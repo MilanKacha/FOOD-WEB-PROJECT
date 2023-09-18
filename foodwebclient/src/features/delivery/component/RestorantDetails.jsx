@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RestorantContent from "./RestorantContent";
 import RestorantMenu from "./RestorantMenu";
 import { useParams } from "react-router-dom";
@@ -14,18 +14,20 @@ const RestorantDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  // fetch restaurant by Id
-  const RestaurantById = useSelector(selectRestaurantById);
-  console.log(RestaurantById);
-  useEffect(() => {
-    dispatch(fetchRestaurantByIdAsync(params.id));
-  }, [dispatch, params.id]);
-
   // fetch product by restaurant
   const ProductsByrestaurant = useSelector(selectAllProductsByRestaurantId);
   console.log(ProductsByrestaurant);
   useEffect(() => {
     dispatch(fetchAllProductsByRestorantIdAsync(params.id));
+  }, [dispatch, params.id]);
+
+  // Filter food items based on 'showVegOnly' state
+
+  // fetch restaurant by Id
+  const RestaurantById = useSelector(selectRestaurantById);
+  // console.log(RestaurantById);
+  useEffect(() => {
+    dispatch(fetchRestaurantByIdAsync(params.id));
   }, [dispatch, params.id]);
 
   return (

@@ -49,8 +49,8 @@ export const restorantSlice = createSlice({
   name: "restorant",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    setProductsubcategories: (state, action) => {
+      state.productsubcategories = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -88,7 +88,7 @@ export const restorantSlice = createSlice({
   },
 });
 
-export const { increment } = restorantSlice.actions;
+export const { setProductsubcategories } = restorantSlice.actions;
 
 export const selectAllRestorants = (state) => state.restorant.restorants;
 export const selectAllProductsByRestaurantId = (state) =>
