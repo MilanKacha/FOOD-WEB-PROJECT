@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../style/delivery.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRestorantAsync, selectAllRestorants } from "../RestorantSlice";
@@ -7,222 +7,145 @@ import { Link, useParams } from "react-router-dom";
 import HeaderOption from "../../Navbar/HeaderOption";
 import HeaderFilter from "../../Navbar/HeaderFilter";
 import RestorantCard from "../../../ui/RestorantCard";
-// import Biryani from "../../assests/hero-popular/biryani.avif";
-// import Dosa from "../../assests/hero-popular/dosa.avif";
-// import Idali from "../../assests/hero-popular/idali.avif";
-// import Paratha from "../../assests/hero-popular/Paratha.avif";
-// import Pizza from "../../assests/hero-popular/Pizza.avif";
-// import Tanduri from "../../assests/hero-popular/Tanduri.avif";
-// import Vada from "../../assests/hero-popular/vada.avif";
-// import Biriyani from "../../assests/hero-popular/biryani.avif";
-// import BurgurP from "../../assests/hero-popular/BurgurMan.avif";
-// import Cack from "../../assests/hero-popular/cack.avif";
+import { MdCancel } from "react-icons/md";
 
 import SliderComponent from "../../../ui/SliderComponent";
 
-// const RestorantData = [
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-//   {
-//     img: Biryani,
-//     name: " Millet Express",
-//     rating: "4.5",
-//     description: "Healthy Food,",
-//     price: "₹200 for one",
-//     deliverytime: "20min",
-//   },
-// ];
-
-// const PopularItem = [
-//   {
-//     imageSrc: Dosa,
-//     heading: "Podi Dosai",
-//     description: "Get Up To 50% off",
-//     price: "₹145",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Idali,
-//     heading: "Idly [2 Nos]",
-//     description: "Get Up To 50% off",
-//     price: "₹70",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Tanduri,
-//     heading: "Tandoori Paneer",
-//     description: "Get Up To 50% off",
-//     price: "₹165",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Pizza,
-//     heading: "Vegetariana Pizza",
-//     description: "Get Up To 50% off",
-//     price: "₹₹495",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Biriyani,
-//     heading: "Biryani",
-//     description: "Get Up To 50% off",
-//     price: "₹125",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Cack,
-//     heading: "Cack",
-//     description: "Get Up To 50% off",
-//     price: "₹645",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Paratha,
-//     heading: "Aloo Paratha",
-//     description: "Get Up To 50% off",
-//     price: "₹149",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Vada,
-//     heading: "Medhu Vadai",
-//     description: "Get Up To 50% off",
-//     price: "₹50",
-//     button: "Order Now",
-//   },
-// ];
-
 const Delivery = () => {
-  const RestorantData = useSelector(selectAllRestorants);
-
+  const restaurantData = useSelector(selectAllRestorants);
   const dispatch = useDispatch();
-  console.log(RestorantData);
+  console.log(restaurantData);
   useEffect(() => {
     dispatch(fetchAllRestorantAsync());
   }, [dispatch]);
 
+  const [filters, setFilters] = useState({
+    price: null,
+    ratingsAverage: null,
+    expecteddeliverytime: null,
+  });
+
+  const sortedData = [...restaurantData];
+
+  // Sort by price
+  if (filters.price === "lowToHigh") {
+    sortedData.sort((a, b) => a.price - b.price);
+  } else if (filters.price === "highToLow") {
+    sortedData.sort((a, b) => b.price - a.price);
+  }
+
+  // Sort by ratingsAverage
+  if (filters.ratingsAverage === "lowToHigh") {
+    sortedData.sort((a, b) => a.ratingsAverage - b.ratingsAverage);
+  } else if (filters.ratingsAverage === "highToLow") {
+    sortedData.sort((a, b) => b.ratingsAverage - a.ratingsAverage);
+  }
+
+  // Sort by expecteddeliverytime
+  if (filters.expecteddeliverytime === "lowToHigh") {
+    sortedData.sort((a, b) => a.expecteddeliverytime - b.expecteddeliverytime);
+  } else if (filters.expecteddeliverytime === "highToLow") {
+    sortedData.sort((a, b) => b.expecteddeliverytime - a.expecteddeliverytime);
+  }
+
+  // for handel filter
+  const handleFilterChange = (filterKey, sortOrder) => {
+    setFilters(() => ({
+      [filterKey]: sortOrder,
+    }));
+  };
+
+  const clearFilter = () => {
+    setFilters({
+      price: null,
+      ratingsAverage: null,
+      expecteddeliverytime: null,
+    });
+  };
+
+  // common function for close filter
+  const closeFilterIcon = (filterValue, targetValue, onClickHandler) => {
+    if (filterValue === targetValue) {
+      return (
+        <span>
+          <MdCancel onClick={onClickHandler} />
+        </span>
+      );
+    }
+    return null;
+  };
+
   return (
     <div>
       <HeaderOption />
-      <HeaderFilter />
+      {/* <HeaderFilter /> */}
+
+      <nav className="navbar">
+        <ul className="navbar-list">
+          <li className="navbar-item">
+            <span
+              onClick={() =>
+                handleFilterChange("expecteddeliverytime", "lowToHigh")
+              }
+              className={
+                filters.expecteddeliverytime === "lowToHigh" ? "active" : ""
+              }
+            >
+              Delivery Time(Low to High)
+            </span>
+            {closeFilterIcon(
+              filters.expecteddeliverytime,
+              "lowToHigh",
+              clearFilter
+            )}
+            {/* {filters.expecteddeliverytime === "lowToHigh" && (
+              <span>
+                <MdCancel onClick={clearFilter} />
+              </span>
+            )} */}
+          </li>
+          <li className="navbar-item">
+            <span
+              onClick={() => {
+                handleFilterChange("ratingsAverage", "highToLow");
+              }}
+              className={filters.ratingsAverage === "highToLow" ? "active" : ""}
+            >
+              Rating(High to Low)
+            </span>
+          </li>
+          <li className="navbar-item">
+            <span
+              onClick={() => {
+                handleFilterChange("ratingsAverage", "lowToHigh");
+              }}
+              className={filters.ratingsAverage === "lowToHigh" ? "active" : ""}
+            >
+              Rating(Low to High)
+            </span>
+          </li>
+          <li className="navbar-item">
+            <span
+              onClick={() => {
+                handleFilterChange("price", "highToLow");
+              }}
+              className={filters.price === "highToLow" ? "active" : ""}
+            >
+              Price(High to Low)
+            </span>
+          </li>
+          <li className="navbar-item">
+            <span
+              onClick={() => {
+                handleFilterChange("price", "lowToHigh");
+              }}
+              className={filters.price === "lowToHigh" ? "active" : ""}
+            >
+              Price(Low to High)
+            </span>
+          </li>
+        </ul>
+      </nav>
       {/* 
       <section className="popular-item">
         <SliderComponent data={PopularItem} heading={"Popular Item"} />
@@ -231,7 +154,7 @@ const Delivery = () => {
       <section className="restorantname-section">
         <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
         <div className="restorsntname-container">
-          {RestorantData.map((item, index) => (
+          {sortedData.map((item, index) => (
             <Link to={`/restaurant/${item._id}`}>
               <RestorantCard props={item} key={index} />
             </Link>

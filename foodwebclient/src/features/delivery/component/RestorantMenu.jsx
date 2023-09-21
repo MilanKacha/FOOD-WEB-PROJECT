@@ -13,19 +13,16 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
     : ProductsByrestaurant;
 
   const filterProductByRestaurantId = ProductsByrestaurant.filter((product) => {
-    // If showVegOnly is true, filter by vegetarian products
     if (showVegOnly && !product.isVegetarian) {
-      return false;
+      return false; //removes non-vegetarian products from the filtered list.
     }
-    // If selectedSubCategory is provided, filter by subcategory
     if (selectedSubCategory && product.subcategory !== selectedSubCategory) {
-      return false;
+      return false; //products with a subcategory that doesn't match the selected one are excluded from the filtered list
     }
     // If activeProduct is provided, filter by activeProduct
     if (activeProduct && product.subcategory !== activeProduct) {
       return false;
     }
-    // If the "Vegetarian Only" checkbox is clicked, remove activeProduct and selectedSubCategory filters
     if (showVegOnly) {
       return true;
     }

@@ -5,29 +5,19 @@ const HeaderFilter = () => {
     <nav className="navbar">
       <ul className="navbar-list">
         <li className="navbar-item">
-          {/* <Link to="/" className="navbar-link"> */}
-          Filter
-          {/* </Link> */}
+          <span>Delivery Time(Low to High)</span>
         </li>
         <li className="navbar-item">
-          {/* <Link to="/about" className="navbar-link"> */}
-          Rating(High to Low)
-          {/* </Link> */}
+          <span>Rating(High to Low)</span>
         </li>
         <li className="navbar-item">
-          {/* <Link to="/about" className="navbar-link"> */}
-          Rating(Low to High)
-          {/* </Link> */}
+          <span>Rating(Low to High)</span>
         </li>
         <li className="navbar-item">
-          {/* <Link to="/about" className="navbar-link"> */}
-          Price(High to Low)
-          {/* </Link> */}
+          <span>Price(High to Low)</span>
         </li>
         <li className="navbar-item">
-          {/* <Link to="/about" className="navbar-link"> */}
-          Price(Low to High)
-          {/* </Link> */}
+          <span>Price(Low to High)</span>
         </li>
       </ul>
     </nav>

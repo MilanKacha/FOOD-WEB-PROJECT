@@ -19,10 +19,12 @@ const RestorantCard = ({ props }) => {
         </div>
         <div id="description-price">
           <span className="restorsntname-description">{props.desc}</span>
-          <span className="restorsntname-price">₹200 for one</span>
+          <span className="restorsntname-price">₹{props.price} for one</span>
         </div>
         <div id="delivery-time">
-          <span id="restorsntname-delivery-time">20min</span>
+          <span id="restorsntname-delivery-time">
+            {props.expecteddeliverytime}
+          </span>
         </div>
       </div>
     </div>
