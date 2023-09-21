@@ -113,6 +113,7 @@ const Delivery = () => {
             >
               Rating(High to Low)
             </span>
+            {closeFilterIcon(filters.ratingsAverage, "highToLow", clearFilter)}
           </li>
           <li className="navbar-item">
             <span
@@ -123,6 +124,7 @@ const Delivery = () => {
             >
               Rating(Low to High)
             </span>
+            {closeFilterIcon(filters.ratingsAverage, "lowToHigh", clearFilter)}
           </li>
           <li className="navbar-item">
             <span
@@ -133,6 +135,7 @@ const Delivery = () => {
             >
               Price(High to Low)
             </span>
+            {closeFilterIcon(filters.price, "highToLow", clearFilter)}
           </li>
           <li className="navbar-item">
             <span
@@ -143,6 +146,7 @@ const Delivery = () => {
             >
               Price(Low to High)
             </span>
+            {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
           </li>
         </ul>
       </nav>
