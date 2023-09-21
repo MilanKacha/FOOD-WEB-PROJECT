@@ -12,6 +12,7 @@ import { MdCancel } from "react-icons/md";
 import SliderComponent from "../../../ui/SliderComponent";
 
 const Delivery = () => {
+  // get data of restaurant
   const restaurantData = useSelector(selectAllRestorants);
   const dispatch = useDispatch();
   console.log(restaurantData);
@@ -25,7 +26,8 @@ const Delivery = () => {
     expecteddeliverytime: null,
   });
 
-  const sortedData = [...restaurantData];
+  // let beause of change data after filter
+  let sortedData = [...restaurantData];
 
   // Sort by price
   if (filters.price === "lowToHigh") {
@@ -46,6 +48,13 @@ const Delivery = () => {
     sortedData.sort((a, b) => a.expecteddeliverytime - b.expecteddeliverytime);
   } else if (filters.expecteddeliverytime === "highToLow") {
     sortedData.sort((a, b) => b.expecteddeliverytime - a.expecteddeliverytime);
+  }
+
+  // function for rating 4+
+  if (filters.ratingsAverage === "Rating4+") {
+    sortedData = sortedData.filter(
+      (restaurant) => restaurant.ratingsAverage >= 3
+    );
   }
 
   // for handel filter
@@ -76,96 +85,123 @@ const Delivery = () => {
   };
 
   return (
-    <div>
-      <HeaderOption />
-      {/* <HeaderFilter /> */}
+    <>
+      <div>
+        <HeaderOption />
+        {/* <HeaderFilter /> */}
 
-      <nav className="navbar">
-        <ul className="navbar-list">
-          <li className="navbar-item">
-            <span
-              onClick={() =>
-                handleFilterChange("expecteddeliverytime", "lowToHigh")
-              }
-              className={
-                filters.expecteddeliverytime === "lowToHigh" ? "active" : ""
-              }
-            >
-              Delivery Time(Low to High)
-            </span>
-            {closeFilterIcon(
-              filters.expecteddeliverytime,
-              "lowToHigh",
-              clearFilter
-            )}
-            {/* {filters.expecteddeliverytime === "lowToHigh" && (
+        <nav className="navbar">
+          <ul className="navbar-list">
+            <li className="navbar-item">
+              <span
+                onClick={() =>
+                  handleFilterChange("expecteddeliverytime", "lowToHigh")
+                }
+                className={
+                  filters.expecteddeliverytime === "lowToHigh" ? "active" : ""
+                }
+              >
+                Delivery Time(Low to High)
+              </span>
+              {closeFilterIcon(
+                filters.expecteddeliverytime,
+                "lowToHigh",
+                clearFilter
+              )}
+              {/* {filters.expecteddeliverytime === "lowToHigh" && (
               <span>
                 <MdCancel onClick={clearFilter} />
               </span>
             )} */}
-          </li>
-          <li className="navbar-item">
-            <span
-              onClick={() => {
-                handleFilterChange("ratingsAverage", "highToLow");
-              }}
-              className={filters.ratingsAverage === "highToLow" ? "active" : ""}
-            >
-              Rating(High to Low)
-            </span>
-            {closeFilterIcon(filters.ratingsAverage, "highToLow", clearFilter)}
-          </li>
-          <li className="navbar-item">
-            <span
-              onClick={() => {
-                handleFilterChange("ratingsAverage", "lowToHigh");
-              }}
-              className={filters.ratingsAverage === "lowToHigh" ? "active" : ""}
-            >
-              Rating(Low to High)
-            </span>
-            {closeFilterIcon(filters.ratingsAverage, "lowToHigh", clearFilter)}
-          </li>
-          <li className="navbar-item">
-            <span
-              onClick={() => {
-                handleFilterChange("price", "highToLow");
-              }}
-              className={filters.price === "highToLow" ? "active" : ""}
-            >
-              Price(High to Low)
-            </span>
-            {closeFilterIcon(filters.price, "highToLow", clearFilter)}
-          </li>
-          <li className="navbar-item">
-            <span
-              onClick={() => {
-                handleFilterChange("price", "lowToHigh");
-              }}
-              className={filters.price === "lowToHigh" ? "active" : ""}
-            >
-              Price(Low to High)
-            </span>
-            {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
-          </li>
-        </ul>
-      </nav>
-      {/* 
+            </li>
+            <li className="navbar-item">
+              <span
+                onClick={() => {
+                  handleFilterChange("ratingsAverage", "highToLow");
+                }}
+                className={
+                  filters.ratingsAverage === "highToLow" ? "active" : ""
+                }
+              >
+                Rating(High to Low)
+              </span>
+              {closeFilterIcon(
+                filters.ratingsAverage,
+                "highToLow",
+                clearFilter
+              )}
+            </li>
+            <li className="navbar-item">
+              <span
+                onClick={() => {
+                  handleFilterChange("ratingsAverage", "lowToHigh");
+                }}
+                className={
+                  filters.ratingsAverage === "lowToHigh" ? "active" : ""
+                }
+              >
+                Rating(Low to High)
+              </span>
+              {closeFilterIcon(
+                filters.ratingsAverage,
+                "lowToHigh",
+                clearFilter
+              )}
+            </li>
+            <li className="navbar-item">
+              <span
+                onClick={() => {
+                  handleFilterChange("price", "highToLow");
+                }}
+                className={filters.price === "highToLow" ? "active" : ""}
+              >
+                Price(High to Low)
+              </span>
+              {closeFilterIcon(filters.price, "highToLow", clearFilter)}
+            </li>
+            <li className="navbar-item">
+              <span
+                onClick={() => {
+                  handleFilterChange("price", "lowToHigh");
+                }}
+                className={filters.price === "lowToHigh" ? "active" : ""}
+              >
+                Price(Low to High)
+              </span>
+              {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
+            </li>
+            <li className="navbar-item">
+              <span
+                onClick={() => {
+                  handleFilterChange("ratingsAverage", "Rating4+");
+                }}
+                className={
+                  filters.ratingsAverage === "Rating4+" ? "active" : ""
+                }
+              >
+                Rating 4+
+              </span>
+              {closeFilterIcon(filters.ratingsAverage, "Rating4+", clearFilter)}
+            </li>
+          </ul>
+        </nav>
+        {/* 
       <section className="popular-item">
         <SliderComponent data={PopularItem} heading={"Popular Item"} />
       </section> */}
 
-      <section className="restorantname-section">
-        <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
-        <div className="restorsntname-container">
-          {sortedData.map((item, index) => (
-            <Link to={`/restaurant/${item._id}`}>
-              <RestorantCard props={item} key={index} />
-            </Link>
-          ))}
-        </div>
-      </section>
-    </div>
+        <section className="restorantname-section">
+          <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
+          <div className="restorsntname-container">
+            {sortedData.map((item, index) => (
+              <Link to={`/restaurant/${item._id}`}>
+                <RestorantCard props={item} key={index} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 

@@ -21,6 +21,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/restaurant" exact element={<Delivery />} />
           <Route path="/restaurant/:id" element={<RestorantDetails />} />
         </Routes>
