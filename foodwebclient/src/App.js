@@ -24,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/restaurant" exact element={<Delivery />} />
           <Route path="/restaurant/:id" element={<RestorantDetails />} />
+          <Route path="/cart" element={<CartDetails />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -15,7 +15,7 @@ const Delivery = () => {
   // get data of restaurant
   const restaurantData = useSelector(selectAllRestorants);
   const dispatch = useDispatch();
-  console.log(restaurantData);
+  // console.log(restaurantData);
   useEffect(() => {
     dispatch(fetchAllRestorantAsync());
   }, [dispatch]);
