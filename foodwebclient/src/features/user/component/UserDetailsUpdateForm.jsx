@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
-import "../../style/userdetailsupdateform.css";
-import Button from "../../ui/Button";
+import "../../../style/userdetailsupdateform.css";
+import Button from "../../../ui/Button";
 import { State } from "country-state-city";
 
 const initialState = {

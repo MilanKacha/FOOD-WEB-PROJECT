@@ -1,7 +1,7 @@
 import "../../style/ordercheckout.css";
-import CartDetails from "../cart/CartDetails";
-import UserDetailsUpdateForm from "../user/UserDetailsUpdateForm";
-import UserDetails from "../user/UserDetails";
+import CartDetails from "../cart/component/CartDetails";
+import UserDetailsUpdateForm from "../user/component/UserDetailsUpdateForm";
+import UserDetails from "../user/component/UserDetails";
 
 const OrderCheckOut = () => {
   return (

@@ -29,7 +29,6 @@ export function logIn(logInInfo) {
         Cookies.set("jwt", data.token);
         resolve({ data });
         // console.log({ data });
-        // localStorage.setItem("token", data);
       } else {
         const error = await response.text();
         reject(error);

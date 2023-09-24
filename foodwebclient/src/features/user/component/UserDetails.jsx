@@ -1,8 +1,8 @@
-import "../../style/userdetails.css";
-import Profile from "../../assests/userdetails/profile.jfif";
-import Button from "../../ui/Button";
+import "../../../style/userdetails.css";
+import Profile from "../../../assests/userdetails/profile.jfif";
+import Button from "../../../ui/Button";
 import { useState } from "react";
-import ModalCommon from "../../ui/ModalCommon";
+import ModalCommon from "../../../ui/ModalCommon";
 import UserDetailsUpdateForm from "./UserDetailsUpdateForm";
 
 const UserDetails = () => {

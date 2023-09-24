@@ -16,7 +16,7 @@ const RestorantDetails = () => {
 
   // fetch product by restaurant
   const ProductsByrestaurant = useSelector(selectAllProductsByRestaurantId);
-  console.log(ProductsByrestaurant);
+  // console.log(ProductsByrestaurant);
   useEffect(() => {
     dispatch(fetchAllProductsByRestorantIdAsync(params.id));
   }, [dispatch, params.id]);

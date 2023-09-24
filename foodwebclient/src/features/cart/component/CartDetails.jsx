@@ -1,6 +1,7 @@
-import "../../style/cartdetails.css";
-import Mini from "../../assests/fooditem/mini.avif";
-import Button from "../../ui/Button";
+import "../../../style/cartdetails.css";
+
+import Mini from "../../../assests/fooditem/mini.avif";
+import Button from "../../../ui/Button";
 
 const CartDetails = () => {
   return (

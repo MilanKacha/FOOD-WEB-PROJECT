@@ -7,7 +7,7 @@ const initialState = {
   status: "idle",
   error: null,
   // jyare token save thay pa6igame te link manually no kule
-  userChecked: false,
+  user: [],
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -61,6 +61,7 @@ export const authSlice = createSlice({
       .addCase(logInUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.loggedInUserToken = action.payload;
+        state.user = action.payload;
       })
       .addCase(logInUserAsync.rejected, (state, action) => {
         state.status = "error";

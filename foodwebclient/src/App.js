@@ -11,10 +11,10 @@ import Footer from "./features/Navbar/Footer";
 import Delivery from "./features/delivery/component/Delivery";
 import RestorantDetails from "./features/delivery/component/RestorantDetails";
 import Modal from "./ui/Modal";
-import UserDetails from "./features/user/UserDetails";
+import UserDetails from "./features/user/component/UserDetails";
 import OrderSuccess from "./features/order/OrderSuccess";
-import CartDetails from "./features/cart/CartDetails";
 import OrderCheckOut from "./features/order/OrderCheckOut";
+import CartDetails from "./features/cart/component/CartDetails";
 
 function App() {
   return (
