@@ -15,8 +15,27 @@ import UserDetails from "./features/user/component/UserDetails";
 import OrderSuccess from "./features/order/OrderSuccess";
 import OrderCheckOut from "./features/order/OrderCheckOut";
 import CartDetails from "./features/cart/component/CartDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoggedInUser } from "./features/auth/authSlice";
+import { useEffect } from "react";
+
+import {
+  fetchLoggedInUserAsync,
+  selectUserInfo,
+} from "./features/user/userSlice";
+import { fetchItemsByUserId } from "./features/cart/cartApi";
+import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchLoggedInUserAsync());
+      dispatch(fetchItemsByUserIdAsync());
+    }
+  }, [dispatch, user]);
+  // console.log(user);
   return (
     <>
       <BrowserRouter>

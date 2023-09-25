@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCartAsync } from "../features/cart/cartSlice";
 import { selectUserInfo } from "../features/user/userSlice";
 import { useEffect } from "react";
-import { fetchLoggedInUserAsync } from "../features/user/userSlice";
 
 const FoodItem = ({ product }) => {
   // console.log(product);
@@ -14,10 +13,10 @@ const FoodItem = ({ product }) => {
   // ToDo when product fetch at this time user fetch repeatedly
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
-  useEffect(() => {
-    dispatch(fetchLoggedInUserAsync());
-  }, [dispatch]);
-  // console.log(user);
+  // useEffect(() => {
+  //   dispatch(fetchLoggedInUserAsync());
+  // }, [dispatch]);
+  console.log(user);
 
   const handeladdToCart = (e) => {
     e.preventDefault();
