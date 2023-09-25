@@ -14,16 +14,35 @@ import { useEffect } from "react";
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchItemsByUserIdAsync());
+  }, [dispatch]);
+  const totalAmount = cartByUserId.reduce(
+    (amount, item) => item.product.price * item.quantity + amount,
+    0
+  );
+
+  const totalItem = cartByUserId.reduce(
+    (amount, item) => item.quantity + amount,
+    0
+  );
 
   const handelUpdateCart = (e, item) => {
-    dispatch(updateCartAsync({ id: item._id, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id: item._id, quantity: +e.target.value })).then(
+      () => {
+        // After successfully updating the cart, you can fetch the updated cart
+        dispatch(fetchItemsByUserIdAsync());
+      }
+    );
   };
 
   const handelRemoveCart = (e, id) => {
     dispatch(deleteItemFromCartAsync(id));
   };
 
-  console.log(cartByUserId);
+  // console.log(cartByUserId);
+
+  console.log(totalAmount);
   return (
     <>
       <div className="cart-container">
@@ -36,7 +55,7 @@ const CartDetails = () => {
           </div>
           {cartByUserId.map((item, index) => (
             <>
-              {console.log(item)}
+              {/* {console.log(item)} */}
               <div className="cartitem" key={index}>
                 <div className="cartitem-img">
                   <img src={item.product.image} alt="" />
@@ -47,8 +66,8 @@ const CartDetails = () => {
                     {item.product.restorantname}
                   </div>
                   <select
-                    value={item.product.quantity}
                     onChange={(e) => handelUpdateCart(e, item)}
+                    value={item.quantity}
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -67,7 +86,8 @@ const CartDetails = () => {
 
           <div className="cartitem-subtotal">
             <div style={{ color: "black" }} className="subtotal">
-              SubTotal: 3333 <span> / Total Item In Cart: 2</span>
+              SubTotal: {totalAmount}
+              <span> / Total Item In Cart: {totalItem}</span>
             </div>
           </div>
           {/* Todo when check out page add ordernow */}
