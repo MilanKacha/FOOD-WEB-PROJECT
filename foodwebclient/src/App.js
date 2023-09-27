@@ -29,6 +29,7 @@ import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
+
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync());
@@ -46,6 +47,7 @@ function App() {
           <Route path="/cart" element={<CartDetails />} />
           <Route path="/checkout" element={<OrderCheckOut />} />
           <Route path="/user" element={<UserDetails />} />
+          <Route path="/ordersucess" element={<OrderSuccess />} />
         </Routes>
       </BrowserRouter>
     </>

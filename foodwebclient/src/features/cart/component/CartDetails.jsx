@@ -10,10 +10,14 @@ import {
   updateCartAsync,
 } from "../cartSlice";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
   const dispatch = useDispatch();
+  const location = useLocation();
+  // console.log(location.pathname);
   useEffect(() => {
     dispatch(fetchItemsByUserIdAsync());
   }, [dispatch]);
@@ -28,6 +32,7 @@ const CartDetails = () => {
   );
 
   const handelUpdateCart = (e, item) => {
+    // + convert in string to int
     dispatch(updateCartAsync({ id: item._id, quantity: +e.target.value })).then(
       () => {
         // After successfully updating the cart, you can fetch the updated cart
@@ -76,9 +81,11 @@ const CartDetails = () => {
                     <option value="5">5</option>
                   </select>
                   <div className="cartitem-price">₹{item.product.price}</div>
-                  <Button onClick={(e) => handelRemoveCart(e, item._id)}>
-                    Remove
-                  </Button>
+                  {location.pathname === "/cart" && (
+                    <Button onClick={(e) => handelRemoveCart(e, item._id)}>
+                      Remove
+                    </Button>
+                  )}
                 </div>
               </div>
             </>
@@ -90,8 +97,17 @@ const CartDetails = () => {
               <span> / Total Item In Cart: {totalItem}</span>
             </div>
           </div>
-          {/* Todo when check out page add ordernow */}
-          <div className="cartitem-subtotal">Checkout</div>
+
+          {location.pathname === "/checkout" && (
+            <Link to="/ordersucess">
+              <Button className="cartitem-subtotal">Place Order</Button>
+            </Link>
+          )}
+          {location.pathname === "/cart" && (
+            <Link to="/checkout">
+              <Button className="cartitem-subtotal">Process to Buy</Button>
+            </Link>
+          )}
         </div>
       </div>
     </>

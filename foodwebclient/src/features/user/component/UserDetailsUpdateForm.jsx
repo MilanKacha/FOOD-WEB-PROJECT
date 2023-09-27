@@ -4,6 +4,7 @@ import Button from "../../../ui/Button";
 import { State } from "country-state-city";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserInfo, updateUserAsync } from "../userSlice";
+import { useLocation } from "react-router-dom";
 
 const initialState = {
   profilepicture: null,
@@ -35,6 +36,8 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
 
   const user = useSelector(selectUserInfo);
   const userUpdateFormdispatch = useDispatch();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handelInputChange = (field, value) => {
     dispatch({ type: "UPDATE_FIELD", field, value });
@@ -56,20 +59,34 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
   return (
     <>
       <div className="updateprofile">
-        <form action="" onSubmit={handleSubmit}>
-          <h2 style={{ color: "black" }} className="updateform-heading">
-            Update Your Profile
-          </h2>
+        <form onSubmit={handleSubmit}>
+          {location.pathname === "/user" && (
+            <h2 style={{ color: "black" }} className="updateform-heading">
+              Update Your Profile
+            </h2>
+          )}
+          {location.pathname === "/checkout" && (
+            <h2 style={{ color: "black" }} className="updateform-heading">
+              Update Shipping Details
+            </h2>
+          )}
+
           <div>
-            <label htmlFor="name">Profile Picture:</label>
-            <input
-              type="file"
-              id="profilepicture"
-              name="prifilepicture"
-              onChange={(e) =>
-                handelInputChange("profilepicture", e.target.value)
-              }
-            />
+            {location.pathname === "/user" && (
+              <>
+                <label htmlFor="name">Profile Picture:</label>
+                <input
+                  type="file"
+                  id="profilepicture"
+                  name="prifilepicture"
+                  onChange={(e) =>
+                    handelInputChange("profilepicture", e.target.value)
+                  }
+                />
+              </>
+            )}
+          </div>
+          <div>
             <label htmlFor="name">Name:</label>
             <input
               type="text"
