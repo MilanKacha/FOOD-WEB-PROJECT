@@ -23,3 +23,19 @@ export function fetchLoggedInUser() {
     }
   });
 }
+
+export function updateUser(update) {
+  return new Promise(async (resolve) => {
+    const token = Cookies.get("jwt") || null;
+    const res = await fetch("http://localhost:8081/api/v1/users/updateMe", {
+      method: "PATCH",
+      body: JSON.stringify(update),
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    resolve({ data });
+  });
+}

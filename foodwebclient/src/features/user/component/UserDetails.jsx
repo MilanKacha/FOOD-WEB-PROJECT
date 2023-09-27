@@ -4,9 +4,13 @@ import Button from "../../../ui/Button";
 import { useState } from "react";
 import ModalCommon from "../../../ui/ModalCommon";
 import UserDetailsUpdateForm from "./UserDetailsUpdateForm";
+import { useDispatch } from "react-redux";
+import { updateUserAsync } from "../userSlice";
 
 const UserDetails = () => {
   const [updateformOpen, setUpdateformOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setUpdateformOpen(true);
@@ -17,7 +21,9 @@ const UserDetails = () => {
   };
 
   //Todo  for update form data
-  const handleUpdateProfile = () => {};
+  // const handleUpdateProfile = () => {
+  //   dispatch(updateUserAsync());
+  // };
 
   return (
     <>
@@ -42,10 +48,7 @@ const UserDetails = () => {
 
       {updateformOpen && (
         <ModalCommon openModal={openModal} closeModal={closeModal}>
-          <UserDetailsUpdateForm
-            closeModal={closeModal}
-            onUpdateProfile={handleUpdateProfile}
-          />
+          <UserDetailsUpdateForm closeModal={closeModal} />
         </ModalCommon>
       )}
     </>

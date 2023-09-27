@@ -2,6 +2,8 @@ import { useReducer, useState } from "react";
 import "../../../style/userdetailsupdateform.css";
 import Button from "../../../ui/Button";
 import { State } from "country-state-city";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserInfo, updateUserAsync } from "../userSlice";
 
 const initialState = {
   profilepicture: null,
@@ -28,25 +30,26 @@ const formReducer = (state, action) => {
   }
 };
 
-// const handleImageChange = (e) => {
-//   const file = e.target.files[0];
-//   dispatch({ type: "UPDATE_PROFILE_PICTURE", file });
-// };
-
 const UserDetailsUpdateForm = ({ closeModal }) => {
   const [formData, dispatch] = useReducer(formReducer, initialState);
+
+  const user = useSelector(selectUserInfo);
+  const userUpdateFormdispatch = useDispatch();
 
   const handelInputChange = (field, value) => {
     dispatch({ type: "UPDATE_FIELD", field, value });
   };
 
-  const handleSubmit = (e) => {
+  // for submit & update data
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Todo Add form submit data in dispatch function
-
-    console.log(formData);
-
-    // reset form after submmision
+    try {
+      await userUpdateFormdispatch(updateUserAsync({ ...user, ...formData }));
+      closeModal();
+    } catch (error) {
+      // Handle errors if necessary
+    }
+    // reset form after submission
     dispatch({ type: "RESET_FORM" });
   };
 

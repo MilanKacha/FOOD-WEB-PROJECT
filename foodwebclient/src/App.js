@@ -44,6 +44,8 @@ function App() {
           <Route path="/restaurant" exact element={<Delivery />} />
           <Route path="/restaurant/:id" element={<RestorantDetails />} />
           <Route path="/cart" element={<CartDetails />} />
+          <Route path="/checkout" element={<OrderCheckOut />} />
+          <Route path="/user" element={<UserDetails />} />
         </Routes>
       </BrowserRouter>
     </>
