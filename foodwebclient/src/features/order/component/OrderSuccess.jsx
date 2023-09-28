@@ -1,19 +1,25 @@
 import { useSelector } from "react-redux";
 import "../../../style/ordersuccess.css";
-import { currentOrder } from "../orderSlice";
+
 import { Link, useNavigate } from "react-router-dom";
+import { selectCurrentOrder } from "../orderSlice";
 
 const OrderSuccess = () => {
   // Declare currentOrder get from localStorage
   const navigate = useNavigate();
-
+  const currentOrder =
+    useSelector(selectCurrentOrder) ||
+    JSON.parse(localStorage.getItem("currentOrder"));
   console.log(currentOrder);
   const goToHomePage = () => {
-    // Remove the currentOrder from local storage
-    localStorage.removeItem("currentOrder");
-    // Navigate to the home page
     navigate("/");
   };
+
+  if (!currentOrder || !currentOrder.data || !currentOrder.data.order) {
+    // Handle the case where currentOrder is not available or is invalid
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="ordersuccess">
@@ -23,7 +29,7 @@ const OrderSuccess = () => {
           </h2>
           <div className="orderdetails">
             <span className="orderid">
-              Order ID:{currentOrder.data.order._id}
+              Order ID:{currentOrder?.data.order._id}
             </span>
             <span className="ordersuccess-text">
               You can check your Orders in my account My Order

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteItemFromCartAsync,
   fetchItemsByUserIdAsync,
+  resetCartAsync,
   selectItems,
-  selectItemsByUserId,
   updateCartAsync,
 } from "../cartSlice";
 import { useEffect } from "react";
@@ -50,7 +50,7 @@ const CartDetails = () => {
 
   // console.log(cartByUserId);
 
-  const handelOrder = () => {
+  const handelOrder = async () => {
     const order = {
       product: cartByUserId,
       totalAmount: totalAmount,
@@ -58,9 +58,8 @@ const CartDetails = () => {
       user: user._id,
       selectedAddress: `${user.street}, ${user.city}, ${user.pincode}, ${user.state}, ${user.country}`,
     };
-    dispatch(createOrderAsync(order));
-    //TODO:- Redirect to order success page
-    //TODO:- Clear cart after order
+    await dispatch(createOrderAsync(order));
+    await dispatch(resetCartAsync());
   };
 
   console.log(totalAmount);

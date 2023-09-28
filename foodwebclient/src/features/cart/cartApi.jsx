@@ -31,6 +31,11 @@ export function fetchItemsByUserId() {
 }
 
 export function deleteItemFromCart(itemId) {
+  if (!itemId) {
+    // Handle the case where itemId is undefined or null.
+    return Promise.resolve({ data: { id: itemId } });
+  }
+
   return new Promise(async (resolve) => {
     const res = await fetch("http://localhost:8081/api/v1/cart/" + itemId, {
       method: "DELETE",
@@ -39,6 +44,27 @@ export function deleteItemFromCart(itemId) {
     const data = await res.json();
 
     resolve({ data: { id: itemId } });
+  });
+}
+
+export async function resetCart() {
+  return new Promise(async (resolve) => {
+    const token = Cookies.get("jwt") || null;
+    const res = await fetch("http://localhost:8081/api/v1/cart", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      // Successful reset (no JSON data to parse)
+      resolve({ status: "success" });
+    } else {
+      // Handle other status codes here if needed
+      resolve({ status: "error", message: "Reset failed" });
+    }
   });
 }
 
