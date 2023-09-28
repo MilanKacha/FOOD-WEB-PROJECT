@@ -4,14 +4,15 @@ import restorantReducer from "../features/delivery/RestorantSlice";
 import authReducer from "../features/auth/authSlice";
 import cartReducer from "../features/cart/cartSlice";
 import userReducer from "../features/user/userSlice";
+import orderReducer from "../features/order/orderSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     restorant: restorantReducer,
     auth: authReducer,
     cart: cartReducer,
     user: userReducer,
+    order: orderReducer,
   },
 });
 

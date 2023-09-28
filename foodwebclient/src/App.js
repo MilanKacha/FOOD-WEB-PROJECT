@@ -12,8 +12,8 @@ import Delivery from "./features/delivery/component/Delivery";
 import RestorantDetails from "./features/delivery/component/RestorantDetails";
 import Modal from "./ui/Modal";
 import UserDetails from "./features/user/component/UserDetails";
-import OrderSuccess from "./features/order/OrderSuccess";
-import OrderCheckOut from "./features/order/OrderCheckOut";
+
+import OrderCheckOut from "./features/order/component/OrderCheckOut";
 import CartDetails from "./features/cart/component/CartDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "./features/auth/authSlice";
@@ -25,6 +25,7 @@ import {
 } from "./features/user/userSlice";
 import { fetchItemsByUserId } from "./features/cart/cartApi";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+import OrderSuccess from "./features/order/component/OrderSuccess";
 
 function App() {
   const dispatch = useDispatch();

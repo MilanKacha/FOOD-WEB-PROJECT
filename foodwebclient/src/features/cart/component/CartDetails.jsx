@@ -12,9 +12,12 @@ import {
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { selectUserInfo } from "../../user/userSlice";
+import { createOrderAsync } from "../../order/orderSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
+  const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
   // console.log(location.pathname);
@@ -46,6 +49,19 @@ const CartDetails = () => {
   };
 
   // console.log(cartByUserId);
+
+  const handelOrder = () => {
+    const order = {
+      product: cartByUserId,
+      totalAmount: totalAmount,
+      totalItems: totalItem,
+      user: user._id,
+      selectedAddress: `${user.street}, ${user.city}, ${user.pincode}, ${user.state}, ${user.country}`,
+    };
+    dispatch(createOrderAsync(order));
+    //TODO:- Redirect to order success page
+    //TODO:- Clear cart after order
+  };
 
   console.log(totalAmount);
   return (
@@ -100,7 +116,9 @@ const CartDetails = () => {
 
           {location.pathname === "/checkout" && (
             <Link to="/ordersucess">
-              <Button className="cartitem-subtotal">Place Order</Button>
+              <Button className="cartitem-subtotal" onClick={handelOrder}>
+                Place Order
+              </Button>
             </Link>
           )}
           {location.pathname === "/cart" && (
