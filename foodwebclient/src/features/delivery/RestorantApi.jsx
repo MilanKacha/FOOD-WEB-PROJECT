@@ -22,3 +22,11 @@ export function fetchRestaurantById(id) {
     resolve({ data });
   });
 }
+
+export function fetchAllProduct() {
+  return new Promise(async (resolve) => {
+    const res = await fetch("http://localhost:8081/api/v1/product");
+    const data = await res.json();
+    resolve({ data });
+  });
+}

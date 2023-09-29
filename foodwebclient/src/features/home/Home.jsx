@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeroSlider from "./HeroSlider";
 import "../../style/home.css";
 import Navbar from "../Navbar/Navbar";
@@ -27,6 +27,11 @@ import SandWhich from "../../assests/hero-popular/sandwhich.avif";
 import Tanduri from "../../assests/hero-popular/Tanduri.avif";
 import Vada from "../../assests/hero-popular/vada.avif";
 import SliderComponent from "../../ui/SliderComponent";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllProductAsync,
+  selectedAllProducts,
+} from "../delivery/RestorantSlice";
 
 const HeroChoiceData = [
   {
@@ -63,64 +68,64 @@ const Locations = [
   { id: 11, location: "Indiranagar", places: "495 places" },
   { id: 12, location: "Indiranagar", places: "495 places" },
 ];
-const PopularItem = [
-  {
-    imageSrc: Dosa,
-    heading: "Podi Dosai",
-    description: "Get Up To 50% off",
-    price: "₹145",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Idali,
-    heading: "Idly [2 Nos]",
-    description: "Get Up To 50% off",
-    price: "₹70",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Tanduri,
-    heading: "Tandoori Paneer",
-    description: "Get Up To 50% off",
-    price: "₹165",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Pizza,
-    heading: "Vegetariana Pizza",
-    description: "Get Up To 50% off",
-    price: "₹₹495",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Biriyani,
-    heading: "Biryani",
-    description: "Get Up To 50% off",
-    price: "₹125",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Cack,
-    heading: "Cack",
-    description: "Get Up To 50% off",
-    price: "₹645",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Paratha,
-    heading: "Aloo Paratha",
-    description: "Get Up To 50% off",
-    price: "₹149",
-    button: "Order Now",
-  },
-  {
-    imageSrc: Vada,
-    heading: "Medhu Vadai",
-    description: "Get Up To 50% off",
-    price: "₹50",
-    button: "Order Now",
-  },
-];
+// const PopularItem = [
+//   {
+//     imageSrc: Dosa,
+//     heading: "Podi Dosai",
+//     description: "Get Up To 50% off",
+//     price: "₹145",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Idali,
+//     heading: "Idly [2 Nos]",
+//     description: "Get Up To 50% off",
+//     price: "₹70",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Tanduri,
+//     heading: "Tandoori Paneer",
+//     description: "Get Up To 50% off",
+//     price: "₹165",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Pizza,
+//     heading: "Vegetariana Pizza",
+//     description: "Get Up To 50% off",
+//     price: "₹₹495",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Biriyani,
+//     heading: "Biryani",
+//     description: "Get Up To 50% off",
+//     price: "₹125",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Cack,
+//     heading: "Cack",
+//     description: "Get Up To 50% off",
+//     price: "₹645",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Paratha,
+//     heading: "Aloo Paratha",
+//     description: "Get Up To 50% off",
+//     price: "₹149",
+//     button: "Order Now",
+//   },
+//   {
+//     imageSrc: Vada,
+//     heading: "Medhu Vadai",
+//     description: "Get Up To 50% off",
+//     price: "₹50",
+//     button: "Order Now",
+//   },
+// ];
 
 const DealsData = [
   {
@@ -193,6 +198,17 @@ const CollectionDetails = [
 const Home = () => {
   const [visible, setVisivle] = useState(6);
 
+  const product = useSelector(selectedAllProducts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllProductAsync());
+  }, []);
+
+  // console.log(product);
+  // for PopulatSweet filter data
+  const PopularSweet = product.data.filter((item) => item.popularSweet);
+  console.log(PopularSweet);
+
   const showMoreItems = () => {
     setVisivle((prevValue) => prevValue + 3);
   };
@@ -215,11 +231,11 @@ const Home = () => {
         </section>
 
         <section className="popular-item">
-          <SliderComponent data={PopularItem} heading={"Popular Item"} />
+          <SliderComponent data={PopularSweet} heading={"Popular Sweet"} />
         </section>
 
         <section className="popular-item">
-          <SliderComponent data={PopularItem} heading={"Popular Item"} />
+          {/* <SliderComponent data={PopularItem} heading={"Popular Item"} /> */}
         </section>
 
         <section className="hero-collection-section">

@@ -26,6 +26,7 @@ import {
 import { fetchItemsByUserId } from "./features/cart/cartApi";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import OrderSuccess from "./features/order/component/OrderSuccess";
+import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
 
 function App() {
   const dispatch = useDispatch();

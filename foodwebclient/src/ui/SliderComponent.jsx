@@ -78,11 +78,11 @@ const SliderComponent = ({ heading, data }) => {
             <div key={index}>
               <div className="card">
                 <div className="slider-img">
-                  <img src={slide.imageSrc} alt={`Slide ${index}`} />
+                  <img src={slide.image} alt={`Slide ${index}`} />
                 </div>
                 <div className="slider-info">
                   <h2 style={{ color: "black" }}>
-                    {slide.heading ? `${slide.heading}` : "Gujarati thali"}
+                    {slide.itemname ? `${slide.itemname}` : "Gujarati thali"}
                   </h2>
 
                   <h3 style={{ color: "black" }}>
@@ -93,7 +93,7 @@ const SliderComponent = ({ heading, data }) => {
                     )
                   </h3>
                   <Button>
-                    {slide.button ? `${slide.button}` : "View More"}
+                    {slide.button ? `${slide.button}` : "Order Now"}
                   </Button>
                 </div>
               </div>

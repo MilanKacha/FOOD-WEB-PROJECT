@@ -17,6 +17,7 @@ import { createOrderAsync } from "../../order/orderSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
+
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -25,7 +26,7 @@ const CartDetails = () => {
     dispatch(fetchItemsByUserIdAsync());
   }, [dispatch]);
   const totalAmount = cartByUserId.reduce(
-    (amount, item) => item.product.price * item.quantity + amount,
+    (amount, item) => item?.product?.price * item.quantity + amount,
     0
   );
 
@@ -75,19 +76,19 @@ const CartDetails = () => {
           </div>
           {cartByUserId.map((item, index) => (
             <>
-              {/* {console.log(item)} */}
+              {console.log(item)}
               <div className="cartitem" key={index}>
                 <div className="cartitem-img">
-                  <img src={item.product.image} alt="" />
+                  <img src={item?.product?.image} alt="" />
                 </div>
                 <div className="cartitem-description">
-                  <div className="cartitem-name">{item.product.itemname}</div>
+                  <div className="cartitem-name">{item?.product?.itemname}</div>
                   <div className="cartitem-restorant">
-                    {item.product.restorantname}
+                    {item?.product?.restorantname}
                   </div>
                   <select
                     onChange={(e) => handelUpdateCart(e, item)}
-                    value={item.quantity}
+                    value={item?.quantity}
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -95,9 +96,9 @@ const CartDetails = () => {
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  <div className="cartitem-price">₹{item.product.price}</div>
+                  <div className="cartitem-price">₹{item?.product?.price}</div>
                   {location.pathname === "/cart" && (
-                    <Button onClick={(e) => handelRemoveCart(e, item._id)}>
+                    <Button onClick={(e) => handelRemoveCart(e, item?._id)}>
                       Remove
                     </Button>
                   )}

@@ -23,7 +23,7 @@ const RestorantCard = ({ props }) => {
         </div>
         <div id="delivery-time">
           <span id="restorsntname-delivery-time">
-            {props.expecteddeliverytime}
+            {props.expecteddeliverytime} min
           </span>
         </div>
       </div>

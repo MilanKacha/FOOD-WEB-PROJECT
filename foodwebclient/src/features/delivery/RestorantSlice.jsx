@@ -3,6 +3,7 @@ import {
   fetchAllRestorant,
   fetchAllProductsByRestorantId,
   fetchRestaurantById,
+  fetchAllProduct,
 } from "./RestorantApi";
 
 const initialState = {
@@ -18,6 +19,18 @@ export const fetchAllRestorantAsync = createAsyncThunk(
   async () => {
     try {
       const response = await fetchAllRestorant();
+      return response; // Return the response directly
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const fetchAllProductAsync = createAsyncThunk(
+  "restorant/fetchAllProducts",
+  async () => {
+    try {
+      const response = await fetchAllProduct();
       return response; // Return the response directly
     } catch (error) {
       console.log(error);
@@ -84,6 +97,13 @@ export const restorantSlice = createSlice({
       .addCase(fetchRestaurantByIdAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.selectedRestaurant = action.payload;
+      })
+      .addCase(fetchAllProductAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAllProductAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.products = action.payload;
       });
   },
 });
@@ -95,5 +115,6 @@ export const selectAllProductsByRestaurantId = (state) =>
   state.restorant.products;
 export const selectRestaurantById = (state) =>
   state.restorant.selectedRestaurant;
+export const selectedAllProducts = (state) => state.restorant.products;
 
 export default restorantSlice.reducer;

@@ -7,26 +7,25 @@ import { selectUserInfo } from "../features/user/userSlice";
 import { useEffect } from "react";
 
 const FoodItem = ({ product }) => {
-  // console.log(product);
   const navigate = useNavigate();
 
   // ToDo when product fetch at this time user fetch repeatedly
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
-  // useEffect(() => {
-  //   dispatch(fetchLoggedInUserAsync());
-  // }, [dispatch]);
-  console.log(user);
 
-  const handeladdToCart = (e) => {
-    e.preventDefault();
-    const newItem = {
-      product: product._id,
-      quantity: 1,
-      user: user._id,
-    };
-    dispatch(addToCartAsync(newItem));
-    navigate("/cart");
+  const handeladdToCart = () => {
+    // Check if product is defined before accessing its properties
+    if (product) {
+      const newItem = {
+        product: product?._id,
+        quantity: 1,
+        user: user?._id,
+      };
+      dispatch(addToCartAsync(newItem));
+      navigate("/cart");
+    } else {
+      console.error("Product is undefined or null");
+    }
   };
   return (
     <>
@@ -42,7 +41,7 @@ const FoodItem = ({ product }) => {
                 [4.9star (136-rating)]
               </span>
             </h3>
-            <span className="food-price">₹190</span>
+            <span className="food-price">₹ {product.price}</span>
 
             <span className="food-quantity">
               2 Mini Masala Dosa+1 Khara Bath+1 Vada+1 Gulab Jamun
