@@ -1,11 +1,31 @@
-.restorant-contant {
+.restorant-contant-wrapper {
   display: flex;
   flex-direction: column;
   font-size: 2rem;
+  background: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(251, 205, 205) 50%,
+    rgb(251, 205, 205) 50%,
+    rgb(255, 255, 255) 100%
+  );
+  padding: 3rem;
+  text-align: center;
 }
 .restorant-contant h2 {
   font-size: 4rem;
 }
 .restorant-contant span {
   margin: 0.5rem;
+}
+.restorant-contant-wrapper .restorant-rating {
+  padding: 0.2rem 1rem;
+  border-radius: 5px;
+  background: rgb(2, 177, 2);
+  font-size: 1.5rem;
+}
+.restorant-rating span {
+  font-size: 1rem;
+  padding-right: 0.2rem;
+  color: rgb(255, 255, 0);
 }

@@ -1,10 +1,10 @@
 .fooditem {
   padding: 10px;
-  margin: 2rem 0;
-}
-.fooditem:hover {
+  margin: 3rem 0;
+  font-size: 1.6rem;
   box-shadow: 10px 0px 5px 2px rgba(0, 0, 0, 0.2);
 }
+
 .fooditem-wrapper {
   display: flex;
 }
@@ -18,10 +18,10 @@
   margin-left: 3rem;
 }
 .food-content h3 {
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 .food-content span {
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
   margin: 0.2rem;
 }
 .food-button {

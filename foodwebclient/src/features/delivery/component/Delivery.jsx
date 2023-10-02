@@ -88,99 +88,108 @@ const Delivery = () => {
   return (
     <>
       <div>
-        {/* <nav className="navbar">
-          <ul className="navbar-list">
-            <li className="navbar-item">
-              <span
-                onClick={() =>
-                  handleFilterChange("expecteddeliverytime", "lowToHigh")
-                }
-                className={
-                  filters.expecteddeliverytime === "lowToHigh" ? "active" : ""
-                }
-              >
-                Delivery Time(Low to High)
-              </span>
-              {closeFilterIcon(
-                filters.expecteddeliverytime,
-                "lowToHigh",
-                clearFilter
-              )}
-            </li>
-            <li className="navbar-item">
-              <span
-                onClick={() => {
-                  handleFilterChange("ratingsAverage", "highToLow");
-                }}
-                className={
-                  filters.ratingsAverage === "highToLow" ? "active" : ""
-                }
-              >
-                Rating(High to Low)
-              </span>
-              {closeFilterIcon(
-                filters.ratingsAverage,
-                "highToLow",
-                clearFilter
-              )}
-            </li>
-            <li className="navbar-item">
-              <span
-                onClick={() => {
-                  handleFilterChange("ratingsAverage", "lowToHigh");
-                }}
-                className={
-                  filters.ratingsAverage === "lowToHigh" ? "active" : ""
-                }
-              >
-                Rating(Low to High)
-              </span>
-              {closeFilterIcon(
-                filters.ratingsAverage,
-                "lowToHigh",
-                clearFilter
-              )}
-            </li>
-            <li className="navbar-item">
-              <span
-                onClick={() => {
-                  handleFilterChange("price", "highToLow");
-                }}
-                className={filters.price === "highToLow" ? "active" : ""}
-              >
-                Price(High to Low)
-              </span>
-              {closeFilterIcon(filters.price, "highToLow", clearFilter)}
-            </li>
-            <li className="navbar-item">
-              <span
-                onClick={() => {
-                  handleFilterChange("price", "lowToHigh");
-                }}
-                className={filters.price === "lowToHigh" ? "active" : ""}
-              >
-                Price(Low to High)
-              </span>
-              {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
-            </li>
-            <li className="navbar-item">
-              <span
-                onClick={() => {
-                  handleFilterChange("ratingsAverage", "Rating4+");
-                }}
-                className={
-                  filters.ratingsAverage === "Rating4+" ? "active" : ""
-                }
-              >
-                Rating 4+
-              </span>
-              {closeFilterIcon(filters.ratingsAverage, "Rating4+", clearFilter)}
-            </li>
-          </ul>
-        </nav> */}
-
         <section className="restorantname-section">
-          <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
+          <div className="filter-nav-wrapper">
+            <nav className="filter-nav">
+              <ul className="navbar-list-filter">
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() =>
+                      handleFilterChange("expecteddeliverytime", "lowToHigh")
+                    }
+                    className={
+                      filters.expecteddeliverytime === "lowToHigh"
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    Delivery Time(Low to High)
+                  </span>
+                  {closeFilterIcon(
+                    filters.expecteddeliverytime,
+                    "lowToHigh",
+                    clearFilter
+                  )}
+                </li>
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() => {
+                      handleFilterChange("ratingsAverage", "highToLow");
+                    }}
+                    className={
+                      filters.ratingsAverage === "highToLow" ? "active" : ""
+                    }
+                  >
+                    Rating(High to Low)
+                  </span>
+                  {closeFilterIcon(
+                    filters.ratingsAverage,
+                    "highToLow",
+                    clearFilter
+                  )}
+                </li>
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() => {
+                      handleFilterChange("ratingsAverage", "lowToHigh");
+                    }}
+                    className={
+                      filters.ratingsAverage === "lowToHigh" ? "active" : ""
+                    }
+                  >
+                    Rating(Low to High)
+                  </span>
+                  {closeFilterIcon(
+                    filters.ratingsAverage,
+                    "lowToHigh",
+                    clearFilter
+                  )}
+                </li>
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() => {
+                      handleFilterChange("price", "highToLow");
+                    }}
+                    className={filters.price === "highToLow" ? "active" : ""}
+                  >
+                    Price(High to Low)
+                  </span>
+                  {closeFilterIcon(filters.price, "highToLow", clearFilter)}
+                </li>
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() => {
+                      handleFilterChange("price", "lowToHigh");
+                    }}
+                    className={filters.price === "lowToHigh" ? "active" : ""}
+                  >
+                    Price(Low to High)
+                  </span>
+                  {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
+                </li>
+                <li className="navbar-item-filter">
+                  <span
+                    onClick={() => {
+                      handleFilterChange("ratingsAverage", "Rating4+");
+                    }}
+                    className={
+                      filters.ratingsAverage === "Rating4+" ? "active" : ""
+                    }
+                  >
+                    Rating 4+
+                  </span>
+                  {closeFilterIcon(
+                    filters.ratingsAverage,
+                    "Rating4+",
+                    clearFilter
+                  )}
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="restaurant heading">
+            <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>
+          </div>
           <div className="restorsntname-container">
             {sortedData.map((item, index) => (
               <Link to={`/restaurant/${item._id}`}>

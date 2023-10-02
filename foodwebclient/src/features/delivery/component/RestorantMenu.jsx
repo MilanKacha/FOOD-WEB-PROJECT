@@ -2,6 +2,7 @@ import "../../../style/restorantmenu.css";
 import FoodItem from "../../../ui/FoodItem";
 import Mini from "../../../assests/fooditem/mini.avif";
 import { useState } from "react";
+import Button from "../../../ui/Button";
 
 const RestorantMenu = ({ ProductsByrestaurant }) => {
   // Filter food items based on 'showVegOnly' state
@@ -65,26 +66,30 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
 
   return (
     <div className="restorantmenu-wrapper">
-      <div className="restorant-item">
-        <div className="restaurant-vegonly">
-          <input
-            type="checkbox"
-            checked={showVegOnly}
-            onClick={() => setShowVagOnly(!showVegOnly)}
-          />
-          <label>Show Veg Only:</label>
+      <div className="restaurantmenu-container"></div>
+      <div className="restorant-item-wrapper">
+        <div className="restaurant-item-container">
+          <span className="restaurant-vegonly">
+            <input
+              type="checkbox"
+              checked={showVegOnly}
+              onClick={() => setShowVagOnly(!showVegOnly)}
+            />
+            <label>Show Veg Only</label>
+          </span>
+          <Button onClick={() => clearFilters()}> All Products</Button>
+
+          {subcategoryArray.map((item) => {
+            return (
+              <span
+                className={item.subcategory === activeProduct ? "active" : ""}
+                onClick={() => handelClickSubCategory(item.subcategory)}
+              >
+                {item.subcategory}({item.count})
+              </span>
+            );
+          })}
         </div>
-        <span onClick={() => clearFilters()}>All Products</span>
-        {subcategoryArray.map((item) => {
-          return (
-            <span
-              className={item.subcategory === activeProduct ? "active" : ""}
-              onClick={() => handelClickSubCategory(item.subcategory)}
-            >
-              {item.subcategory}({item.count})
-            </span>
-          );
-        })}
       </div>
       <div className="restorant-menu">
         {/* {console.log(filterProductByRestaurantId)} */}

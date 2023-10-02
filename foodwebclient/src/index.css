@@ -54,3 +54,7 @@ img {
 .page-wrapper {
   margin-top: 7rem;
 }
+.active {
+  color: rgb(255, 92, 92);
+  font-weight: 500;
+}

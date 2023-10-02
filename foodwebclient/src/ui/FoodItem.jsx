@@ -7,8 +7,6 @@ import { selectUserInfo } from "../features/user/userSlice";
 import { useEffect } from "react";
 
 const FoodItem = ({ product }) => {
-  const navigate = useNavigate();
-
   // ToDo when product fetch at this time user fetch repeatedly
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
@@ -22,7 +20,6 @@ const FoodItem = ({ product }) => {
         user: user?._id,
       };
       dispatch(addToCartAsync(newItem));
-      navigate("/cart");
     } else {
       console.error("Product is undefined or null");
     }
@@ -37,10 +34,11 @@ const FoodItem = ({ product }) => {
           <div className="food-content">
             <h3 style={{ color: "black" }}>
               {/* {item.foodtitle} */}
-              <span style={{ fontWeight: 400 }} className="food-rating">
-                [4.9star (136-rating)]
-              </span>
+              <span className="food-rating">{product.itemname}</span>
             </h3>
+            <span className="food-rating ">
+              <span>{product.ratingsAverage} Stars</span> (94-rating)
+            </span>
             <span className="food-price">₹ {product.price}</span>
 
             <span className="food-quantity">

@@ -16,9 +16,7 @@
 }
 
 /* popular-item */
-
-.popular-item .popular-Sweet {
-  padding: 5rem 0 7rem 0;
+.popular-item {
   background: linear-gradient(
     to right,
     rgb(255, 255, 255) 0%,
@@ -27,15 +25,12 @@
     rgb(251, 205, 205) 100%
   );
 }
+
+.popular-item .popular-Sweet {
+  padding: 5rem 0 7rem 0;
+}
 .popular-item .popular-items {
   padding: 5rem 0 7rem 0;
-  background: linear-gradient(
-    to left,
-    rgb(255, 255, 255) 0%,
-    rgb(255, 255, 255) 50%,
-    rgb(251, 205, 205) 80%,
-    rgb(251, 205, 205) 100%
-  );
 }
 
 /* collection section */

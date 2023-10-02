@@ -3,23 +3,35 @@
   height: 80vh;
   border-top: 1px solid #dedcdc;
 }
-.restorant-item {
+.restorant-item-wrapper {
   display: flex;
   flex: 1;
   flex-direction: column;
   border-right: 1px solid #dedcdc;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   box-sizing: border-box;
+  padding: 3rem;
 }
-.restorant-item span {
+
+.restorant-item-wrapper span {
   margin: 1rem 0 1rem 3rem;
+}
+.restaurant-item-container {
+  background: rgb(243, 243, 243);
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  height: 100%;
+  padding-top: 2rem;
+}
+.restaurant-vegonly input {
+  margin-right: 0.5rem;
+}
+.restaurant-item-container Button {
+  background: rgb(254, 221, 221);
 }
 
 .restorant-menu {
   flex: 4;
   overflow-y: auto;
-}
-.active {
-  color: red;
-  font-weight: 500;
 }

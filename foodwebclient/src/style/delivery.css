@@ -1,3 +1,28 @@
+/* navbar for filter */
+
+.filter-nav {
+  display: flex;
+  font-size: 1.6rem;
+  align-items: center;
+  width: 100%;
+  height: 7rem;
+  z-index: 1000;
+  background: #fff;
+  position: fixed;
+  top: 7rem;
+  left: 0;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+.navbar-list-filter {
+  display: flex;
+  flex-direction: row;
+  margin: 0 2rem;
+  gap: 2rem;
+}
+/* restaurant */
+.restorantname-section {
+  margin-top: 16rem;
+}
 .restorsntname-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns in each row */
@@ -5,6 +30,5 @@
   padding: 20px;
 }
 .restorantname-section h2 {
-  margin: 4rem 3rem 0 0;
   text-align: center;
 }
