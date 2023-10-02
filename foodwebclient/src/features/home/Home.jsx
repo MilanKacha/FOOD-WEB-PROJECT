@@ -30,8 +30,15 @@ import SliderComponent from "../../ui/SliderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllProductAsync,
+  fetchAllProductsByRestorantIdAsync,
+  fetchAllRestorantAsync,
+  selectAllRestorants,
   selectedAllProducts,
 } from "../delivery/RestorantSlice";
+import HeroSection from "./HeroSection";
+import { fetchAllRestorant } from "../delivery/RestorantApi";
+import { Link, useParams } from "react-router-dom";
+import Footer from "../Navbar/Footer";
 
 const HeroChoiceData = [
   {
@@ -68,7 +75,7 @@ const Locations = [
   { id: 11, location: "Indiranagar", places: "495 places" },
   { id: 12, location: "Indiranagar", places: "495 places" },
 ];
-// const PopularItem = [
+
 //   {
 //     imageSrc: Dosa,
 //     heading: "Podi Dosai",
@@ -130,21 +137,21 @@ const Locations = [
 const DealsData = [
   {
     id: 1,
-    img: Burgur,
-    heading: "Top Deals on Burger",
-    description: `Get Free Classic Veg Cheese Burger with every Order  Minimum cart amount should be Rs. 299 Access this deal by using the given Promo code`,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077215/home/dominoz_vybasv.avif`,
+    heading: "Top Deals on Domino's Pizza",
+    description: `Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese. Available in Cheese Burst, Wheat Thin Crust and Pan Crust options.`,
   },
   {
     id: 1,
-    img: Burgur,
-    heading: "Top Deals on Burger",
-    description: `Get Free Classic Veg Cheese Burger with every Order  Minimum cart amount should be Rs. 299 Access this deal by using the given Promo code`,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077680/home/potful_mclqrf.avif`,
+    heading: "Potful - Claypot Biryanis",
+    description: `This renowned flavourful biryani is cooked in traditional dum style with succulent chicken in layers of fluffy basmati rice fragrant spices and caramelised onions. Its for those who crave for the feast.`,
   },
   {
     id: 1,
-    img: Burgur,
-    heading: "Top Deals on Burger",
-    description: `Get Free Classic Veg Cheese Burger with every Order  Minimum cart amount should be Rs. 299 Access this deal by using the given Promo code`,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077841/home/th_bbc2ix.avif`,
+    heading: "Thom's Bakery - Since 1970",
+    description: `Experience the vibrancy of Indian flavors on our Tandoori Veg Paneer Pizza. Marinated paneer and an assortment of tandoori veggies rest on a tandoori-flavored crust.`,
   },
 ];
 
@@ -196,30 +203,39 @@ const CollectionDetails = [
 ];
 
 const Home = () => {
-  const [visible, setVisivle] = useState(6);
-
+  const restaurants = useSelector(selectAllRestorants);
   const product = useSelector(selectedAllProducts);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchAllProductAsync());
-  }, []);
-
   // console.log(product);
-  // for PopulatSweet filter data
-  const PopularSweet = product.data.filter((item) => item.popularSweet);
-  console.log(PopularSweet);
+
+  useEffect(() => {
+    dispatch(fetchAllRestorantAsync());
+    dispatch(fetchAllProductAsync());
+  }, [dispatch]);
+
+  // console.log(restaurants);
+
+  const [visible, setVisivle] = useState(6);
+  // console.log(product);
+  // for PopularSweet filter data
+  const PopularSweet = product?.data?.filter((item) => item.popularSweet);
+  // console.log(PopularSweet);
+
+  // for PopularItemfilter data
+  const PopularItem = product?.data?.filter((item) => item.popularItems);
+  // console.log(PopularItem);
 
   const showMoreItems = () => {
-    setVisivle((prevValue) => prevValue + 3);
+    setVisivle((prevValue) => prevValue + 6);
   };
   const showLessItems = () => {
-    setVisivle(3);
+    setVisivle(6);
   };
   return (
     <>
       <main className="home">
         <section className="hero-section">
-          <Navbar />
+          <HeroSection />
         </section>
 
         <section className="hero-choice-section">
@@ -231,31 +247,20 @@ const Home = () => {
         </section>
 
         <section className="popular-item">
-          <SliderComponent data={PopularSweet} heading={"Popular Sweet"} />
+          <div className="popular-Sweet">
+            <SliderComponent data={PopularSweet} heading={"Popular Sweet"} />
+          </div>
+          <div className="popular-items">
+            <SliderComponent data={PopularItem} heading={"Popular Fastfoods"} />
+          </div>
         </section>
 
-        <section className="popular-item">
-          {/* <SliderComponent data={PopularItem} heading={"Popular Item"} /> */}
-        </section>
-
-        <section className="hero-collection-section">
-          <h2 className="heading">
-            Collections
-            <div className="heading-text">
-              Explore curated lists of top restaurants, cafes, pubs, and bars in
-              Bengaluru, based on trends
-            </div>
-          </h2>
-
+        {/* <section className="hero-collection-section">
           <div className="hero-collection-container">
             {CollectionDetails.map((collction, index) => (
               <HeroCollectionDetails key={index} data={collction} />
             ))}
           </div>
-        </section>
-
-        {/* <section className="hero-brands">
-          <HeroSlider />
         </section> */}
 
         <section className="hero-deal-section">
@@ -266,29 +271,45 @@ const Home = () => {
 
         <section className="hero-location-section">
           <div className="hero-location-text">
-            <h2>Popular localities in and around Bengaluru</h2>
+            <h2>Popular Restaurants in and around Bengaluru</h2>
           </div>
           <div className="location">
-            {Locations.slice(0, visible).map((location) => (
-              <HeroLocation key={location.id} data={location} />
+            {restaurants.slice(0, visible).map((restaurant, index) => (
+              <>
+                <Link to={`/restaurant/${restaurant._id}`}>
+                  <HeroLocation key={index} data={restaurant} />
+                </Link>
+              </>
             ))}
           </div>
-          {visible !== Locations.length ? (
-            <Button onClick={showMoreItems} className="primary">
-              AddMore
-            </Button>
-          ) : (
-            <Button onClick={showLessItems}>Addless</Button>
-          )}
+
+          <div className="hero-restaurant-button">
+            {visible !== Locations.length ? (
+              <Button onClick={showMoreItems} className="primary ">
+                AddMore
+              </Button>
+            ) : (
+              <Button onClick={showLessItems}>Addless</Button>
+            )}
+          </div>
         </section>
+
         <section className="faq-section">
-          <h2 className="heading">Frequently asked questions (FAQ)</h2>
+          <div className="question-heading">
+            <h2 className="heading" style={{ color: "black" }}>
+              Frequently asked questions (FAQ)
+            </h2>
+          </div>
           {FqaDetails.map((faq, index) => (
             <Herofaq key={index} data={faq} />
           ))}
         </section>
+
         <section className="hero-getapp-section">
           <HeroGetApp />
+        </section>
+        <section className="footer">
+          <Footer />
         </section>
       </main>
     </>

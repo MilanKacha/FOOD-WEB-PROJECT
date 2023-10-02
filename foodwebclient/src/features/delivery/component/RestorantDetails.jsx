@@ -13,10 +13,11 @@ import {
 const RestorantDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
+  // console.log(params.id);
 
   // fetch product by restaurant
   const ProductsByrestaurant = useSelector(selectAllProductsByRestaurantId);
-  // console.log(ProductsByrestaurant);
+  console.log(ProductsByrestaurant);
   useEffect(() => {
     dispatch(fetchAllProductsByRestorantIdAsync(params.id));
   }, [dispatch, params.id]);

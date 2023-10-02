@@ -10,8 +10,9 @@ const initialState = {
   products: [],
   restorants: [],
   status: "idle",
-  totalItems: 0,
+
   selectedRestaurant: [],
+  productsByRestorantId: [],
 };
 
 export const fetchAllRestorantAsync = createAsyncThunk(
@@ -85,7 +86,7 @@ export const restorantSlice = createSlice({
         fetchAllProductsByRestorantIdAsync.fulfilled,
         (state, action) => {
           state.status = "idle";
-          state.products = action.payload.data;
+          state.productsByRestorantId = action.payload.data;
         }
       )
       .addCase(fetchAllProductsByRestorantIdAsync.rejected, (state, action) => {
@@ -112,7 +113,7 @@ export const { setProductsubcategories } = restorantSlice.actions;
 
 export const selectAllRestorants = (state) => state.restorant.restorants;
 export const selectAllProductsByRestaurantId = (state) =>
-  state.restorant.products;
+  state.restorant.productsByRestorantId;
 export const selectRestaurantById = (state) =>
   state.restorant.selectedRestaurant;
 export const selectedAllProducts = (state) => state.restorant.products;

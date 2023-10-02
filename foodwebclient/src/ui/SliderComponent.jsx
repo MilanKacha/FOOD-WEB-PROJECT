@@ -7,10 +7,14 @@ import {
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
 import Button from "../ui/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUserInfo } from "../features/user/userSlice";
+import { addToCartAsync } from "../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const SliderComponent = ({ heading, data }) => {
   const sliderRef = useRef(null);
-  console.log(sliderRef.current);
+  // console.log(sliderRef.current);
   const settings = {
     dots: true,
     infinite: false,
@@ -46,14 +50,33 @@ const SliderComponent = ({ heading, data }) => {
       },
     ],
   };
-  const sliderClasses = data.className
-    ? data.className + " " + "slider-content"
-    : "slider-content" + " " + data.title + "-slider";
+  // const sliderClasses = data.className
+  //   ? data.className + " " + "slider-content"
+  //   : "slider-content" + " " + data.title + "-slider";
+  const user = useSelector(selectUserInfo);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handeladdToCart = (product, user) => {
+    // Check if product is defined before accessing its properties
+    if (product) {
+      const newItem = {
+        product: product?._id,
+        quantity: 1,
+        user: user?._id,
+      };
+      dispatch(addToCartAsync(newItem));
+      navigate("/cart");
+    } else {
+      console.error("Product is undefined or null");
+    }
+  };
   return (
     <div>
       <div className="container">
-        <div className={sliderClasses}>
-          <h2 style={{ color: "black" }}> {heading} </h2>
+        <div>
+          <h2 className="slider-heading" style={{ color: "black" }}>
+            {heading}
+          </h2>
           <div className="slider-button" style={{ display: "flex" }}>
             <div>
               <BsFillArrowLeftCircleFill
@@ -74,7 +97,7 @@ const SliderComponent = ({ heading, data }) => {
           </div>
         </div>
         <Slider ref={sliderRef} {...settings}>
-          {data.map((slide, index) => (
+          {data?.map((slide, index) => (
             <div key={index}>
               <div className="card">
                 <div className="slider-img">
@@ -92,7 +115,7 @@ const SliderComponent = ({ heading, data }) => {
                       : "Get Up To 40% off"}
                     )
                   </h3>
-                  <Button>
+                  <Button onClick={() => handeladdToCart(slide, user)}>
                     {slide.button ? `${slide.button}` : "Order Now"}
                   </Button>
                 </div>

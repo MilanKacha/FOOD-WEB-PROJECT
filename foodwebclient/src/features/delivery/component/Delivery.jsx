@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRestorantAsync, selectAllRestorants } from "../RestorantSlice";
 import { Link, useParams } from "react-router-dom";
 
-import HeaderOption from "../../Navbar/HeaderOption";
 import HeaderFilter from "../../Navbar/HeaderFilter";
 import RestorantCard from "../../../ui/RestorantCard";
 import { MdCancel } from "react-icons/md";
@@ -25,6 +24,8 @@ const Delivery = () => {
     ratingsAverage: null,
     expecteddeliverytime: null,
   });
+
+  if (!restaurantData) return <p>loading</p>;
 
   // let beause of change data after filter
   let sortedData = [...restaurantData];
@@ -87,10 +88,7 @@ const Delivery = () => {
   return (
     <>
       <div>
-        <HeaderOption />
-        {/* <HeaderFilter /> */}
-
-        <nav className="navbar">
+        {/* <nav className="navbar">
           <ul className="navbar-list">
             <li className="navbar-item">
               <span
@@ -108,11 +106,6 @@ const Delivery = () => {
                 "lowToHigh",
                 clearFilter
               )}
-              {/* {filters.expecteddeliverytime === "lowToHigh" && (
-              <span>
-                <MdCancel onClick={clearFilter} />
-              </span>
-            )} */}
             </li>
             <li className="navbar-item">
               <span
@@ -184,11 +177,7 @@ const Delivery = () => {
               {closeFilterIcon(filters.ratingsAverage, "Rating4+", clearFilter)}
             </li>
           </ul>
-        </nav>
-        {/* 
-      <section className="popular-item">
-        <SliderComponent data={PopularItem} heading={"Popular Item"} />
-      </section> */}
+        </nav> */}
 
         <section className="restorantname-section">
           <h2 style={{ color: "black" }}>Best Food in Bengaluru</h2>

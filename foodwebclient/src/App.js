@@ -24,18 +24,26 @@ import {
   selectUserInfo,
 } from "./features/user/userSlice";
 import { fetchItemsByUserId } from "./features/cart/cartApi";
-import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+import {
+  fetchItemsByUserIdAsync,
+  selectItems,
+} from "./features/cart/cartSlice";
 import OrderSuccess from "./features/order/component/OrderSuccess";
 import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
+import HomePage from "./pages/HomePage";
+import RestaurantPage from "./pages/RestaurantPage";
+import Restaurant from "./pages/Restaurant";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
+  const product = useSelector(selectItems);
 
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync());
       dispatch(fetchItemsByUserIdAsync());
+      dispatch(fetchAllProductAsync());
     }
   }, [dispatch, user]);
   // console.log(user);
@@ -43,9 +51,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/restaurant" exact element={<Delivery />} />
-          <Route path="/restaurant/:id" element={<RestorantDetails />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/restaurant" exact element={<RestaurantPage />} />
+          <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route path="/cart" element={<CartDetails />} />
           <Route path="/checkout" element={<OrderCheckOut />} />
           <Route path="/user" element={<UserDetails />} />

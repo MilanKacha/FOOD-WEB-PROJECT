@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOutAsync, selectLoggedInUser } from "../auth/authSlice";
 import Login from "../auth/component/Login";
 import { PiBagBold } from "react-icons/pi";
+import { selectItems } from "../cart/cartSlice";
+import HeroSection from "../home/HeroSection";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const userToken = useSelector(selectLoggedInUser);
-
+  const cart = useSelector(selectItems); // for calculation od cart length
+  // console.log(cart.length);
   const dispatch = useDispatch();
 
   const handalLogOut = () => {
@@ -50,46 +54,51 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <header className="header">
-          <div className="navbar">
-            <div className="nav-app">Get the App</div>
-            <div className="nav-menu">
-              <ul className={active}>
-                <li>
-                  <span>
-                    <PiBagBold />
-                  </span>
-                </li>
-                <li>
-                  <span onClick={openModalSignUp}>Sign up</span>
-                </li>
-                {userToken ? (
-                  <li>M</li>
-                ) : (
-                  <li onClick={openModalLogin}>Log in</li>
+        <div className="navbar">
+          <div className="nav-app">Get the App</div>
+          <div className="nav-menu">
+            <ul className={active}>
+              <li>
+                {userToken && (
+                  // <Link to="">
+                  <span>My Orders</span>
+                  // </Link>
                 )}
-                {userToken && <li onClick={() => handalLogOut()}>LogOut</li>}
-              </ul>
-              <div onClick={navToggle} className={toggleIcon}>
-                <div className="line1"></div>
-                <div className="line2"></div>
-                <div className="line3"></div>
-              </div>
+              </li>
+              <li>
+                {userToken && (
+                  <Link to="/user">
+                    <span>My Profile</span>
+                  </Link>
+                )}
+              </li>
+              <li>
+                <span onClick={openModalSignUp}>Sign up</span>
+              </li>
+              {!userToken ? (
+                <li onClick={openModalLogin}>Log in</li>
+              ) : (
+                <li onClick={() => handalLogOut()}>LogOut</li>
+              )}
+
+              <li>
+                <span>
+                  <PiBagBold />
+                  {cart.length > 0 && (
+                    <span className="cart-length">{cart.length}</span>
+                  )}
+                </span>
+              </li>
+            </ul>
+            <div onClick={navToggle} className={toggleIcon}>
+              <div className="line1"></div>
+              <div className="line2"></div>
+              <div className="line3"></div>
             </div>
           </div>
-          <div className="hero">
-            <div className="hero-content">
-              <div className="hero-content-text">
-                <h1>Discover the best food &</h1>
-                <h1>drinks in Bengaluru</h1>
-              </div>
-              <div className="hero-content-img">
-                <img src={thali} alt="" />
-              </div>
-            </div>
-          </div>
-        </header>
+        </div>
       </nav>
+      {/* <HeroSection /> */}
 
       {signUpOpen && (
         <ModalCommon openModal={openModalSignUp} closeModal={closeModalSignUp}>

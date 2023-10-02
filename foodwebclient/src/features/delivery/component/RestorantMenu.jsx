@@ -13,23 +13,25 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
     : ProductsByrestaurant;
   // console.log(ProductsByrestaurant);
 
-  const filterProductByRestaurantId = ProductsByrestaurant.filter((product) => {
-    if (showVegOnly && !product.isVegetarian) {
-      return false; //removes non-vegetarian products from the filtered list.
-    }
-    if (selectedSubCategory && product.subcategory !== selectedSubCategory) {
-      return false; //products with a subcategory that doesn't match the selected one are excluded from the filtered list
-    }
-    // If activeProduct is provided, filter by activeProduct
-    if (activeProduct && product.subcategory !== activeProduct) {
-      return false;
-    }
-    if (showVegOnly) {
+  const filterProductByRestaurantId = ProductsByrestaurant?.filter(
+    (product) => {
+      if (showVegOnly && !product.isVegetarian) {
+        return false; //removes non-vegetarian products from the filtered list.
+      }
+      if (selectedSubCategory && product.subcategory !== selectedSubCategory) {
+        return false; //products with a subcategory that doesn't match the selected one are excluded from the filtered list
+      }
+      // If activeProduct is provided, filter by activeProduct
+      if (activeProduct && product.subcategory !== activeProduct) {
+        return false;
+      }
+      if (showVegOnly) {
+        return true;
+      }
+      // If none of the conditions above match, include the product
       return true;
     }
-    // If none of the conditions above match, include the product
-    return true;
-  });
+  );
 
   const clearFilters = () => {
     setShowVagOnly(false);

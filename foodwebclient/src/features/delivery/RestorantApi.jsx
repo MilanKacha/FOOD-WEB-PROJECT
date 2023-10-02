@@ -7,11 +7,20 @@ export function fetchAllRestorant() {
 }
 
 export function fetchAllProductsByRestorantId(restaurantId) {
-  return new Promise(async (resolve) => {
-    const apiUrl = `http://localhost:8081/api/v1/restorant/${restaurantId}/products`;
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    resolve({ data });
+  return new Promise(async (resolve, reject) => {
+    try {
+      const apiUrl = `http://localhost:8081/api/v1/restorant/${restaurantId}/products`;
+      const res = await fetch(apiUrl);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      resolve({ data });
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
@@ -25,7 +34,7 @@ export function fetchRestaurantById(id) {
 
 export function fetchAllProduct() {
   return new Promise(async (resolve) => {
-    const res = await fetch("http://localhost:8081/api/v1/product");
+    const res = await fetch("http://localhost:8081/api/v1/product/all");
     const data = await res.json();
     resolve({ data });
   });

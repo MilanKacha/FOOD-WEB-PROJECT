@@ -1,22 +1,15 @@
-header {
-  background-image: url("../assests/bg.avif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 80vh;
-  width: 100%;
-}
-
 .navbar {
   display: flex;
-  font-size: 1.9rem;
+  font-size: 1.6rem;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 7rem;
-  background: transparent;
-  position: relative;
-  color: white;
-  z-index: 999;
+  z-index: 1000;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .navbar .nav-app {
@@ -26,6 +19,7 @@ header {
 .navbar .nav-menu {
   display: flex;
   flex-direction: row;
+  margin-right: 4rem;
 }
 .nav-menu-ul {
   display: flex;
@@ -45,16 +39,47 @@ header {
   display: none;
 }
 
-/* hero-after navbar */
-.hero-content {
+.cart-length {
+  background-color: #ff5722;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: 4.4rem;
+}
+
+.hero {
+  background-image: url("../assests/bg.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
   width: 100%;
+}
+
+/* hero-after navbar */
+.hero {
+  height: 100vh; /* Set a height for the parent container */
+}
+.hero Button {
+  padding: 10px 20px;
+  margin: auto;
+}
+.hero Button:hover {
+  padding: 10px 20px;
+  margin: auto;
+  transform: scale(1.02);
+}
+.hero-content {
+  height: 100%; /* Occupy the full height of the parent */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
-  top: 7rem;
 }
+
 .hero-content-text {
   margin-left: 7rem;
 }

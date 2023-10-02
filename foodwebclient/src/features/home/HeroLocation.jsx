@@ -2,15 +2,15 @@ import "../../style/herolocation.css";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const HeroLocation = (props) => {
-  const { location, places } = props.data;
+  const { restorantname, location } = props.data;
 
   return (
     <>
       <div className="popular-location">
         <div className="location-wrapper">
           <div className="location-text">
-            <h3>{location}</h3>
-            <p>{places}</p>
+            <h3>{restorantname}</h3>
+            <p>{location}</p>
           </div>
           <div className="location-icon">
             <MdOutlineKeyboardArrowRight />

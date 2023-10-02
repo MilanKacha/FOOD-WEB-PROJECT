@@ -1,82 +1,90 @@
-.heading {
-  width: 80%;
-  color: black;
-  margin: 4rem auto;
-  text-align: center;
-  font-size: 4rem;
-}
-
 .home {
   display: flex;
   flex-direction: column;
-  /* min-height: 100vh;
-  background: linear-gradient(
-      rgba(230, 103, 103, 0.3),
-      rgba(239, 137, 137, 0.6)
-    ),
-    url(../assests/back.jpg) no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: 0;
-  overflow: hidden;
-  position: relative; */
+  background: #fff;
 }
 
-.hero-brands {
-  width: 100%;
-  background: gray;
-}
 /* choice section start here */
 .hero-choice-section {
   width: 100%;
   padding: 0 2rem;
-  margin: 5rem auto;
+  margin: 10rem auto;
 }
 .choice {
   display: flex;
   justify-content: space-around;
 }
-/* Location */
-.hero-location-section {
-  background-color: black;
-}
-.hero-location-section .location,
-.hero-location-text {
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.hero-location-text {
-  margin-top: 3rem;
-}
+/* popular-item */
 
-.location-button {
-  align-items: center;
+.popular-item .popular-Sweet {
+  padding: 5rem 0 7rem 0;
+  background: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(251, 205, 205) 80%,
+    rgb(251, 205, 205) 100%
+  );
 }
-.button-invisible {
-  visibility: hidden;
-}
-
-/* collection */
-.hero-deal-section {
-  width: 100%;
+.popular-item .popular-items {
+  padding: 5rem 0 7rem 0;
+  background: linear-gradient(
+    to left,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(251, 205, 205) 80%,
+    rgb(251, 205, 205) 100%
+  );
 }
 
 /* collection section */
 .hero-collection-section {
   width: 90%;
-  margin: 0 auto;
+  margin: 8rem auto;
   display: flex;
   flex-direction: column;
 }
 .hero-collection-container {
   display: flex;
 }
-.hero-collection-section .heading .heading-text {
-  font-size: 2rem;
+
+/* Location */
+.hero-location-section {
+  background: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(251, 205, 205) 80%,
+    rgb(251, 205, 205) 100%
+  );
+}
+.hero-location-section .location,
+.hero-location-text,
+.hero-restaurant-button {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hero-location-section .location {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.hero-location-text {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+
+.location-button {
+  justify-content: center;
+}
+.button-invisible {
+  visibility: hidden;
 }
 
 /* faq-section */
@@ -84,8 +92,20 @@
   width: 100%;
   background: #fff;
 }
+
+.question-heading {
+  width: 80%;
+  margin: 5rem auto 2rem auto;
+}
+
 /* Get App */
 .hero-getapp-section {
   width: 100%;
-  background: rgb(243, 153, 153);
+  background: linear-gradient(
+    to left,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(251, 205, 205) 80%,
+    rgb(251, 205, 205) 100%
+  );
 }
