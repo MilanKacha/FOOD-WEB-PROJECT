@@ -109,7 +109,7 @@ const SliderComponent = ({ heading, data }) => {
                   </h2>
 
                   <h3 style={{ color: "black" }}>
-                    {slide.price ? `${slide.price}` : "Get Up To 40% off"}(
+                    {slide.price ? `₹ ${slide.price}` : "Get Up To 40% off"}(
                     {slide.description
                       ? `${slide.description}`
                       : "Get Up To 40% off"}

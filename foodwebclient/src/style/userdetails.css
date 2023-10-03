@@ -4,14 +4,20 @@
   align-items: center;
   justify-content: center;
   padding: 3rem 0;
-  background: rgb(251, 182, 182);
+  background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(251, 205, 205) 80%,
+    rgb(251, 205, 205) 100%
+  );
 }
 
 .userdetails .userdetails-wrapper .userdetails-content {
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .userdetails .userdetails-wrapper .userdetails-content span {

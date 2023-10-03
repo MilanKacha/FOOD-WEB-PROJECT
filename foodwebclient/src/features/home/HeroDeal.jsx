@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import "../../style/herodeal.css";
 import Button from "../../ui/Button";
-// import Burgur from "../../assests/hero-deal/burger1.jpg";
 
 const HeroDeal = ({ data, index }) => {
   return (
@@ -8,13 +8,15 @@ const HeroDeal = ({ data, index }) => {
       <div className="container">
         <div className="herodeal-content">
           <div className="heroDealImgWrap">
-            <img src={data.img} alt="" />
+            <img src={data.imageHome} alt="" />
           </div>
           <div class="herodealCard">
             <div class="herodeal-card-content">
               <h2>{data.heading}</h2>
               <p>{data.description}</p>
-              <Button>View More</Button>
+              <Link to={`/restaurant/${data._id}`}>
+                <Button>View More</Button>
+              </Link>
             </div>
           </div>
         </div>

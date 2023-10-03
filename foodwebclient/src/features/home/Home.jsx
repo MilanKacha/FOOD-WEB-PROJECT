@@ -61,100 +61,6 @@ const HeroChoiceData = [
   },
 ];
 
-const Locations = [
-  { id: 1, location: "Indiranagar", places: "495 places" },
-  { id: 2, location: "Indiranagar", places: "495 places" },
-  { id: 3, location: "Indiranagar", places: "495 places" },
-  { id: 4, location: "Indiranagar", places: "495 places" },
-  { id: 5, location: "Indiranagar", places: "495 places" },
-  { id: 6, location: "Indiranagar", places: "495 places" },
-  { id: 7, location: "Indiranagar", places: "495 places" },
-  { id: 8, location: "Indiranagar", places: "495 places" },
-  { id: 9, location: "Indiranagar", places: "495 places" },
-  { id: 10, location: "Indiranagar", places: "495 places" },
-  { id: 11, location: "Indiranagar", places: "495 places" },
-  { id: 12, location: "Indiranagar", places: "495 places" },
-];
-
-//   {
-//     imageSrc: Dosa,
-//     heading: "Podi Dosai",
-//     description: "Get Up To 50% off",
-//     price: "₹145",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Idali,
-//     heading: "Idly [2 Nos]",
-//     description: "Get Up To 50% off",
-//     price: "₹70",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Tanduri,
-//     heading: "Tandoori Paneer",
-//     description: "Get Up To 50% off",
-//     price: "₹165",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Pizza,
-//     heading: "Vegetariana Pizza",
-//     description: "Get Up To 50% off",
-//     price: "₹₹495",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Biriyani,
-//     heading: "Biryani",
-//     description: "Get Up To 50% off",
-//     price: "₹125",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Cack,
-//     heading: "Cack",
-//     description: "Get Up To 50% off",
-//     price: "₹645",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Paratha,
-//     heading: "Aloo Paratha",
-//     description: "Get Up To 50% off",
-//     price: "₹149",
-//     button: "Order Now",
-//   },
-//   {
-//     imageSrc: Vada,
-//     heading: "Medhu Vadai",
-//     description: "Get Up To 50% off",
-//     price: "₹50",
-//     button: "Order Now",
-//   },
-// ];
-
-const DealsData = [
-  {
-    id: 1,
-    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077215/home/dominoz_vybasv.avif`,
-    heading: "Top Deals on Domino's Pizza",
-    description: `Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese. Available in Cheese Burst, Wheat Thin Crust and Pan Crust options.`,
-  },
-  {
-    id: 1,
-    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077680/home/potful_mclqrf.avif`,
-    heading: "Potful - Claypot Biryanis",
-    description: `This renowned flavourful biryani is cooked in traditional dum style with succulent chicken in layers of fluffy basmati rice fragrant spices and caramelised onions. Its for those who crave for the feast.`,
-  },
-  {
-    id: 1,
-    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696077841/home/th_bbc2ix.avif`,
-    heading: "Thom's Bakery - Since 1970",
-    description: `Experience the vibrancy of Indian flavors on our Tandoori Veg Paneer Pizza. Marinated paneer and an assortment of tandoori veggies rest on a tandoori-flavored crust.`,
-  },
-];
-
 const FqaDetails = [
   {
     id: 1,
@@ -181,32 +87,11 @@ const FqaDetails = [
   },
 ];
 
-const CollectionDetails = [
-  {
-    id: 1,
-    img: Collection1,
-    heading: "23 Serene Rooftop Places",
-    places: "24 Places",
-  },
-  {
-    id: 1,
-    img: Collection2,
-    heading: "23 Serene Rooftop Places",
-    places: "24 Places",
-  },
-  {
-    id: 1,
-    img: Collection3,
-    heading: "23 Serene Rooftop Places",
-    places: "24 Places",
-  },
-];
-
 const Home = () => {
   const restaurants = useSelector(selectAllRestorants);
   const product = useSelector(selectedAllProducts);
   const dispatch = useDispatch();
-  // console.log(product);
+  console.log(restaurants);
 
   useEffect(() => {
     dispatch(fetchAllRestorantAsync());
@@ -223,7 +108,11 @@ const Home = () => {
 
   // for PopularItemfilter data
   const PopularItem = product?.data?.filter((item) => item.popularItems);
-  // console.log(PopularItem);
+  console.log(PopularItem);
+
+  // data for
+  const data = restaurants.filter((item) => item.isHome);
+  console.log(data);
 
   const showMoreItems = () => {
     setVisivle((prevValue) => prevValue + 6);
@@ -264,7 +153,7 @@ const Home = () => {
         </section> */}
 
         <section className="hero-deal-section">
-          {DealsData.map((deal, index) => (
+          {data.map((deal, index) => (
             <HeroDeal key={index} data={deal} index={index} />
           ))}
         </section>
@@ -284,7 +173,7 @@ const Home = () => {
           </div>
 
           <div className="hero-restaurant-button">
-            {visible !== Locations.length ? (
+            {visible !== restaurants?.length ? (
               <Button onClick={showMoreItems} className="primary ">
                 AddMore
               </Button>

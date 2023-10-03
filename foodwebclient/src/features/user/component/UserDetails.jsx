@@ -1,5 +1,5 @@
 import "../../../style/userdetails.css";
-import Profile from "../../../assests/userdetails/profile.jfif";
+
 import Button from "../../../ui/Button";
 import { useState } from "react";
 import ModalCommon from "../../../ui/ModalCommon";
@@ -24,11 +24,7 @@ const UserDetails = () => {
   const closeModal = () => {
     setUpdateformOpen(false);
   };
-
-  //Todo  for update form data
-  // const handleUpdateProfile = () => {
-  //   dispatch(updateUserAsync());
-  // };
+  const Profile = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696311898/11111111111_fq8byx.jpg`;
 
   return (
     <>

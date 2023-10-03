@@ -17,7 +17,7 @@ import { createOrderAsync } from "../../order/orderSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
-
+  // console.log(cartByUserId.length);
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -63,20 +63,22 @@ const CartDetails = () => {
     await dispatch(resetCartAsync());
   };
 
-  console.log(totalAmount);
+  // console.log(totalAmount);
   return (
     <>
-      <div className="cart-container">
-        <div className="cart-wrapper">
-          <h2 style={{ color: "black" }} className="cart-heading">
-            Cart
-          </h2>
-          <div style={{ color: "blue" }} className="cartitem-continueshopping">
-            Continue Shopping
-          </div>
+      <div className="cart-wrapper">
+        <div className="cart-container">
+          <h2 className="cart-heading">Shopping Cart</h2>
+          <Link to="/">
+            <div
+              style={{ color: "blue" }}
+              className="cartitem-continueshopping"
+            >
+              Continue Shopping
+            </div>
+          </Link>
           {cartByUserId.map((item, index) => (
             <>
-              {console.log(item)}
               <div className="cartitem" key={index}>
                 <div className="cartitem-img">
                   <img src={item?.product?.image} alt="" />
@@ -109,22 +111,27 @@ const CartDetails = () => {
 
           <div className="cartitem-subtotal">
             <div style={{ color: "black" }} className="subtotal">
-              SubTotal: {totalAmount}
-              <span> / Total Item In Cart: {totalItem}</span>
+              SubTotal({totalItem} items): {totalAmount}
             </div>
           </div>
-
-          {location.pathname === "/checkout" && (
-            <Link to="/ordersucess">
-              <Button className="cartitem-subtotal" onClick={handelOrder}>
-                Place Order
-              </Button>
-            </Link>
-          )}
-          {location.pathname === "/cart" && (
-            <Link to="/checkout">
-              <Button className="cartitem-subtotal">Process to Buy</Button>
-            </Link>
+          {cartByUserId.length > 0 && (
+            <>
+              {location.pathname === "/checkout" ? (
+                <Link to="/ordersuccess">
+                  <Button className="cartitem-subtotal" onClick={handelOrder}>
+                    Place Order
+                  </Button>
+                </Link>
+              ) : (
+                location.pathname === "/cart" && (
+                  <Link to="/checkout">
+                    <Button className="cartitem-subtotal">
+                      Proceed to Buy
+                    </Button>
+                  </Link>
+                )
+              )}
+            </>
           )}
         </div>
       </div>

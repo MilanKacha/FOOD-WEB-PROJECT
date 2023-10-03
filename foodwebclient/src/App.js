@@ -33,6 +33,8 @@ import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
 import Restaurant from "./pages/Restaurant";
+import CartPage from "./pages/CartPage";
+import CheckOutPage from "./pages/CheckOutPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,10 +56,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurant" exact element={<RestaurantPage />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
-          <Route path="/cart" element={<CartDetails />} />
-          <Route path="/checkout" element={<OrderCheckOut />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckOutPage />} />
           <Route path="/user" element={<UserDetails />} />
-          <Route path="/ordersucess" element={<OrderSuccess />} />
+          <Route path="ordersuccess" element={<OrderSuccess />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -9,6 +9,7 @@ form div {
 }
 form div label {
   font-size: 1.3rem;
+  margin: 0.3rem;
 }
 
 form div select {
@@ -17,7 +18,9 @@ form div select {
 }
 form div input {
   font-size: 1.6rem;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  border: 1px solid rgb(177, 177, 177);
+  border-radius: 5px;
 }
 .userprofile-button Button {
   width: 15rem;

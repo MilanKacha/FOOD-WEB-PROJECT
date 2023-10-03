@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { createUserAsync } from "../authSlice";
+import Button from "../../../ui/Button";
 
 const initialState = {
   email: "",
@@ -86,7 +87,7 @@ const SingUp = ({ closeModal }) => {
             <span className="error">{errors.passwordConfirm}</span>
           )} */}
         </div>
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

@@ -9,13 +9,14 @@ import Login from "../auth/component/Login";
 import { PiBagBold } from "react-icons/pi";
 import { selectItems } from "../cart/cartSlice";
 import HeroSection from "../home/HeroSection";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const userToken = useSelector(selectLoggedInUser);
   const cart = useSelector(selectItems); // for calculation od cart length
   // console.log(cart.length);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handalLogOut = () => {
     dispatch(logOutAsync());
@@ -58,18 +59,10 @@ const Navbar = () => {
           <div className="nav-app">Get the App</div>
           <div className="nav-menu">
             <ul className={active}>
+              <li>{userToken && <span>My Orders</span>}</li>
               <li>
                 {userToken && (
-                  // <Link to="">
-                  <span>My Orders</span>
-                  // </Link>
-                )}
-              </li>
-              <li>
-                {userToken && (
-                  <Link to="/user">
-                    <span>My Profile</span>
-                  </Link>
+                  <span onClick={() => navigate("/user")}>My Profile</span>
                 )}
               </li>
               <li>
@@ -83,7 +76,7 @@ const Navbar = () => {
 
               <li>
                 <span>
-                  <PiBagBold />
+                  <PiBagBold onClick={() => navigate("/cart")} />
                   {cart.length > 0 && (
                     <span className="cart-length">{cart.length}</span>
                   )}

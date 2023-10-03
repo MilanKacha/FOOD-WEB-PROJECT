@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { logInUserAsync } from "../authSlice";
+import Button from "../../../ui/Button";
 
 const initialState = {
   email: "",
@@ -46,7 +47,9 @@ const Login = ({ closeModal }) => {
   };
   return (
     <div>
-      <h2 style={{ color: "black" }}>Log In</h2>
+      <h2 style={{ color: "black" }} className="updateform-heading">
+        Log In
+      </h2>
       <form onSubmit={handelSubmit}>
         <div>
           <label>Email:</label>
@@ -71,7 +74,7 @@ const Login = ({ closeModal }) => {
           {/* {errors.password && <span className="error">{errors.password}</span>} */}
         </div>
 
-        <button type="submit">Log In</button>
+        <Button type="submit">Log In</Button>
       </form>
     </div>
   );

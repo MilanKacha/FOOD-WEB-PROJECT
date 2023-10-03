@@ -7,7 +7,6 @@ import { selectUserInfo, updateUserAsync } from "../userSlice";
 import { useLocation } from "react-router-dom";
 
 const initialState = {
-  profilepicture: null,
   username: "",
   email: "",
   phone: "",
@@ -71,21 +70,6 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
             </h2>
           )}
 
-          <div>
-            {location.pathname === "/user" && (
-              <>
-                <label htmlFor="name">Profile Picture:</label>
-                <input
-                  type="file"
-                  id="profilepicture"
-                  name="prifilepicture"
-                  onChange={(e) =>
-                    handelInputChange("profilepicture", e.target.value)
-                  }
-                />
-              </>
-            )}
-          </div>
           <div>
             <label htmlFor="name">Name:</label>
             <input
