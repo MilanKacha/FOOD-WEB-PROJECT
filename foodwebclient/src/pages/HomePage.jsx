@@ -4,11 +4,9 @@ import Home from "../features/home/Home";
 
 const HomePage = () => {
   return (
-    <LayOut>
-      <div className="page-wrapper">
-        <Home />
-      </div>
-    </LayOut>
+    <div className="page-wrapper">
+      <Home />
+    </div>
   );
 };
 

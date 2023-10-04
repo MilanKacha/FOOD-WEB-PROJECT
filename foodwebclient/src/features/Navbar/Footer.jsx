@@ -8,6 +8,8 @@ import {
 } from "react-icons/ai";
 import Googleplay from "../../assests/hero-getapp/googleplay.png";
 import AppStore from "../../assests/hero-getapp/appstore.png";
+import { Link } from "react-router-dom";
+import { BsLadder } from "react-icons/bs";
 
 const Footer = () => {
   const FooterData = [
@@ -54,15 +56,42 @@ const Footer = () => {
                 Social Links
               </h3>
               <div className="icon">
-                <AiFillLinkedin />
-                <AiFillInstagram />
-                <AiFillTwitterSquare />
-                <AiFillYoutube />
-                <AiFillFacebook />
+                <Link to="https://www.linkedin.com/" className="app-link">
+                  <span className="app-icon">
+                    <AiFillLinkedin />
+                  </span>
+                </Link>
+                <Link to="https://www.instagram.com/" className="app-link">
+                  <span className="app-icon">
+                    <AiFillInstagram />
+                  </span>
+                </Link>
+                <Link to="https://twitter.com/" className="app-link">
+                  <span className="app-icon">
+                    <AiFillTwitterSquare />
+                  </span>
+                </Link>
+                <Link to="https://www.youtube.com/" className="app-link">
+                  <span className="app-icon">
+                    <AiFillYoutube />
+                  </span>
+                </Link>
+                <Link to="https://www.facebook.com/" className="app-link">
+                  <span className="app-icon">
+                    <AiFillFacebook />
+                  </span>
+                </Link>
               </div>
               <div className="app-icon">
-                <img src={Googleplay} alt="" />
-                <img src={AppStore} alt="" />
+                <Link to="https://play.google.com/store" className="app-link ">
+                  <img src={Googleplay} alt="" />
+                </Link>
+                <Link
+                  to="https://www.apple.com/in/app-store/"
+                  className="app-link "
+                >
+                  <img src={AppStore} alt="" />
+                </Link>
               </div>
             </div>
           </div>
@@ -71,8 +100,8 @@ const Footer = () => {
           <div className="foo">
             By continuing past this page, you agree to our Terms of Service,
             Cookie Policy, Privacy Policy and Content Policies. All trademarks
-            are properties of their respective owners. 2008-2023 © Zomato™ Ltd.
-            All rights reserved.
+            are properties of their respective owners. 2008-2023™ Ltd. All
+            rights reserved.
           </div>
         </div>
       </section>

@@ -32,3 +32,9 @@
 .restorantname-section h2 {
   text-align: center;
 }
+
+.remove-filter {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  background: rgb(255, 206, 206);
+}

@@ -21,7 +21,7 @@
   margin: 0 1rem;
   transition: transform 0.5s ease;
   border-radius: 10px;
-  background: rgb(205, 126, 126);
+  background: rgb(255, 194, 194);
 }
 .card:hover {
   transform: translateY(5px);

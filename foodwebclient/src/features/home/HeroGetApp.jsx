@@ -2,8 +2,14 @@ import "../../style/herogetapp.css";
 import GetApp from "../../assests/hero-getapp/mobile.png";
 import GoogleStore from "../../assests/hero-getapp/googleplay.png";
 import AppStore from "../../assests/hero-getapp/appstore.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeroGetApp = () => {
+  const navigate = useNavigate();
+
+  const handelPlay = () => {
+    navigate("https://play.google.com/store");
+  };
   return (
     <div className="getapp-container">
       <div className="getapp-wrapper">
@@ -14,6 +20,7 @@ const HeroGetApp = () => {
           </span>
           <div className="getapp-icon">
             <img src={GoogleStore} alt="" />
+
             <img src={AppStore} alt="" />
           </div>
           <div className="getapp-button"></div>

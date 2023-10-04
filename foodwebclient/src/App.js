@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Navbar from "./features/Navbar/Navbar";
 import Home from "../src/features/home/Home";
@@ -32,14 +33,18 @@ import OrderSuccess from "./features/order/component/OrderSuccess";
 import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
-import Restaurant from "./pages/Restaurant";
+
 import CartPage from "./pages/CartPage";
 import CheckOutPage from "./pages/CheckOutPage";
+import LayOut from "./ui/LayOut";
+import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import Protected from "./features/auth/component/Protected";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
-  const product = useSelector(selectItems);
 
   useEffect(() => {
     if (user) {
@@ -49,21 +54,40 @@ function App() {
     }
   }, [dispatch, user]);
   // console.log(user);
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/restaurant" exact element={<RestaurantPage />} />
-          <Route path="/restaurant/:id" element={<Restaurant />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckOutPage />} />
-          <Route path="/user" element={<UserDetails />} />
-          <Route path="ordersuccess" element={<OrderSuccess />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <LayOut />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: "restaurant", element: <RestaurantPage /> },
+        {
+          path: "restaurant/:id",
+          element: <RestaurantDetailsPage />,
+        },
+        { path: "cart", element: <CartPage /> },
+        { path: "checkout", element: <CheckOutPage /> },
+        {
+          path: "user",
+          element: (
+            <Protected>
+              <UserDetailsPage />
+            </Protected>
+          ),
+        },
+        {
+          path: "ordersuccess",
+          element: (
+            <Protected>
+              <OrderSuccessPage />
+            </Protected>
+          ),
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

@@ -51,6 +51,10 @@ const Navbar = () => {
   const closeModalLogin = () => {
     setLoginOpen(false);
   };
+  // const calculate cart item
+  const cartItem = cart.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   return (
     <>
@@ -78,7 +82,7 @@ const Navbar = () => {
                 <span>
                   <PiBagBold onClick={() => navigate("/cart")} />
                   {cart.length > 0 && (
-                    <span className="cart-length">{cart.length}</span>
+                    <span className="cart-length">{cartItem}</span>
                   )}
                 </span>
               </li>

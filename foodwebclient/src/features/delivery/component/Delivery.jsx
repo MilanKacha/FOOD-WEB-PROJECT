@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../../../style/delivery.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRestorantAsync, selectAllRestorants } from "../RestorantSlice";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import HeaderFilter from "../../Navbar/HeaderFilter";
 import RestorantCard from "../../../ui/RestorantCard";
 import { MdCancel } from "react-icons/md";
 
 import SliderComponent from "../../../ui/SliderComponent";
+import Button from "../../../ui/Button";
 
 const Delivery = () => {
   // get data of restaurant
@@ -19,16 +20,31 @@ const Delivery = () => {
     dispatch(fetchAllRestorantAsync());
   }, [dispatch]);
 
+  // for home page data (choise)
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const subcategory = queryParams.get("subcategory");
+
+  // for filter
   const [filters, setFilters] = useState({
     price: null,
     ratingsAverage: null,
     expecteddeliverytime: null,
+    subCategory: subcategory || null,
   });
 
   if (!restaurantData) return <p>loading</p>;
 
   // let beause of change data after filter
   let sortedData = [...restaurantData];
+
+  // for home page subcategory filter
+
+  if (filters.subCategory === subcategory) {
+    sortedData = sortedData.filter(
+      (restaurant) => restaurant.subCategory === subcategory
+    );
+  }
 
   // Sort by price
   if (filters.price === "lowToHigh") {
@@ -59,10 +75,19 @@ const Delivery = () => {
   }
 
   // for handel filter
+  // const handleFilterChange = (filterKey, sortOrder) => {
+  //   setFilters(() => ({
+  //     [filterKey]: sortOrder,
+  //   }));
+  // };
+
   const handleFilterChange = (filterKey, sortOrder) => {
-    setFilters(() => ({
+    // Create a new object with the updated filter and include other active filters
+    const updatedFilters = {
+      ...filters,
       [filterKey]: sortOrder,
-    }));
+    };
+    setFilters(updatedFilters);
   };
 
   const clearFilter = () => {
@@ -70,20 +95,18 @@ const Delivery = () => {
       price: null,
       ratingsAverage: null,
       expecteddeliverytime: null,
+      subCategory: filters.subCategory,
     });
   };
-
-  // common function for close filter
-  const closeFilterIcon = (filterValue, targetValue, onClickHandler) => {
-    if (filterValue === targetValue) {
-      return (
-        <span>
-          <MdCancel onClick={onClickHandler} />
-        </span>
-      );
-    }
-    return null;
-  };
+  // when no filter
+  if (
+    !filters.subCategory &&
+    !filters.price &&
+    !filters.ratingsAverage &&
+    !filters.expecteddeliverytime
+  ) {
+    sortedData = [...restaurantData];
+  }
 
   return (
     <>
@@ -105,11 +128,6 @@ const Delivery = () => {
                   >
                     Delivery Time(Low to High)
                   </span>
-                  {closeFilterIcon(
-                    filters.expecteddeliverytime,
-                    "lowToHigh",
-                    clearFilter
-                  )}
                 </li>
                 <li className="navbar-item-filter">
                   <span
@@ -122,11 +140,6 @@ const Delivery = () => {
                   >
                     Rating(High to Low)
                   </span>
-                  {closeFilterIcon(
-                    filters.ratingsAverage,
-                    "highToLow",
-                    clearFilter
-                  )}
                 </li>
                 <li className="navbar-item-filter">
                   <span
@@ -139,11 +152,6 @@ const Delivery = () => {
                   >
                     Rating(Low to High)
                   </span>
-                  {closeFilterIcon(
-                    filters.ratingsAverage,
-                    "lowToHigh",
-                    clearFilter
-                  )}
                 </li>
                 <li className="navbar-item-filter">
                   <span
@@ -154,7 +162,6 @@ const Delivery = () => {
                   >
                     Price(High to Low)
                   </span>
-                  {closeFilterIcon(filters.price, "highToLow", clearFilter)}
                 </li>
                 <li className="navbar-item-filter">
                   <span
@@ -165,7 +172,6 @@ const Delivery = () => {
                   >
                     Price(Low to High)
                   </span>
-                  {closeFilterIcon(filters.price, "lowToHigh", clearFilter)}
                 </li>
                 <li className="navbar-item-filter">
                   <span
@@ -178,11 +184,11 @@ const Delivery = () => {
                   >
                     Rating 4+
                   </span>
-                  {closeFilterIcon(
-                    filters.ratingsAverage,
-                    "Rating4+",
-                    clearFilter
-                  )}
+                </li>
+                <li>
+                  <span className="remove-filter" onClick={clearFilter}>
+                    Remove filter
+                  </span>
                 </li>
               </ul>
             </nav>

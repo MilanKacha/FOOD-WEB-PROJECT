@@ -9,8 +9,12 @@ const HeroChoice = (props) => {
           <div className="choice-card">
             <img src={img} alt="" />
             <div className="choice-content">
-              <h3 className="choice-heading">{heading}</h3>
-              <p className="choice-text">{description}</p>
+              <h3 className="choice-heading" style={{ color: "white" }}>
+                {heading}
+              </h3>
+              <p className="choice-text" style={{ color: "white" }}>
+                {description}
+              </p>
             </div>
           </div>
         </a>

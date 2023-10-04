@@ -46,18 +46,21 @@ const HeroChoiceData = [
     img: OrderOnline,
     heading: "Order Online",
     description: "Stay home and order to your doorstep",
+    subCategory: "orderonline",
   },
   {
     id: 2,
     img: Dining,
     heading: "Dining",
     description: "View the city's favourite dining venues",
+    subCategory: "Dining",
   },
   {
     id: 3,
     img: Club,
     heading: "Nightlife and Clubs",
     description: "Explore the city’s top nightlife outlets",
+    subCategory: "nightlife",
   },
 ];
 
@@ -110,9 +113,7 @@ const Home = () => {
   const PopularItem = product?.data?.filter((item) => item.popularItems);
   console.log(PopularItem);
 
-  // data for
   const data = restaurants.filter((item) => item.isHome);
-  console.log(data);
 
   const showMoreItems = () => {
     setVisivle((prevValue) => prevValue + 6);
@@ -130,7 +131,9 @@ const Home = () => {
         <section className="hero-choice-section">
           <div className="choice">
             {HeroChoiceData.map((item) => (
-              <HeroChoice key={item.id} data={item} />
+              <Link to={`/restaurant?subcategory=${item.subCategory}`}>
+                <HeroChoice key={item.id} data={item} />
+              </Link>
             ))}
           </div>
         </section>

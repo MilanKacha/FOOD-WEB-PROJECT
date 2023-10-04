@@ -9,11 +9,12 @@ import {
   selectItems,
   updateCartAsync,
 } from "../cartSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { selectUserInfo } from "../../user/userSlice";
 import { createOrderAsync } from "../../order/orderSlice";
+import ModalCommon from "../../../ui/ModalCommon";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
@@ -21,10 +22,12 @@ const CartDetails = () => {
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
+
   // console.log(location.pathname);
   useEffect(() => {
     dispatch(fetchItemsByUserIdAsync());
   }, [dispatch]);
+
   const totalAmount = cartByUserId.reduce(
     (amount, item) => item?.product?.price * item.quantity + amount,
     0
@@ -135,6 +138,12 @@ const CartDetails = () => {
           )}
         </div>
       </div>
+      {/* {!user && (
+        <ModalCommon
+          openModal={() => setModalOpen(true)}
+          closeModal={() => setModalOpen(false)}
+        ></ModalCommon>
+      )} */}
     </>
   );
 };
