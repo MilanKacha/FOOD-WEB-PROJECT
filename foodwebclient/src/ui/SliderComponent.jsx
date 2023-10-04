@@ -12,7 +12,7 @@ import { selectUserInfo } from "../features/user/userSlice";
 import { addToCartAsync } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 
-const SliderComponent = ({ heading, data }) => {
+const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   const sliderRef = useRef(null);
   // console.log(sliderRef.current);
   const settings = {
@@ -50,24 +50,26 @@ const SliderComponent = ({ heading, data }) => {
       },
     ],
   };
-  // const sliderClasses = data.className
-  //   ? data.className + " " + "slider-content"
-  //   : "slider-content" + " " + data.title + "-slider";
+
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handeladdToCart = (product, user) => {
-    // Check if product is defined before accessing its properties
-    if (product) {
-      const newItem = {
-        product: product?._id,
-        quantity: 1,
-        user: user?._id,
-      };
-      dispatch(addToCartAsync(newItem));
-      navigate("/cart");
+    if (user) {
+      // Check if product is defined before accessing its properties
+      if (product) {
+        const newItem = {
+          product: product?._id,
+          quantity: 1,
+          user: user?._id,
+        };
+        dispatch(addToCartAsync(newItem));
+        navigate("/cart");
+      } else {
+        console.error("Product is undefined or null");
+      }
     } else {
-      console.error("Product is undefined or null");
+      handleOrderNowClick();
     }
   };
   return (

@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { selectUserInfo } from "../../user/userSlice";
 import { createOrderAsync } from "../../order/orderSlice";
 import ModalCommon from "../../../ui/ModalCommon";
+import { selectedAllProducts } from "../../delivery/RestorantSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
@@ -22,6 +23,7 @@ const CartDetails = () => {
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
+  const product = useSelector(selectedAllProducts);
 
   // console.log(location.pathname);
   useEffect(() => {
@@ -66,12 +68,26 @@ const CartDetails = () => {
     await dispatch(resetCartAsync());
   };
 
+  // for
+  let data;
+  if (location.pathname === "/cart") {
+    data = cartByUserId;
+  } else if (location.pathname === "/myorder") {
+    data = product;
+  }
+
+  console.log(data);
+
   // console.log(totalAmount);
   return (
     <>
       <div className="cart-wrapper">
         <div className="cart-container">
-          <h2 className="cart-heading">Shopping Cart</h2>
+          {location.pathname === "/myorder" ? (
+            <h2 className="cart-heading">Your Orders</h2>
+          ) : (
+            <h2 className="cart-heading">Shopping Cart</h2>
+          )}
           <Link to="/">
             <div
               style={{ color: "blue" }}
@@ -80,7 +96,7 @@ const CartDetails = () => {
               Continue Shopping
             </div>
           </Link>
-          {cartByUserId.map((item, index) => (
+          {data.map((item, index) => (
             <>
               <div className="cartitem" key={index}>
                 <div className="cartitem-img">
@@ -112,11 +128,13 @@ const CartDetails = () => {
             </>
           ))}
 
-          <div className="cartitem-subtotal">
-            <div style={{ color: "black" }} className="subtotal">
-              SubTotal({totalItem} items): {totalAmount}
+          {
+            <div className="cartitem-subtotal">
+              <div style={{ color: "black" }} className="subtotal">
+                SubTotal({totalItem} items): {totalAmount}
+              </div>
             </div>
-          </div>
+          }
           {cartByUserId.length > 0 && (
             <>
               {location.pathname === "/checkout" ? (
@@ -138,12 +156,6 @@ const CartDetails = () => {
           )}
         </div>
       </div>
-      {/* {!user && (
-        <ModalCommon
-          openModal={() => setModalOpen(true)}
-          closeModal={() => setModalOpen(false)}
-        ></ModalCommon>
-      )} */}
     </>
   );
 };

@@ -1,35 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Navbar from "./features/Navbar/Navbar";
-import Home from "../src/features/home/Home";
-import HeroSlider from "./features/home/HeroSlider";
-import SliderComponent from "./ui/SliderComponent";
-import img1 from "../src/assests/hero-choice/club.jpg";
-import img2 from "../src/assests/hero-choice/dining.avif";
 import "./App.css";
-import Footer from "./features/Navbar/Footer";
-import Delivery from "./features/delivery/component/Delivery";
-import RestorantDetails from "./features/delivery/component/RestorantDetails";
-import Modal from "./ui/Modal";
-import UserDetails from "./features/user/component/UserDetails";
 
-import OrderCheckOut from "./features/order/component/OrderCheckOut";
-import CartDetails from "./features/cart/component/CartDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "./features/auth/authSlice";
 import { useEffect } from "react";
 
-import {
-  fetchLoggedInUserAsync,
-  selectUserInfo,
-} from "./features/user/userSlice";
-import { fetchItemsByUserId } from "./features/cart/cartApi";
-import {
-  fetchItemsByUserIdAsync,
-  selectItems,
-} from "./features/cart/cartSlice";
-import OrderSuccess from "./features/order/component/OrderSuccess";
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
+
+import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+
 import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
@@ -41,6 +21,8 @@ import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import Protected from "./features/auth/component/Protected";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +35,6 @@ function App() {
       dispatch(fetchAllProductAsync());
     }
   }, [dispatch, user]);
-  // console.log(user);
 
   const router = createBrowserRouter([
     {
@@ -61,13 +42,38 @@ function App() {
       element: <LayOut />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: "restaurant", element: <RestaurantPage /> },
+        {
+          path: "restaurant",
+          element: (
+            <Protected>
+              <RestaurantPage />
+            </Protected>
+          ),
+        },
         {
           path: "restaurant/:id",
-          element: <RestaurantDetailsPage />,
+          element: (
+            <Protected>
+              <RestaurantDetailsPage />
+            </Protected>
+          ),
         },
-        { path: "cart", element: <CartPage /> },
-        { path: "checkout", element: <CheckOutPage /> },
+        {
+          path: "cart",
+          element: (
+            <Protected>
+              <CartPage />
+            </Protected>
+          ),
+        },
+        {
+          path: "checkout",
+          element: (
+            <Protected>
+              <CheckOutPage />
+            </Protected>
+          ),
+        },
         {
           path: "user",
           element: (
@@ -84,10 +90,34 @@ function App() {
             </Protected>
           ),
         },
+        {
+          path: "myorder",
+          element: (
+            <Protected>
+              <CartPage />
+            </Protected>
+          ),
+        },
       ],
     },
   ]);
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <RouterProvider router={router}></RouterProvider>;
+    </>
+  );
 }
 
 export default App;

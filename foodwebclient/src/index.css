@@ -61,3 +61,8 @@ img {
 .app-link {
   text-decoration: none;
 }
+
+/* Custom CSS to change toast font */
+.Toastify__toast {
+  font-size: 1.5rem;
+}

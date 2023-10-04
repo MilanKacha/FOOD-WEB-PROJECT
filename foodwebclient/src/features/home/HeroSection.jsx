@@ -2,7 +2,7 @@ import thali from "../../assests/thali.png";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 
-const HeroSection = () => {
+const HeroSection = ({ handleViewMoreClick }) => {
   const pizza = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696054901/restorant/pizza_qqqufr.png`;
   return (
     <div className="hero">
@@ -11,7 +11,7 @@ const HeroSection = () => {
           <h1>Discover the best food &</h1>
           <h1>drinks in Bengaluru</h1>
           <Link to="/restaurant">
-            <Button>View More</Button>
+            <Button onClick={handleViewMoreClick}>View More</Button>
           </Link>
         </div>
         <div className="hero-content-img">

@@ -49,9 +49,7 @@ const FoodItem = ({ product }) => {
                 Add To Cart
               </Button>
 
-              <Link to="/order">
-                <Button>Order Now</Button>
-              </Link>
+              <Button onClick={handeladdToCart}>Order Now</Button>
             </div>
           </div>
         </div>

@@ -1,20 +1,22 @@
 import "../../style/herochoice.css";
+import Button from "../../ui/Button";
 
-const HeroChoice = (props) => {
-  const { img, heading, description } = props.data;
+const HeroChoice = ({ data, handleClickError }) => {
+  // const { img, heading, description } = props.data;
   return (
     <div>
       <div className="choice-card-wrapper">
         <a>
           <div className="choice-card">
-            <img src={img} alt="" />
+            <img src={data.img} alt="" />
             <div className="choice-content">
               <h3 className="choice-heading" style={{ color: "white" }}>
-                {heading}
+                {data.heading}
               </h3>
               <p className="choice-text" style={{ color: "white" }}>
-                {description}
+                {data.description}
               </p>
+              <Button onClick={handleClickError}>View More</Button>
             </div>
           </div>
         </a>

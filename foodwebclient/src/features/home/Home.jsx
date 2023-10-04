@@ -39,6 +39,9 @@ import HeroSection from "./HeroSection";
 import { fetchAllRestorant } from "../delivery/RestorantApi";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../Navbar/Footer";
+import { toast } from "react-toastify";
+
+import { selectLoggedInUser } from "../auth/authSlice";
 
 const HeroChoiceData = [
   {
@@ -93,25 +96,23 @@ const FqaDetails = [
 const Home = () => {
   const restaurants = useSelector(selectAllRestorants);
   const product = useSelector(selectedAllProducts);
+  const user = useSelector(selectLoggedInUser);
   const dispatch = useDispatch();
-  console.log(restaurants);
 
   useEffect(() => {
     dispatch(fetchAllRestorantAsync());
     dispatch(fetchAllProductAsync());
   }, [dispatch]);
 
-  // console.log(restaurants);
-
   const [visible, setVisivle] = useState(6);
-  // console.log(product);
+
   // for PopularSweet filter data
   const PopularSweet = product?.data?.filter((item) => item.popularSweet);
   // console.log(PopularSweet);
 
   // for PopularItemfilter data
   const PopularItem = product?.data?.filter((item) => item.popularItems);
-  console.log(PopularItem);
+  // console.log(PopularItem);
 
   const data = restaurants.filter((item) => item.isHome);
 
@@ -121,18 +122,30 @@ const Home = () => {
   const showLessItems = () => {
     setVisivle(6);
   };
+
+  const handleClickError = () => {
+    console.log("error");
+    if (!user) {
+      toast.error("You are not logged in.");
+    }
+  };
+
   return (
     <>
       <main className="home">
         <section className="hero-section">
-          <HeroSection />
+          <HeroSection handleViewMoreClick={handleClickError} />
         </section>
 
         <section className="hero-choice-section">
           <div className="choice">
             {HeroChoiceData.map((item) => (
               <Link to={`/restaurant?subcategory=${item.subCategory}`}>
-                <HeroChoice key={item.id} data={item} />
+                <HeroChoice
+                  key={item.id}
+                  data={item}
+                  handleClickError={handleClickError}
+                />
               </Link>
             ))}
           </div>
@@ -140,10 +153,18 @@ const Home = () => {
 
         <section className="popular-item">
           <div className="popular-Sweet">
-            <SliderComponent data={PopularSweet} heading={"Popular Sweet"} />
+            <SliderComponent
+              data={PopularSweet}
+              heading={"Popular Sweet"}
+              handleOrderNowClick={handleClickError}
+            />
           </div>
           <div className="popular-items">
-            <SliderComponent data={PopularItem} heading={"Popular Fastfoods"} />
+            <SliderComponent
+              data={PopularItem}
+              heading={"Popular Fastfoods"}
+              handleOrderNowClick={handleClickError}
+            />
           </div>
         </section>
 
@@ -157,7 +178,11 @@ const Home = () => {
 
         <section className="hero-deal-section">
           {data.map((deal, index) => (
-            <HeroDeal key={index} data={deal} index={index} />
+            <HeroDeal
+              key={index}
+              data={deal}
+              handleClickError={handleClickError}
+            />
           ))}
         </section>
 

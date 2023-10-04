@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../../style/herodeal.css";
 import Button from "../../ui/Button";
 
-const HeroDeal = ({ data, index }) => {
+const HeroDeal = ({ data, handleClickError }) => {
   return (
     <div className={`herodeal-card-wrapper`}>
       <div className="container">
@@ -15,7 +15,7 @@ const HeroDeal = ({ data, index }) => {
               <h2>{data.heading}</h2>
               <p>{data.description}</p>
               <Link to={`/restaurant/${data._id}`}>
-                <Button>View More</Button>
+                <Button onClick={handleClickError}>View More</Button>
               </Link>
             </div>
           </div>
