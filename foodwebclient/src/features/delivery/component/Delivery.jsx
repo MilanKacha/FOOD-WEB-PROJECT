@@ -2,35 +2,29 @@ import React, { useEffect, useState } from "react";
 import "../../../style/delivery.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRestorantAsync, selectAllRestorants } from "../RestorantSlice";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-import HeaderFilter from "../../Navbar/HeaderFilter";
 import RestorantCard from "../../../ui/RestorantCard";
-import { MdCancel } from "react-icons/md";
-
-import SliderComponent from "../../../ui/SliderComponent";
-import Button from "../../../ui/Button";
 
 const Delivery = () => {
   // get data of restaurant
   const restaurantData = useSelector(selectAllRestorants);
   const dispatch = useDispatch();
   // console.log(restaurantData);
-  useEffect(() => {
-    dispatch(fetchAllRestorantAsync());
-  }, [dispatch]);
 
   // for home page data (choise)
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const subcategory = queryParams.get("subcategory");
+  useEffect(() => {
+    dispatch(fetchAllRestorantAsync(subcategory));
+  }, [dispatch]);
 
   // for filter
   const [filters, setFilters] = useState({
     price: null,
     ratingsAverage: null,
     expecteddeliverytime: null,
-    subCategory: subcategory || null,
   });
 
   if (!restaurantData) return <p>loading</p>;
@@ -38,30 +32,16 @@ const Delivery = () => {
   // let beause of change data after filter
   let sortedData = [...restaurantData];
 
-  // for home page subcategory filter
-
-  if (filters.subCategory === subcategory) {
-    sortedData = sortedData.filter(
-      (restaurant) => restaurant.subCategory === subcategory
-    );
-  }
-
   // Sort by price
   if (filters.price === "lowToHigh") {
     sortedData.sort((a, b) => a.price - b.price);
   } else if (filters.price === "highToLow") {
     sortedData.sort((a, b) => b.price - a.price);
-  }
-
-  // Sort by ratingsAverage
-  if (filters.ratingsAverage === "lowToHigh") {
+  } else if (filters.ratingsAverage === "lowToHigh") {
     sortedData.sort((a, b) => a.ratingsAverage - b.ratingsAverage);
   } else if (filters.ratingsAverage === "highToLow") {
     sortedData.sort((a, b) => b.ratingsAverage - a.ratingsAverage);
-  }
-
-  // Sort by expecteddeliverytime
-  if (filters.expecteddeliverytime === "lowToHigh") {
+  } else if (filters.expecteddeliverytime === "lowToHigh") {
     sortedData.sort((a, b) => a.expecteddeliverytime - b.expecteddeliverytime);
   } else if (filters.expecteddeliverytime === "highToLow") {
     sortedData.sort((a, b) => b.expecteddeliverytime - a.expecteddeliverytime);
@@ -75,19 +55,10 @@ const Delivery = () => {
   }
 
   // for handel filter
-  // const handleFilterChange = (filterKey, sortOrder) => {
-  //   setFilters(() => ({
-  //     [filterKey]: sortOrder,
-  //   }));
-  // };
-
   const handleFilterChange = (filterKey, sortOrder) => {
-    // Create a new object with the updated filter and include other active filters
-    const updatedFilters = {
-      ...filters,
+    setFilters(() => ({
       [filterKey]: sortOrder,
-    };
-    setFilters(updatedFilters);
+    }));
   };
 
   const clearFilter = () => {
@@ -95,18 +66,8 @@ const Delivery = () => {
       price: null,
       ratingsAverage: null,
       expecteddeliverytime: null,
-      subCategory: filters.subCategory,
     });
   };
-  // when no filter
-  if (
-    !filters.subCategory &&
-    !filters.price &&
-    !filters.ratingsAverage &&
-    !filters.expecteddeliverytime
-  ) {
-    sortedData = [...restaurantData];
-  }
 
   return (
     <>

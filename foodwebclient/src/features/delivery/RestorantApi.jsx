@@ -1,6 +1,12 @@
-export function fetchAllRestorant() {
+export function fetchAllRestorant(subcategory) {
   return new Promise(async (resolve) => {
-    const res = await fetch("http://localhost:8081/api/v1/restorant");
+    let apiUrl = "http://localhost:8081/api/v1/restorant";
+
+    if (subcategory) {
+      apiUrl += `?subcategory=${subcategory}`;
+    }
+
+    const res = await fetch(apiUrl);
     const data = await res.json();
     resolve({ data });
   });

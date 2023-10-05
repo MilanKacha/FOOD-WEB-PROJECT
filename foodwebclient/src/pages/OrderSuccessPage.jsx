@@ -3,7 +3,7 @@ import OrderSuccess from "../features/order/component/OrderSuccess";
 
 const OrderSuccessPage = () => {
   return (
-    <div>
+    <div className="page-wrapper">
       <OrderSuccess />
     </div>
   );

@@ -23,6 +23,8 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import Protected from "./features/auth/component/Protected";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MyOrders from "./features/order/component/MyOrders";
+import MyOrderPage from "./pages/MyOrderPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -94,7 +96,7 @@ function App() {
           path: "myorder",
           element: (
             <Protected>
-              <CartPage />
+              <MyOrderPage />
             </Protected>
           ),
         },

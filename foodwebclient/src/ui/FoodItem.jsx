@@ -2,28 +2,60 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../src/style/fooditem.css";
 import Button from "./Button";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCartAsync } from "../features/cart/cartSlice";
+import {
+  addToCartAsync,
+  fetchItemsByUserIdAsync,
+  selectItems,
+  updateCartAsync,
+} from "../features/cart/cartSlice";
 import { selectUserInfo } from "../features/user/userSlice";
 import { useEffect } from "react";
+import { fetchItemsByUserId } from "../features/cart/cartApi";
 
 const FoodItem = ({ product }) => {
   // ToDo when product fetch at this time user fetch repeatedly
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
+  const cartItems = useSelector(selectItems);
 
-  const handeladdToCart = () => {
-    // Check if product is defined before accessing its properties
+  const handeladdToCart = async () => {
     if (product) {
-      const newItem = {
-        product: product?._id,
-        quantity: 1,
-        user: user?._id,
-      };
-      dispatch(addToCartAsync(newItem));
+      const existingCartItemIndex = cartItems.findIndex(
+        (item) => item.product === product._id
+      );
+
+      if (existingCartItemIndex !== -1) {
+        // If the product is already in the cart, increase its quantity
+        const updatedItem = {
+          ...cartItems[existingCartItemIndex],
+          quantity: cartItems[existingCartItemIndex].quantity + 1,
+        };
+        await dispatch(
+          updateCartAsync({
+            id: updatedItem._id,
+            quantity: updatedItem.quantity,
+          })
+        );
+        // After successfully updating the cart, you can fetch the updated cart
+        dispatch(fetchItemsByUserIdAsync());
+      } else {
+        // If the product is not in the cart, add it with a quantity of 1
+        const newItem = {
+          product: product._id,
+          quantity: 1,
+          user: user._id,
+        };
+        await dispatch(addToCartAsync(newItem)); // Dispatch the action to add to cart
+        // After successfully adding to the cart, you can fetch the updated cart
+        dispatch(fetchItemsByUserIdAsync());
+      }
     } else {
       console.error("Product is undefined or null");
     }
   };
+
+  // Rest of your component code...
+
   return (
     <>
       <div className="fooditem">

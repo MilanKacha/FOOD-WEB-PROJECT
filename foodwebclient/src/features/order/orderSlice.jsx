@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createOrder } from "./orderApi";
+import { createOrder, fetchOrderByUserId } from "./orderApi";
 import Cookies from "js-cookie";
 
 const initialState = {
@@ -13,6 +13,14 @@ export const createOrderAsync = createAsyncThunk(
   "order/createOrder",
   async (order) => {
     const response = await createOrder(order);
+    return response.data;
+  }
+);
+
+export const fetchOrderByUserIdAsync = createAsyncThunk(
+  "order/fetchOrderByUserId",
+  async () => {
+    const response = await fetchOrderByUserId();
     return response.data;
   }
 );
@@ -33,6 +41,13 @@ export const orderSlice = createSlice({
         // latest order (action.payload)
         state.currentOrder = action.payload;
         localStorage.setItem("currentOrder", JSON.stringify(action.payload));
+      })
+      .addCase(fetchOrderByUserIdAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchOrderByUserIdAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.orders = action.payload;
       });
   },
 });

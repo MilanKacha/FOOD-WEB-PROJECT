@@ -7,16 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOutAsync, selectLoggedInUser } from "../auth/authSlice";
 import Login from "../auth/component/Login";
 import { PiBagBold } from "react-icons/pi";
-import { selectItems } from "../cart/cartSlice";
+import { fetchItemsByUserIdAsync, selectItems } from "../cart/cartSlice";
 import HeroSection from "../home/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const userToken = useSelector(selectLoggedInUser);
   const cart = useSelector(selectItems); // for calculation od cart length
-  // console.log(cart.length);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(fetchItemsByUserIdAsync());
+  }, [dispatch]);
+  // console.log(cart);
 
   const handalLogOut = () => {
     dispatch(logOutAsync());
@@ -55,6 +58,7 @@ const Navbar = () => {
   const cartItem = cart.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
+  // console.log(cartItem);
 
   return (
     <>

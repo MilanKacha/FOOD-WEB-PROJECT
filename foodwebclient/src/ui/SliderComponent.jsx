@@ -9,7 +9,12 @@ import {
 import Button from "../ui/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUserInfo } from "../features/user/userSlice";
-import { addToCartAsync } from "../features/cart/cartSlice";
+import {
+  addToCartAsync,
+  fetchItemsByUserIdAsync,
+  selectItems,
+  updateCartAsync,
+} from "../features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
@@ -52,21 +57,63 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   };
 
   const user = useSelector(selectUserInfo);
+  const cartItems = useSelector(selectItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handeladdToCart = (product, user) => {
+  // const handeladdToCart = (product, user) => {
+  //   if (user) {
+  //     // Check if product is defined before accessing its properties
+  //     if (product) {
+  //       const newItem = {
+  //         product: product?._id,
+  //         quantity: 1,
+  //         user: user?._id,
+  //       };
+  //       dispatch(addToCartAsync(newItem));
+  //       navigate("/cart");
+  //     } else {
+  //       console.error("Product is undefined or null");
+  //     }
+  //   } else {
+  //     handleOrderNowClick();
+  //   }
+  // };
+
+  const handeladdToCart = async (product, user) => {
     if (user) {
-      // Check if product is defined before accessing its properties
       if (product) {
-        const newItem = {
-          product: product?._id,
-          quantity: 1,
-          user: user?._id,
-        };
-        dispatch(addToCartAsync(newItem));
-        navigate("/cart");
-      } else {
-        console.error("Product is undefined or null");
+        // find index of existing item
+        const existingCartItemIndex = cartItems.findIndex(
+          (item) => item.product === product._id
+        );
+
+        // check it exist in cart item array
+        if (existingCartItemIndex !== -1) {
+          // If the product is already in the cart, increase its quantity
+          const updatedItem = {
+            ...cartItems[existingCartItemIndex],
+            quantity: cartItems[existingCartItemIndex].quantity + 1,
+          };
+          await dispatch(
+            updateCartAsync({
+              //updatecart require id in BE
+              id: updatedItem._id,
+              quantity: updatedItem.quantity,
+            })
+          );
+          // After successfully updating the cart, you can fetch the updated cart
+          dispatch(updateCartAsync());
+        } else {
+          // If the product is not in the cart, add it with a quantity of 1
+          const newItem = {
+            product: product._id,
+            quantity: 1,
+            user: user._id,
+          };
+          await dispatch(addToCartAsync(newItem)); // Dispatch the action to add to cart
+          // After successfully adding, fetch the updated cart
+          dispatch(fetchItemsByUserIdAsync());
+        }
       }
     } else {
       handleOrderNowClick();

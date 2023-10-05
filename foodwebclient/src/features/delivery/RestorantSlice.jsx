@@ -17,9 +17,9 @@ const initialState = {
 
 export const fetchAllRestorantAsync = createAsyncThunk(
   "restorant/fetchAllRestorants",
-  async () => {
+  async (subcategory) => {
     try {
-      const response = await fetchAllRestorant();
+      const response = await fetchAllRestorant(subcategory);
       return response; // Return the response directly
     } catch (error) {
       console.log(error);

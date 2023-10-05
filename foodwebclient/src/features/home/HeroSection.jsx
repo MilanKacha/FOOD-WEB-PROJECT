@@ -1,6 +1,6 @@
-import thali from "../../assests/thali.png";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
+import "../../style/herosection.css";
 
 const HeroSection = ({ handleViewMoreClick }) => {
   const pizza = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696054901/restorant/pizza_qqqufr.png`;

@@ -52,8 +52,9 @@
   right: 4.4rem;
 }
 
+/* hero-section */
 .hero {
-  background-image: url("../assests/bg.avif");
+  background-image: url("https://res.cloudinary.com/dkaenszh3/image/upload/v1696492882/bg_pnqwsd.avif");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
