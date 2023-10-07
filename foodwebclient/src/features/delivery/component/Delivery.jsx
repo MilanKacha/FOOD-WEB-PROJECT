@@ -76,6 +76,11 @@ const Delivery = () => {
           <div className="filter-nav-wrapper">
             <nav className="filter-nav">
               <ul className="navbar-list-filter">
+                <li>
+                  <span className="remove-filter" onClick={clearFilter}>
+                    Remove filter
+                  </span>
+                </li>
                 <li className="navbar-item-filter">
                   <span
                     onClick={() =>
@@ -144,11 +149,6 @@ const Delivery = () => {
                     }
                   >
                     Rating 4+
-                  </span>
-                </li>
-                <li>
-                  <span className="remove-filter" onClick={clearFilter}>
-                    Remove filter
                   </span>
                 </li>
               </ul>

@@ -22,8 +22,6 @@ const RestorantDetails = () => {
     dispatch(fetchAllProductsByRestorantIdAsync(params.id));
   }, [dispatch, params.id]);
 
-  // Filter food items based on 'showVegOnly' state
-
   // fetch restaurant by Id
   const RestaurantById = useSelector(selectRestaurantById);
   // console.log(RestaurantById);

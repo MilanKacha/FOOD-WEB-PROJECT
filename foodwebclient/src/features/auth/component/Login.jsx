@@ -1,6 +1,6 @@
-import React, { useReducer } from "react";
-import { useDispatch } from "react-redux";
-import { logInUserAsync } from "../authSlice";
+import React, { useEffect, useReducer } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logInUserAsync, selectLoggedInUser } from "../authSlice";
 import Button from "../../../ui/Button";
 
 const initialState = {
@@ -38,9 +38,29 @@ const Login = ({ closeModal }) => {
       .catch((error) => {
         console.error("Signup failed:", error);
       });
-    // console.log(logInData);
+
     dispatched({ type: "RESET_FORM" });
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await dispatch(
+  //       logInUserAsync({
+  //         email: logInData.email,
+  //         password: logInData.password,
+  //       })
+  //     );
+
+  //     if (logInUserAsync.fulfilled.match(response)) {
+  //       // Handle successful login here, e.g., navigate to a new page
+  //       console.log("Successfully logged in");
+  //     }
+  //   } catch (error) {
+  //     // Handle login failure, display toast message, or update state accordingly
+  //     console.error("Login failed:", error);
+  //   }
+  // };
 
   const handelInputChange = (field, value) => {
     dispatched({ type: "UPDATE_FIELD", field, value });
@@ -59,7 +79,6 @@ const Login = ({ closeModal }) => {
             value={logInData.email}
             onChange={(e) => handelInputChange("email", e.target.value)}
           />
-          {/* {errors.email && <span className="error">{errors.email}</span>} */}
         </div>
         <div>
           <label>Password:</label>
@@ -71,7 +90,6 @@ const Login = ({ closeModal }) => {
               handelInputChange("password", e.target.value);
             }}
           />
-          {/* {errors.password && <span className="error">{errors.password}</span>} */}
         </div>
 
         <Button type="submit">Log In</Button>

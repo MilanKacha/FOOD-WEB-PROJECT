@@ -66,7 +66,6 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
 
   return (
     <div className="restorantmenu-wrapper">
-      <div className="restaurantmenu-container"></div>
       <div className="restorant-item-wrapper">
         <div className="restaurant-item-container">
           <span className="restaurant-vegonly">

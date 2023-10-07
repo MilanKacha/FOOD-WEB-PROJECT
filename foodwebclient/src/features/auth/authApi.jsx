@@ -28,7 +28,6 @@ export function logIn(logInInfo) {
         const data = await response.json();
         Cookies.set("jwt", data.token);
         resolve({ data });
-        // console.log({ data });
       } else {
         const error = await response.text();
         reject(error);

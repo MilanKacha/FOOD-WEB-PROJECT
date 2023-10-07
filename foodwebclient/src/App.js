@@ -25,6 +25,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyOrders from "./features/order/component/MyOrders";
 import MyOrderPage from "./pages/MyOrderPage";
+import Navbar from "./features/Navbar/Navbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,9 +35,9 @@ function App() {
     if (user) {
       dispatch(fetchLoggedInUserAsync());
       dispatch(fetchItemsByUserIdAsync());
-      dispatch(fetchAllProductAsync());
     }
-  }, [dispatch, user]);
+    dispatch(fetchAllProductAsync());
+  }, [dispatch]);
 
   const router = createBrowserRouter([
     {

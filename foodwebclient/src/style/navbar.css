@@ -52,55 +52,6 @@
   right: 4.4rem;
 }
 
-/* hero-section */
-.hero {
-  background-image: url("https://res.cloudinary.com/dkaenszh3/image/upload/v1696492882/bg_pnqwsd.avif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  width: 100%;
-}
-
-/* hero-after navbar */
-.hero {
-  height: 100vh; /* Set a height for the parent container */
-}
-.hero Button {
-  padding: 10px 20px;
-  margin: auto;
-}
-.hero Button:hover {
-  padding: 10px 20px;
-  margin: auto;
-  transform: scale(1.02);
-}
-.hero-content {
-  height: 100%; /* Occupy the full height of the parent */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.hero-content-text {
-  margin-left: 7rem;
-}
-.hero-content-img {
-  width: 40rem;
-  height: 40rem;
-  margin-right: 10rem;
-  overflow: inline-block;
-  display: block;
-  transition: transform 3s;
-}
-.hero-content-img img {
-  width: 100%;
-  height: 100%;
-}
-.hero-content-img:hover {
-  transform: rotate(270deg);
-}
-
 @media screen and (max-width: 768px) {
   .nav_toggler {
     display: block;
@@ -111,7 +62,7 @@
     right: 0;
     width: 50%;
     height: 50vh;
-    background: red;
+    background: rgb(255, 219, 219);
     margin: 0;
     flex-direction: column;
     align-items: center;
@@ -119,7 +70,7 @@
     transition: 0.5s ease-in;
   }
   .navbar .nav-menu .nav-menu-ul li:nth-child(1) {
-    margin-top: 4rem;
+    margin-top: 6rem;
   }
   .nav-menu .nav_toggler {
     z-index: 999;

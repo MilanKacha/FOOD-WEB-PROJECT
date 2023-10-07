@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../../style/navbar.css";
-import thali from "../../assests/thali.png";
 import SingUp from "../auth/component/SingUp";
 import ModalCommon from "../../ui/ModalCommon";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,18 +7,18 @@ import { logOutAsync, selectLoggedInUser } from "../auth/authSlice";
 import Login from "../auth/component/Login";
 import { PiBagBold } from "react-icons/pi";
 import { fetchItemsByUserIdAsync, selectItems } from "../cart/cartSlice";
-import HeroSection from "../home/HeroSection";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const userToken = useSelector(selectLoggedInUser);
   const cart = useSelector(selectItems); // for calculation od cart length
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchItemsByUserIdAsync());
   }, [dispatch]);
-  // console.log(cart);
 
   const handalLogOut = () => {
     dispatch(logOutAsync());
@@ -27,6 +26,7 @@ const Navbar = () => {
 
   const [active, setActive] = useState("nav-menu-ul");
   const [toggleIcon, setToggleIcon] = useState("nav_toggler");
+  // for modal open
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 
@@ -54,11 +54,11 @@ const Navbar = () => {
   const closeModalLogin = () => {
     setLoginOpen(false);
   };
+
   // const calculate cart item
   const cartItem = cart.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
-  // console.log(cartItem);
 
   return (
     <>
@@ -107,7 +107,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/* <HeroSection /> */}
 
       {signUpOpen && (
         <ModalCommon openModal={openModalSignUp} closeModal={closeModalSignUp}>

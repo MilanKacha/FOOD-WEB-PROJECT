@@ -26,6 +26,7 @@
 .order {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 1rem auto;
   width: 85%;
   font-size: 1.8rem;
@@ -38,4 +39,33 @@
 }
 .order div {
   margin-right: 2rem;
+}
+
+/* @media only screen and (min-width: 575px) and (max-width: 767px) {
+  .order {
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 95%;
+  }
+} */
+@media only screen and (max-width: 767px) {
+  .order-wrapper {
+    width: 100%;
+    border-radius: 0px;
+    border: none;
+    margin: 0 auto;
+  }
+  .order {
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 1rem 0;
+    flex-direction: column;
+    align-items: center;
+  }
+  .oredr-id {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 }

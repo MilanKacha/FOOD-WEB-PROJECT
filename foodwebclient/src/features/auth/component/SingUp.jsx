@@ -71,7 +71,9 @@ const SingUp = ({ closeModal }) => {
               handelInputChange("password", e.target.value);
             }}
           />
-          {/* {errors.password && <span className="error">{errors.password}</span>} */}
+          <span className="error" style={{ color: "red", fontSize: 13 }}>
+            min 8 Characters
+          </span>
         </div>
         <div>
           <label>Confirm Password:</label>
@@ -83,9 +85,9 @@ const SingUp = ({ closeModal }) => {
               handelInputChange("passwordConfirm", e.target.value);
             }}
           />
-          {/* {errors.passwordConfirm && (
-            <span className="error">{errors.passwordConfirm}</span>
-          )} */}
+          <span className="error" style={{ color: "red", fontSize: 13 }}>
+            min 8 Characters
+          </span>
         </div>
         <Button type="submit">Sign Up</Button>
       </form>

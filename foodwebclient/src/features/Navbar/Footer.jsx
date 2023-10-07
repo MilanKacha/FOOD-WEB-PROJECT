@@ -40,10 +40,8 @@ const Footer = () => {
         <div className="footer-container">
           <div className="footer-wrapper">
             {FooterData.map((item, index) => (
-              <div key={index}>
-                <h3 style={{ color: "black" }} className="footer-heading">
-                  {item.heading}
-                </h3>
+              <div key={index} className="footer-map">
+                <h3 className="footer-heading">{item.heading}</h3>
                 <div className="text">
                   {item.content.map((text, subindex) => (
                     <div key={subindex}>{text}</div>
@@ -52,9 +50,7 @@ const Footer = () => {
               </div>
             ))}
             <div>
-              <h3 style={{ color: "black" }} className="footer-heading">
-                Social Links
-              </h3>
+              <h3 className="footer-heading">Social Links</h3>
               <div className="icon">
                 <Link to="https://www.linkedin.com/" className="app-link">
                   <span className="app-icon">

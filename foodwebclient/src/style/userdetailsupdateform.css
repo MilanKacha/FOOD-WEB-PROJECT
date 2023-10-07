@@ -30,3 +30,9 @@ form div input {
   flex-direction: row;
   margin: 1rem;
 }
+
+@media only screen and (max-width: 575px) {
+  .userprofile-button Button {
+    width: 9.5rem;
+  }
+}

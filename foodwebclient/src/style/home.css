@@ -1,14 +1,13 @@
 .home {
   display: flex;
   flex-direction: column;
-  background: #fff;
 }
 
 /* choice section start here */
 .hero-choice-section {
   width: 100%;
   padding: 0 2rem;
-  margin: 10rem auto;
+  margin: 8rem auto;
 }
 .choice {
   display: flex;
@@ -29,19 +28,9 @@
 .popular-item .popular-Sweet {
   padding: 5rem 0 7rem 0;
 }
+
 .popular-item .popular-items {
   padding: 5rem 0 7rem 0;
-}
-
-/* collection section */
-.hero-collection-section {
-  width: 90%;
-  margin: 8rem auto;
-  display: flex;
-  flex-direction: column;
-}
-.hero-collection-container {
-  display: flex;
 }
 
 /* Location */
@@ -85,7 +74,6 @@
 /* faq-section */
 .faq-section {
   width: 100%;
-  background: #fff;
 }
 
 .question-heading {
@@ -103,4 +91,76 @@
     rgb(251, 205, 205) 80%,
     rgb(251, 205, 205) 100%
   );
+}
+.footer {
+  background-color: black;
+}
+
+@media only screen and (max-width: 767px) {
+  /* choise section */
+  .choice {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-choice-section {
+    margin: 2rem auto;
+  }
+  /* popular item */
+
+  .popular-item {
+    background: linear-gradient(
+      to right,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 50%,
+      rgb(251, 205, 205) 50%,
+      rgb(251, 205, 205) 100%
+    );
+  }
+  .popular-item .popular-Sweet {
+    padding: 5rem 0 4rem 0;
+  }
+
+  .popular-item .popular-items {
+    padding: 5rem 0 4rem 0;
+  }
+  /* location */
+  .hero-location-section {
+    background: linear-gradient(
+      to right,
+      rgb(251, 205, 205) 0%,
+      rgb(251, 205, 205) 50%,
+      rgb(255, 255, 255) 50%,
+      rgb(255, 255, 255) 100%
+    );
+  }
+  .hero-location-section .location {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  /* footer */
+  .hero-getapp-section {
+    width: 100%;
+    background: linear-gradient(
+      to left,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 50%,
+      rgb(251, 205, 205) 80%,
+      rgb(251, 205, 205) 100%
+    );
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-location-section .location {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .choice {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-choice-section {
+    margin: 2rem auto;
+  }
 }

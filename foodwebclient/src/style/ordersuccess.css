@@ -21,11 +21,17 @@
 }
 .orderdetails {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 .orderdetails span {
   font-size: 1.6rem;
 }
 .orderdetails .ordersuccess-gotohome {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 575px) {
+  .orderdetails span {
+    font-size: 1.3rem;
+  }
 }

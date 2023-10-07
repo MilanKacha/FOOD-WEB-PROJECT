@@ -4,9 +4,7 @@
 }
 
 .herodeal-card-wrapper {
-  /* border: 2px solid green; */
   width: 100%;
-  /* height: 900px; */
   background: white;
   position: relative;
   display: flex;
@@ -30,19 +28,11 @@
   left: 60%;
 }
 .herodeal-img img {
-  width: 55rem;
-  height: 35rem;
   border-radius: 10px;
-  box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  -webkit-box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  -moz-box-shadow: 7px 8px 8px -1px rgba(166, 158, 158, 0.75);
-  transition: transform 0.3s ease-in-out;
 }
-.herodeal-img img:hover {
-  transform: translateY(-10px);
-}
+
 .herodeal-content .herodeal-text {
-  width: 35rem;
+  width: 33rem;
   height: 34rem;
   position: absolute;
   top: 20%;
@@ -50,25 +40,30 @@
   /* border: 2px solid green; */
 }
 .herodeal-content {
-  padding: 100px 0px;
-  width: 100%;
+  box-sizing: content-box; /* Remove this line if you want border-box sizing */
+  padding: 100px 0; /* Adjust padding as needed */
+  width: 90%;
   height: 100%;
+  /* border: 2px solid green; */
+  display: flex;
+  justify-content: center;
 }
 /* card css */
 .herodeal-card-content {
   margin: 0 0 0 8rem;
+  /* border: 1px solid red; */
 }
 
 .herodeal-card-content h2 {
   margin: 0 0px 2rem;
-  font-size: 3.5rem;
+  font-size: 3rem;
   line-height: 4rem;
   font-weight: 600;
   color: black;
   text-align: center;
 }
 .herodeal-card-content p {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: black;
   text-align: justify;
   line-height: 3rem;
@@ -79,8 +74,7 @@
   .herodeal-card-content {
   margin: 0 8rem 0 0;
 }
-.heroDealImgWrap {
-}
+
 .heroDealImgWrap {
   position: relative;
   width: 55rem;
@@ -99,4 +93,86 @@
 .herodeal-content {
   display: flex;
   align-items: center;
+}
+.herodeal-button {
+  display: flex;
+  margin: 1rem auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .herodeal-card-wrapper:before {
+    display: none;
+  }
+  .herodeal-content {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .herodeal-card-content h2 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+  .herodeal-card-content p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  .herodeal-card-content {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .hero-deal-section .herodeal-card-wrapper:nth-child(even) .herodeal-content {
+    flex-direction: column;
+  }
+  .herodealimg {
+    margin-bottom: 1rem;
+  }
+  .herodealCard .herodeal-card-content .container {
+    flex-direction: column;
+  }
+  .hero-deal-section
+    .herodeal-card-wrapper:nth-child(even)
+    .herodealCard
+    .herodeal-card-content {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .herodeal-content {
+    width: 100%;
+    display: flex;
+    padding: 2rem;
+  }
+
+  .heroDealImgWrap {
+    flex: 1;
+  }
+  .herodealCard {
+    flex: 1;
+  }
+  .herodeal-card-wrapper:before {
+    display: none;
+  }
+  .herodeal-card-content {
+    margin: 0 0 0 3rem;
+  }
+  .herodeal-card-content h2 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+  .herodeal-card-content p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .herodeal-card-content h2 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+  .herodeal-card-content p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
 }

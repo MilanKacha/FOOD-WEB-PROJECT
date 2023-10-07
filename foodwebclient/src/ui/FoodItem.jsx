@@ -61,7 +61,7 @@ const FoodItem = ({ product }) => {
       <div className="fooditem">
         <div className="fooditem-wrapper">
           <div className="food-img">
-            <img src={product.image} alt="" />
+            <img src={product.image} alt="" className="food-image" />
           </div>
           <div className="food-content">
             <h3 style={{ color: "black" }}>
@@ -77,7 +77,7 @@ const FoodItem = ({ product }) => {
               2 Mini Masala Dosa+1 Khara Bath+1 Vada+1 Gulab Jamun
             </span>
             <div className="food-button">
-              <Button className="primary" onClick={handeladdToCart}>
+              <Button className="primary addtocart" onClick={handeladdToCart}>
                 Add To Cart
               </Button>
 

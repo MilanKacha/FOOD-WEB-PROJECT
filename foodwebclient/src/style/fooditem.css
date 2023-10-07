@@ -11,6 +11,10 @@
 .fooditem-wrapper .food-img img {
   border-radius: 5px;
 }
+.food-image {
+  width: 17rem;
+  height: 17rem;
+}
 
 .food-content {
   display: flex;
@@ -27,8 +31,33 @@
 .food-button {
   display: flex;
   text-align: center;
-  width: 30rem;
 }
 .food-button Button {
   margin: 0 2rem 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .fooditem-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .food-image {
+    width: 27rem;
+    height: 20rem;
+  }
+  .food-img {
+    display: flex;
+    margin: 0 auto;
+  }
+  .food-content {
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+  .food-content span {
+    margin: 0;
+  }
+  .addtocart {
+    margin-left: 2rem;
+  }
 }

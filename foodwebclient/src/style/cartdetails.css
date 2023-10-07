@@ -92,3 +92,19 @@
 .cart-container Button {
   background: rgb(190, 190, 190);
 }
+
+@media only screen and (max-width: 767px) {
+  .cartitem {
+    flex-direction: column;
+  }
+  .cartitem-img {
+    margin: 1rem auto;
+  }
+  .cartitem-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+  }
+}

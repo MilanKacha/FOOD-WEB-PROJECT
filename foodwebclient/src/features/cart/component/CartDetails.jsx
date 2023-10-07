@@ -93,7 +93,11 @@ const CartDetails = () => {
             <>
               <div className="cartitem" key={index}>
                 <div className="cartitem-img">
-                  <img src={item?.product?.image} alt="" />
+                  <img
+                    src={item?.product?.image}
+                    alt=""
+                    className="cartitem-image"
+                  />
                 </div>
                 <div className="cartitem-description">
                   <div className="cartitem-name">{item?.product?.itemname}</div>

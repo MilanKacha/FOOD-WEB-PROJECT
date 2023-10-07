@@ -22,10 +22,19 @@ const MyOrders = () => {
           {orders.map((item, index) => (
             <>
               <div className="order" key={index}>
-                <div className="oredr-id">Order_Id:{item._id},</div>
-                <div className="order-status">Status:{item.status},</div>
+                <div className="oredr-id">
+                  <span> Order_Id:</span>
+                  <span>{item._id},</span>
+                </div>
+                <div className="order-status">
+                  <span></span>Status:<span>{item.status},</span>
+                </div>
                 <div className="total">
-                  TotalAmount:{item.totalAmount} ({item.totalItems})items
+                  <span></span>TotalAmount:
+                  <span>
+                    {item.totalAmount} ({item.totalItems}
+                    )items
+                  </span>
                 </div>
               </div>
             </>

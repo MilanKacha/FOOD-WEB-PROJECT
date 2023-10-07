@@ -9,12 +9,9 @@ import Club from "../../assests/hero-choice/club.jpg";
 import HeroLocation from "./HeroLocation";
 import Button from "../../ui/Button";
 import HeroDeal from "./HeroDeal";
-import Burgur from "../../assests/hero-deal/burger1.jpg";
+
 import Herofaq from "./Herofaq";
-import HeroCollectionDetails from "./HeroCollectionDetails";
-import Collection2 from "../../assests/hero-collec/collection2.avif";
-import Collection1 from "../../assests/hero-collec/collection1.avif";
-import Collection3 from "../../assests/hero-collec/collection3.avif";
+
 import HeroGetApp from "./HeroGetApp";
 import Biriyani from "../../assests/hero-popular/biryani.avif";
 import BurgurP from "../../assests/hero-popular/BurgurMan.avif";
@@ -108,11 +105,11 @@ const Home = () => {
 
   // for PopularSweet filter data
   const PopularSweet = product?.data?.filter((item) => item.popularSweet);
-  // console.log(PopularSweet);
+  console.log(PopularSweet);
 
   // for PopularItemfilter data
   const PopularItem = product?.data?.filter((item) => item.popularItems);
-  // console.log(PopularItem);
+  console.log(PopularItem);
 
   const data = restaurants.filter((item) => item.isHome);
 
@@ -167,14 +164,6 @@ const Home = () => {
             />
           </div>
         </section>
-
-        {/* <section className="hero-collection-section">
-          <div className="hero-collection-container">
-            {CollectionDetails.map((collction, index) => (
-              <HeroCollectionDetails key={index} data={collction} />
-            ))}
-          </div>
-        </section> */}
 
         <section className="hero-deal-section">
           {data.map((deal, index) => (

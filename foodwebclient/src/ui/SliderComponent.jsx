@@ -30,27 +30,39 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1025,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 870,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 588,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 374,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
         },
       },
     ],
@@ -59,25 +71,6 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   const user = useSelector(selectUserInfo);
   const cartItems = useSelector(selectItems);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // const handeladdToCart = (product, user) => {
-  //   if (user) {
-  //     // Check if product is defined before accessing its properties
-  //     if (product) {
-  //       const newItem = {
-  //         product: product?._id,
-  //         quantity: 1,
-  //         user: user?._id,
-  //       };
-  //       dispatch(addToCartAsync(newItem));
-  //       navigate("/cart");
-  //     } else {
-  //       console.error("Product is undefined or null");
-  //     }
-  //   } else {
-  //     handleOrderNowClick();
-  //   }
-  // };
 
   const handeladdToCart = async (product, user) => {
     if (user) {

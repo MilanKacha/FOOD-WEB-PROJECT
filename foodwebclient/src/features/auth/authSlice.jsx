@@ -28,11 +28,12 @@ export const logInUserAsync = createAsyncThunk(
       const response = await logIn(logInInfo);
       return response.data;
     } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
+      // console.log(err);
+      return rejectWithValue(err || "Incorrect email or password");
     }
   }
 );
+
 export const logOutAsync = createAsyncThunk("user/logOut", async () => {
   const response = await logOut();
   return response.data;

@@ -1,8 +1,8 @@
-.slider-content {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+.container {
+  box-sizing: content-box; /* Ensure that it's set to content-box */
+  width: 80% !important;
 }
+
 .slider-heading {
   margin-bottom: 2rem;
 }
@@ -13,11 +13,9 @@
 .slider-button div {
   margin-right: 1rem;
 }
-/* .container {
-  background: rgb(121, 174, 118);
-} */
+
 .card {
-  height: 33rem;
+  height: 35rem;
   margin: 0 1rem;
   transition: transform 0.5s ease;
   border-radius: 10px;

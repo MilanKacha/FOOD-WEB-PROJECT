@@ -8,9 +8,12 @@
 .herofaq-answer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  text-align: justify;
   font-size: 2rem;
   padding: 2rem 2rem;
+}
+.herofaq-question {
+  margin-right: 2rem;
 }
 
 .plus-icon {
@@ -26,4 +29,11 @@
 }
 .open .herofaq-answer {
   display: block;
+}
+
+@media only screen and (max-width: 767px) {
+  .herofaq-wrapper .question-wrapper,
+  .herofaq-answer {
+    font-size: 1.8rem;
+  }
 }
