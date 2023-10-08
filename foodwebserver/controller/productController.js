@@ -1,15 +1,10 @@
 const Product = require("../modal/ProductModal");
 const catchAsync = require("../utils/catchAsync");
+const cloudinary = require("../utils/cloudinaryConfig");
 
 exports.getAllProduct = catchAsync(async (req, res, next) => {
   const products = await Product.find();
-  res.status(201).json({
-    status: "success",
-    result: products.length,
-    data: {
-      products,
-    },
-  });
+  res.status(201).json(products);
 });
 
 exports.getOneProduct = catchAsync(async (req, res, next) => {
@@ -23,7 +18,15 @@ exports.getOneProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.createProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.create(req.body);
+  const file = req.files.image;
+  // console.log(file);
+  const result = await cloudinary.uploader.upload(file.tempFilePath, {
+    folder: "products", // Adjust the folder name as needed
+    width: 150, // Set the desired image width
+    crop: "scale",
+  });
+  // console.log(result)
+  const product = await Product.create({ ...req.body, image: result.url });
   res.status(201).json({
     status: "success",
     data: {

@@ -8,7 +8,9 @@ const RestorantSchema = new Schema({
     minlength: 1, // Minimum length of 5 characters
     maxlength: 100, // Maximum length of 50 characters
   },
-  images: [String],
+  image: {
+    type: String,
+  },
   desc: {
     type: String,
     minlength: 1, // Minimum length of 5 characters
@@ -16,24 +18,21 @@ const RestorantSchema = new Schema({
     trim: true,
     required: false,
   },
-  brand: {
-    type: String,
-  },
+
   opentime: {
     type: String,
     required: true,
   },
   expecteddeliverytime: {
-    type: String,
+    type: Number,
   },
   category: {
     type: String,
-    required: [true, "A restorant should have type"],
-    enum: {
-      values: ["orderonline", "dining", "nightlife&club"],
-      message: "Category is either orderonline, dining or nightlife&club",
-    },
   },
+  subCategory: {
+    type: String,
+  },
+
   ratingsAverage: {
     type: Number,
     default: 4.5,
@@ -52,6 +51,13 @@ const RestorantSchema = new Schema({
   location: {
     type: String,
   },
+  price: {
+    type: Number,
+  },
 });
 
+const virtual = RestorantSchema.virtual("id");
+virtual.get(function () {
+  return this._id;
+});
 module.exports = mongoose.model("Restorant", RestorantSchema);

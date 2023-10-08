@@ -4,6 +4,9 @@ const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
+  profilepicture: {
+    type: String,
+  },
   username: {
     type: String,
     // required: [true, "Please tell us your name"],
@@ -14,9 +17,6 @@ const userSchema = new Schema({
     unique: true,
     lowercase: true,
     validate: [validator.isEmail, "Please Enter valid email"],
-  },
-  photo: {
-    type: String,
   },
   role: {
     type: String,
@@ -42,17 +42,16 @@ const userSchema = new Schema({
   },
   phone: {
     type: Number,
-    max: 10,
   },
   street: {
     type: String,
-    minLength: 5,
-    maxLength: [100, "street have max 100 characters"],
+    // minLength: 5,
+    // maxLength: [100, "street have max 100 characters"],
   },
   city: {
     type: String,
-    minLength: 5,
-    maxLength: [50, "city have max 100 characters"],
+    // minLength: 5,
+    // maxLength: [50, "city have max 100 characters"],
   },
   pincode: {
     type: Number,
@@ -85,5 +84,10 @@ userSchema.methods.correctPassword = async function (
 ) {
   return await bcrypt.compare(candidatePassword, userpassword);
 };
+
+const virtual = userSchema.virtual("id");
+virtual.get(function () {
+  return this._id;
+});
 
 module.exports = mongoose.model("User", userSchema);

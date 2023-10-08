@@ -13,9 +13,14 @@ const ProductSchema = new Schema({
     minlength: 1, // Minimum length of 5 characters
     maxlength: 100, // Maximum length of 50 characters
   },
-  slug: {
+  restaurantId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Restaurant",
+  },
+  image: {
     type: String,
   },
+
   desc: {
     type: String,
     minlength: 1, // Minimum length of 5 characters
@@ -28,7 +33,6 @@ const ProductSchema = new Schema({
     default: 4.5,
     min: [1, "rating must be above 1.0"],
     max: [5, "rating must be below 5.0"],
-    set: (val) => Math.round(val),
   },
   ratingsQuantity: {
     type: Number,
@@ -38,13 +42,22 @@ const ProductSchema = new Schema({
     type: Number,
     required: [true, "A product must have a price"],
   },
-  category: {
+  isVegetarian: {
+    type: Boolean,
+    required: [true, "A product should have category"],
+  },
+  subcategory: {
     type: String,
-    required: [true, "A product should have type"],
-    enum: {
-      values: ["vegetarian", "non-vegetarian"],
-      message: "Type is either vegetarian or non-vegetarian",
-    },
+    required: [true, "A product should have subcategory"],
+  },
+  popularItems: {
+    type: Boolean,
+  },
+  popularSweet: {
+    type: Boolean,
+  },
+  topDealItems: {
+    type: Boolean,
   },
 });
 

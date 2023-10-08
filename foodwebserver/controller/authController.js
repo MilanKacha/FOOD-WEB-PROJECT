@@ -1,39 +1,16 @@
 const User = require("../modal/UserModal");
 const { promisify } = require("util"); // use for built in promisify in protect route
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const catchAsync = require("../utils/catchAsync");
 
 // for genrate jwt token
 function generateToken(userId) {
-  // Todo process.env
-  return jwt.sign({ userId }, "your-secret-key", { expiresIn: "1h" });
+  const expiresIn = 3 * 24 * 60 * 60; // 3 days in seconds
+  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn });
 }
-
-// send jwt
-// const createSendToken = (user, statusCode, res) => {
-//   const token = signToken(user._id);
-//   const cookieOptions = {
-//     expires: new Date(
-//       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-//     ),
-//     httpOnly: true,
-//   };
-//   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
-
-//   res.cookie("jwt", token, cookieOptions);
-//   // remove the password from the output
-//   user.password = undefined;
-
-//   res.status(statusCode).json({
-//     status: "success",
-//     token,
-//     data: {
-//       user: user,
-//     },
-//   });
-// };
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
@@ -44,10 +21,10 @@ exports.signUp = catchAsync(async (req, res, next) => {
   res.cookie("jwt", token, { httpOnly: true });
 
   res.status(201).json({
-    status: "success",
     token,
     data: {
-      newUser,
+      id: newUser.id,
+      role: newUser.role,
     },
   });
 });
@@ -71,8 +48,10 @@ exports.logIn = catchAsync(async (req, res, next) => {
 
   const token = generateToken(user._id);
   res.status(200).json({
-    status: "success",
     token,
+    data: {
+      id: user.id,
+    },
   });
 });
 
@@ -92,9 +71,9 @@ exports.protect = catchAsync(async (req, res, next) => {
       .status(401)
       .json({ message: "You are not Logged In! Please login to get access" });
   }
-  // console.log(token);
+
   // 2)validate the token
-  const decode = await promisify(jwt.verify)(token, "your-secret-key");
+  const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   // console.log(decode); // return jwt payload
   // 3)check if user still exist
   const freshUser = await User.findById(decode.userId);
@@ -105,6 +84,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   req.user = freshUser; // protected route get access(use in updateMe) || Grant access to protected route
+  // console.log(req.user);
   next(); // for protected after route
 });
 

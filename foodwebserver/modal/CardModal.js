@@ -11,7 +11,6 @@ const CartSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   price: {
     type: Number,
-    required: [true, "Booking must have a price"],
   },
 });
 

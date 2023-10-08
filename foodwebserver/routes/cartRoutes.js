@@ -6,12 +6,17 @@ const authController = require("../controller/authController");
 
 router
   .route("/")
+  // .post(cartController.addToCart)
+  // .get(cartController.fetchCartByUser);
   .post(authController.protect, cartController.addToCart)
-  .get(authController.protect, cartController.fetchCartByUser);
+  .get(authController.protect, cartController.fetchCartByUser)
+  .delete(authController.protect, cartController.deleteCartByUser);
 
 router
   .route("/:id")
-  .patch(authController.protect, cartController.updateCart)
-  .delete(authController.protect, cartController.deleteCart);
+  .patch(cartController.updateCart)
+  .delete(cartController.deleteCart);
+// .patch(authController.protect, cartController.updateCart)
+// .delete(authController.protect, cartController.deleteCart);
 
 module.exports = router;

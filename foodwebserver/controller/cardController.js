@@ -3,15 +3,22 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.addToCart = catchAsync(async (req, res, next) => {
   const { id } = req.user;
-  const cart = new Cart({ ...req.body, user: id });
-  const doc = await cart.save();
-  const result = await doc.populate("product"); // populate = fetch data of product
-  res.status(201).json({
-    status: "success",
-    data: {
-      result,
-    },
-  });
+  const { product, quantity } = req.body;
+
+  // Check if the product already exists in the user's cart
+  const existingCartItem = await Cart.findOne({ user: id, product });
+
+  if (existingCartItem) {
+    // If it exists, update the quantity
+    existingCartItem.quantity += quantity;
+    await existingCartItem.save();
+    res.status(201).json(existingCartItem);
+  } else {
+    // If it doesn't exist, create a new cart entry
+    const cart = new Cart({ product, quantity, user: id });
+    const doc = await cart.save();
+    res.status(201).json(doc);
+  }
 });
 
 exports.updateCart = catchAsync(async (req, res, next) => {
@@ -42,4 +49,18 @@ exports.fetchCartByUser = catchAsync(async (req, res, next) => {
   const { id } = req.user;
   const cartItems = await Cart.find({ user: id }).populate("product");
   res.status(200).json(cartItems);
+});
+
+exports.deleteCartByUser = catchAsync(async (req, res, next) => {
+  // Get the user's ID from the authenticated user (provided by the protect middleware)
+  const { id } = req.user;
+  // console.log(id);
+
+  // Delete all cart items associated with the user
+  await Cart.deleteMany({ user: id });
+  // Respond with a success message
+  res.status(204).json({
+    status: "success",
+    message: "Cart deleted successfully",
+  });
 });
