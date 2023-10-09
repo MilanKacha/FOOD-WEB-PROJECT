@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 exports.addToCart = catchAsync(async (req, res, next) => {
   const { id } = req.user;
   const { product, quantity } = req.body;
+  console.log(req.user);
 
   // Check if the product already exists in the user's cart
   const existingCartItem = await Cart.findOne({ user: id, product });

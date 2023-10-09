@@ -49,15 +49,13 @@ exports.logIn = catchAsync(async (req, res, next) => {
   const token = generateToken(user._id);
   res.status(200).json({
     token,
-    data: {
-      id: user.id,
-    },
+    id: user.id,
   });
 });
 
 // protected route
 exports.protect = catchAsync(async (req, res, next) => {
-  console.log(req.file);
+  // console.log(req.file);
   //1)Getting token and check of it's there
   let token;
   if (
@@ -74,7 +72,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2)validate the token
   const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  // console.log(decode); // return jwt payload
+  console.log(decode); // return jwt payload
   // 3)check if user still exist
   const freshUser = await User.findById(decode.userId);
   if (!freshUser) {

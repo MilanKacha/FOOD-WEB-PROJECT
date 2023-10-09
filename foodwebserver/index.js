@@ -6,6 +6,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
+const path = require("path");
 const fileUpload = require("express-fileupload");
 const productRoute = require("./routes/productRoutes");
 const restorantRoute = require("./routes/restorantRoutes");
@@ -16,7 +17,17 @@ const orderRoute = require("./routes/orderRoute");
 //1) middlewares
 server.use(express.json()); // to parse req.body
 
-server.use(helmet()); //Set Security Http headers
+// server.use(helmet()); //Set Security Http headers
+// Use the Helmet middleware to set CSP headers
+server.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "res.cloudinary.com", "data:"],
+      // Add other directives as needed
+    },
+  })
+);
 
 // Limit req in 1 hour Same Id
 const limiter = rateLimit({
@@ -24,7 +35,7 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, //60 minutes in milisec
   message: "Too many requests from this IP, Please try again in an hour!",
 });
-// Apply the rate limiting middleware to all requests
+
 // Apply the rate limiting middleware to API calls only (/api)
 server.use("/api", limiter);
 
@@ -36,7 +47,7 @@ server.use(xss());
 server.use(hpp());
 // fileupload
 server.use(fileUpload({ useTempFiles: true }));
-
+server.use(express.static(path.join(__dirname, "./build")));
 server.use(
   cors({
     origin: true,
@@ -51,5 +62,21 @@ server.use("/api/v1/restorant", restorantRoute);
 server.use("/api/v1/users", userRoute);
 server.use("/api/v1/cart", cartRoute);
 server.use("/api/v1/order", orderRoute);
+
+// build
+// server.get("/", (req, res) => {
+//   // serve static file in build folder
+
+//   // server build folder
+//   res.sendFile(path.resolve(__dirname, "build"));
+// });
+
+server.get("/*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "./build/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 module.exports = server;
