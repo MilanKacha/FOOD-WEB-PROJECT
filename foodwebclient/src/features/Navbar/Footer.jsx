@@ -6,12 +6,12 @@ import {
   AiFillYoutube,
   AiFillFacebook,
 } from "react-icons/ai";
-import Googleplay from "../../assests/hero-getapp/googleplay.png";
-import AppStore from "../../assests/hero-getapp/appstore.png";
+
 import { Link } from "react-router-dom";
-import { BsLadder } from "react-icons/bs";
 
 const Footer = () => {
+  const GoogleStore = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696763080/herogetapp/googleplay_tuhh5a.png`;
+  const AppStore = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696763080/herogetapp/appstore_onoedn.png`;
   const FooterData = [
     {
       heading: "About Us",
@@ -80,7 +80,7 @@ const Footer = () => {
               </div>
               <div className="app-icon">
                 <Link to="https://play.google.com/store" className="app-link ">
-                  <img src={Googleplay} alt="" />
+                  <img src={GoogleStore} alt="" />
                 </Link>
                 <Link
                   to="https://www.apple.com/in/app-store/"

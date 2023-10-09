@@ -1,10 +1,9 @@
 import "../../style/herogetapp.css";
-import GetApp from "../../assests/hero-getapp/mobile.png";
-import GoogleStore from "../../assests/hero-getapp/googleplay.png";
-import AppStore from "../../assests/hero-getapp/appstore.png";
-import { Link, useNavigate } from "react-router-dom";
 
 const HeroGetApp = () => {
+  const GetApp = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696763081/herogetapp/mobile_os1vlm.png`;
+  const GoogleStore = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696763080/herogetapp/googleplay_tuhh5a.png`;
+  const AppStore = `https://res.cloudinary.com/dkaenszh3/image/upload/v1696763080/herogetapp/appstore_onoedn.png`;
   return (
     <div className="getapp-container">
       <div className="getapp-wrapper">

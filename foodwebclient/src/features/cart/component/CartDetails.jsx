@@ -1,5 +1,4 @@
 import "../../../style/cartdetails.css";
-import Mini from "../../../assests/fooditem/mini.avif";
 import Button from "../../../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,17 +8,11 @@ import {
   selectItems,
   updateCartAsync,
 } from "../cartSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { selectUserInfo } from "../../user/userSlice";
-import {
-  createOrderAsync,
-  fetchOrderByUserIdAsync,
-  selectOrders,
-} from "../../order/orderSlice";
-import ModalCommon from "../../../ui/ModalCommon";
-import { selectedAllProducts } from "../../delivery/RestorantSlice";
+import { createOrderAsync } from "../../order/orderSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);

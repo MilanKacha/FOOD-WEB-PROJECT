@@ -1,4 +1,3 @@
-import Biryani from "../../src/assests/hero-popular/biryani.avif";
 import "../../src/style/restorantcard.css";
 
 const RestorantCard = ({ props }) => {

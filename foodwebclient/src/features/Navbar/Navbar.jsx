@@ -8,8 +8,19 @@ import Login from "../auth/component/Login";
 import { PiBagBold } from "react-icons/pi";
 import { fetchItemsByUserIdAsync, selectItems } from "../cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import Loader from "../../ui/Loader";
 
 const Navbar = () => {
+  const [active, setActive] = useState("nav-menu-ul");
+  const [toggleIcon, setToggleIcon] = useState("nav_toggler");
+  // for modal open
+  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+
+  const [isLoading, setLoading] = useState(true);
+  const loading = useSelector((state) => state.cart.status);
+
   const userToken = useSelector(selectLoggedInUser);
   const cart = useSelector(selectItems); // for calculation od cart length
 
@@ -17,18 +28,29 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchItemsByUserIdAsync());
-  }, [dispatch]);
+    const token = Cookies.get("jwt") || null;
+    console.log(token);
+    if (!token) {
+      console.log("User is not logged in");
+    } else {
+      dispatch(fetchItemsByUserIdAsync())
+        .then((response) => {
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          setLoading(false);
+        });
+    }
+  }, [dispatch]); // Include dispatch as a dependency
+
+  // useEffect(() => {
+  //   dispatch(fetchItemsByUserIdAsync());
+  // }, [dispatch]);
 
   const handalLogOut = () => {
     dispatch(logOutAsync());
   };
-
-  const [active, setActive] = useState("nav-menu-ul");
-  const [toggleIcon, setToggleIcon] = useState("nav_toggler");
-  // for modal open
-  const [signUpOpen, setSignUpOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
 
   const navToggle = () => {
     active === "nav-menu-ul"
@@ -56,7 +78,7 @@ const Navbar = () => {
   };
 
   // const calculate cart item
-  const cartItem = cart.reduce((total, item) => {
+  const cartItem = cart?.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
 
@@ -88,15 +110,21 @@ const Navbar = () => {
                 <li onClick={() => handalLogOut()}>LogOut</li>
               )}
 
-              {userToken && (
-                <li>
-                  <span>
-                    <PiBagBold onClick={() => navigate("/cart")} />
-                    {cart.length > 0 && (
-                      <span className="cart-length">{cartItem}</span>
-                    )}
-                  </span>
-                </li>
+              {/* manage loading state in nav */}
+              {loading === "loading" || isLoading ? (
+                <Loader />
+              ) : (
+                userToken &&
+                loading === "idle" && (
+                  <li>
+                    <span>
+                      <PiBagBold onClick={() => navigate("/cart")} />
+                      {cart?.length > 0 && (
+                        <span className="cart-length">{cart.length}</span>
+                      )}
+                    </span>
+                  </li>
+                )
               )}
             </ul>
             <div onClick={navToggle} className={toggleIcon}>

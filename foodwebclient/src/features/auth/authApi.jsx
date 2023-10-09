@@ -41,7 +41,7 @@ export function logIn(logInInfo) {
 export function logOut() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8081/api/v1/users/logout");
+      const response = await fetch("/api/v1/users/logout");
       if (response.ok) {
         // If the server confirms the logout, remove the JWT token cookie
         Cookies.remove("jwt");

@@ -16,18 +16,46 @@ export function addToCart(item) {
   });
 }
 
-export function fetchItemsByUserId() {
-  return new Promise(async (resolve) => {
+// export function fetchItemsByUserId() {
+//   return new Promise(async (resolve) => {
+//     const token = Cookies.get("jwt") || null;
+//     const res = await fetch("http://localhost:8081/api/v1/cart", {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       withCredentials: true,
+//     });
+//     const data = await res.json();
+//     resolve({ data });
+//   });
+// }
+
+export async function fetchItemsByUserId() {
+  try {
     const token = Cookies.get("jwt") || null;
+    console.log(token);
+
+    if (!token) {
+      console.log("User is not logged in");
+    }
+
     const res = await fetch("http://localhost:8081/api/v1/cart", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      withCredentials: true,
+      credentials: "include", // Use 'include' to include cookies
     });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch cart items");
+    }
+
     const data = await res.json();
-    resolve({ data });
-  });
+    return { data };
+  } catch (error) {
+    // Handle errors gracefully
+    return { error: error.message };
+  }
 }
 
 export function deleteItemFromCart(itemId) {

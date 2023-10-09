@@ -16,11 +16,12 @@ const FoodItem = ({ product }) => {
   // ToDo when product fetch at this time user fetch repeatedly
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
+  console.log(user);
   const cartItems = useSelector(selectItems);
 
   const handeladdToCart = async () => {
     if (product) {
-      const existingCartItemIndex = cartItems.findIndex(
+      const existingCartItemIndex = cartItems?.findIndex(
         (item) => item.product === product._id
       );
 

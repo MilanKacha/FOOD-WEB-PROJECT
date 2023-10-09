@@ -3,10 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoggedInUser } from "./features/auth/authSlice";
-import { useEffect } from "react";
+import { logInUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
+import { useEffect, useState } from "react";
 
-import { fetchLoggedInUserAsync } from "./features/user/userSlice";
+import {
+  fetchLoggedInUserAsync,
+  selectUserInfo,
+} from "./features/user/userSlice";
 
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 
@@ -26,14 +29,26 @@ import "react-toastify/dist/ReactToastify.css";
 import MyOrders from "./features/order/component/MyOrders";
 import MyOrderPage from "./pages/MyOrderPage";
 import Navbar from "./features/Navbar/Navbar";
+import Loader from "./ui/Loader";
+import ErrorPage from "./ui/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
+  console.log(user);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync());
+      dispatch(logInUserAsync());
       dispatch(fetchItemsByUserIdAsync());
     }
     dispatch(fetchAllProductAsync());
@@ -101,24 +116,34 @@ function App() {
             </Protected>
           ),
         },
+        {
+          path: "*",
+          element: <ErrorPage />,
+        },
       ],
     },
   ]);
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <RouterProvider router={router}></RouterProvider>;
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <RouterProvider router={router}></RouterProvider>
+        </>
+      )}
     </>
   );
 }

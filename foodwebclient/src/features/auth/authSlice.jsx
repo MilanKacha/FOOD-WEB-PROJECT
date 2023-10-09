@@ -6,7 +6,6 @@ const initialState = {
   loggedInUserToken: Cookies.get("jwt") || null,
   status: "idle",
   error: null,
-  // jyare token save thay pa6igame te link manually no kule
   user: [],
 };
 

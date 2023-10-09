@@ -1,63 +1,43 @@
 import React, { useEffect, useState } from "react";
-import HeroSlider from "./HeroSlider";
 import "../../style/home.css";
-import Navbar from "../Navbar/Navbar";
 import HeroChoice from "./HeroChoice";
-import OrderOnline from "../../assests/hero-choice/online.webp";
-import Dining from "../../assests/hero-choice/dining.avif";
-import Club from "../../assests/hero-choice/club.jpg";
 import HeroLocation from "./HeroLocation";
 import Button from "../../ui/Button";
 import HeroDeal from "./HeroDeal";
-
 import Herofaq from "./Herofaq";
-
 import HeroGetApp from "./HeroGetApp";
-import Biriyani from "../../assests/hero-popular/biryani.avif";
-import BurgurP from "../../assests/hero-popular/BurgurMan.avif";
-import Cack from "../../assests/hero-popular/cack.avif";
-import Dosa from "../../assests/hero-popular/dosa.avif";
-import Idali from "../../assests/hero-popular/idali.avif";
-import Paratha from "../../assests/hero-popular/Paratha.avif";
-import Pizza from "../../assests/hero-popular/Pizza.avif";
-import SandWhich from "../../assests/hero-popular/sandwhich.avif";
-import Tanduri from "../../assests/hero-popular/Tanduri.avif";
-import Vada from "../../assests/hero-popular/vada.avif";
 import SliderComponent from "../../ui/SliderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllProductAsync,
-  fetchAllProductsByRestorantIdAsync,
   fetchAllRestorantAsync,
   selectAllRestorants,
   selectedAllProducts,
 } from "../delivery/RestorantSlice";
 import HeroSection from "./HeroSection";
-import { fetchAllRestorant } from "../delivery/RestorantApi";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../Navbar/Footer";
 import { toast } from "react-toastify";
-
 import { selectLoggedInUser } from "../auth/authSlice";
 
 const HeroChoiceData = [
   {
     id: 1,
-    img: OrderOnline,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696762617/herochoice/online_ap4x6n.webp`,
     heading: "Order Online",
     description: "Stay home and order to your doorstep",
     subCategory: "orderonline",
   },
   {
     id: 2,
-    img: Dining,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696762616/herochoice/dining_fbfqwd.avif`,
     heading: "Dining",
     description: "View the city's favourite dining venues",
     subCategory: "Dining",
   },
   {
     id: 3,
-    img: Club,
+    img: `https://res.cloudinary.com/dkaenszh3/image/upload/v1696762607/herochoice/club_lr1bfa.jpg`,
     heading: "Nightlife and Clubs",
     description: "Explore the city’s top nightlife outlets",
     subCategory: "nightlife",

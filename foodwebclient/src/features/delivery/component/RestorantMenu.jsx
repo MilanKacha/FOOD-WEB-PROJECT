@@ -1,6 +1,5 @@
 import "../../../style/restorantmenu.css";
 import FoodItem from "../../../ui/FoodItem";
-import Mini from "../../../assests/fooditem/mini.avif";
 import { useState } from "react";
 import Button from "../../../ui/Button";
 

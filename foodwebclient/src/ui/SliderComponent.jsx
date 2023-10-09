@@ -15,7 +15,6 @@ import {
   selectItems,
   updateCartAsync,
 } from "../features/cart/cartSlice";
-import { useNavigate } from "react-router-dom";
 
 const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   const sliderRef = useRef(null);
@@ -158,7 +157,7 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
                     )
                   </h3>
                   <Button onClick={() => handeladdToCart(slide, user)}>
-                    {slide.button ? `${slide.button}` : "Order Now"}
+                    {slide.button ? `${slide.button}` : "Add To Cart"}
                   </Button>
                 </div>
               </div>

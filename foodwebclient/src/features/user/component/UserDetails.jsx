@@ -13,10 +13,6 @@ const UserDetails = () => {
   const user = useSelector(selectUserInfo);
   // console.log(user);
 
-  if (!user) {
-    // Render loading state or handle the absence of user data
-    return <div>Loading...</div>;
-  }
   const openModal = () => {
     setUpdateformOpen(true);
   };
