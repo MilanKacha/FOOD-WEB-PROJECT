@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const res = await fetch("http://localhost:8081/api/v1/users/signup", {
+    const res = await fetch("/api/v1/users/signup", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
@@ -19,7 +19,7 @@ export function createUser(userData) {
 export function logIn(logInInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8081/api/v1/users/login", {
+      const response = await fetch("/api/v1/users/login", {
         method: "POST",
         body: JSON.stringify(logInInfo),
         headers: { "content-type": "application/json" },
@@ -42,7 +42,7 @@ export function logIn(logInInfo) {
 export function logOut() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8081/api/v1/users/logout");
+      const response = await fetch("/api/v1/users/logout");
       if (response.ok) {
         // If the server confirms the logout, remove the JWT token cookie
         Cookies.remove("jwt");

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 export function addToCart(item) {
   return new Promise(async (resolve) => {
     const token = Cookies.get("jwt") || localStorage.getItem("jwt");
-    const res = await fetch("http://localhost:8081/api/v1/cart", {
+    const res = await fetch("/api/v1/cart", {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
@@ -20,7 +20,7 @@ export async function fetchItemsByUserId() {
   try {
     const token = Cookies.get("jwt") || localStorage.getItem("jwt");
 
-    const res = await fetch("http://localhost:8081/api/v1/cart", {
+    const res = await fetch("/api/v1/cart", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -46,7 +46,7 @@ export function deleteItemFromCart(itemId) {
   }
 
   return new Promise(async (resolve) => {
-    const res = await fetch("http://localhost:8081/api/v1/cart/" + itemId, {
+    const res = await fetch("/api/v1/cart/" + itemId, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });
@@ -59,7 +59,7 @@ export function deleteItemFromCart(itemId) {
 export async function resetCart() {
   return new Promise(async (resolve) => {
     const token = Cookies.get("jwt") || localStorage.getItem("jwt");
-    const res = await fetch("http://localhost:8081/api/v1/cart", {
+    const res = await fetch("/api/v1/cart", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ export async function resetCart() {
 
 export function updateCart(update) {
   return new Promise(async (resolve) => {
-    const res = await fetch("http://localhost:8081/api/v1/cart/" + update.id, {
+    const res = await fetch("/api/v1/cart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: {

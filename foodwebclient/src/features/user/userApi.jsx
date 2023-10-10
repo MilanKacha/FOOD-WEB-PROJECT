@@ -5,7 +5,7 @@ export function fetchLoggedInUser() {
     try {
       const token = Cookies.get("jwt") || localStorage.getItem("jwt");
 
-      const res = await fetch("http://localhost:8081/api/v1/users/me", {
+      const res = await fetch("/api/v1/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -27,7 +27,7 @@ export function fetchLoggedInUser() {
 export function updateUser(update) {
   return new Promise(async (resolve) => {
     const token = Cookies.get("jwt") || localStorage.getItem("jwt");
-    const res = await fetch("http://localhost:8081/api/v1/users/updateMe", {
+    const res = await fetch("/api/v1/users/updateMe", {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: {
