@@ -9,7 +9,7 @@ const MyOrders = () => {
   useEffect(() => {
     dispatch(fetchOrderByUserIdAsync());
   }, [dispatch]);
-  console.log(orders);
+  // console.log(orders);
   return (
     <>
       <div className="order-wrapper">

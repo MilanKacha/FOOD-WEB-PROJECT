@@ -1,17 +1,21 @@
 import "../../../style/userdetails.css";
 
 import Button from "../../../ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalCommon from "../../../ui/ModalCommon";
 import UserDetailsUpdateForm from "./UserDetailsUpdateForm";
-import { useSelector } from "react-redux";
-import { selectUserInfo } from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLoggedInUserAsync, selectUserInfo } from "../userSlice";
 
 const UserDetails = () => {
   const [updateformOpen, setUpdateformOpen] = useState(false);
 
   const user = useSelector(selectUserInfo);
-  // console.log(user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchLoggedInUserAsync();
+  }, [dispatch]);
+  console.log(user);
 
   const openModal = () => {
     setUpdateformOpen(true);

@@ -121,7 +121,7 @@ const CartDetails = () => {
           {
             <div className="cartitem-subtotal">
               <div style={{ color: "black" }} className="subtotal">
-                SubTotal({totalItem} items): {totalAmount}
+                SubTotal({totalItem} items): {totalAmount.toFixed(2)}
               </div>
             </div>
           }

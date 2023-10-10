@@ -36,6 +36,7 @@ export async function fetchItemsByUserId() {
     console.log(token);
 
     if (!token) {
+      // throw new Error("User is not logged in");
       console.log("User is not logged in");
     }
 
@@ -78,7 +79,7 @@ export function deleteItemFromCart(itemId) {
 export async function resetCart() {
   return new Promise(async (resolve) => {
     const token = Cookies.get("jwt") || null;
-    const res = await fetch("http://localhost:8081/api/v1/cart", {
+    const res = await fetch("/api/v1/cart", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

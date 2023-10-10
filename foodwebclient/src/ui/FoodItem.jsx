@@ -8,16 +8,37 @@ import {
   selectItems,
   updateCartAsync,
 } from "../features/cart/cartSlice";
-import { selectUserInfo } from "../features/user/userSlice";
-import { useEffect } from "react";
+import {
+  fetchLoggedInUserAsync,
+  selectUserInfo,
+} from "../features/user/userSlice";
+import { useEffect, useState } from "react";
 import { fetchItemsByUserId } from "../features/cart/cartApi";
+import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 const FoodItem = ({ product }) => {
-  // ToDo when product fetch at this time user fetch repeatedly
+  // for loading user
+  const loading = useSelector((state) => state.user.status);
+  const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
-  console.log(user);
+  useEffect(() => {
+    dispatch(fetchLoggedInUserAsync())
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []);
+
   const cartItems = useSelector(selectItems);
+
+  const handlePopUp = () => {
+    toast.success("Item added to cart successfully");
+  };
 
   const handeladdToCart = async () => {
     if (product) {
@@ -46,7 +67,9 @@ const FoodItem = ({ product }) => {
           quantity: 1,
           user: user._id,
         };
-        await dispatch(addToCartAsync(newItem)); // Dispatch the action to add to cart
+        await dispatch(addToCartAsync(newItem)).then(() => {
+          handlePopUp();
+        }); // Dispatch the action to add to cart
         // After successfully adding to the cart, you can fetch the updated cart
         dispatch(fetchItemsByUserIdAsync());
       }
@@ -77,13 +100,22 @@ const FoodItem = ({ product }) => {
             <span className="food-quantity">
               2 Mini Masala Dosa+1 Khara Bath+1 Vada+1 Gulab Jamun
             </span>
-            <div className="food-button">
-              <Button className="primary addtocart" onClick={handeladdToCart}>
-                Add To Cart
-              </Button>
+            {loading === "loading" || isLoading ? (
+              <Loader />
+            ) : (
+              loading === "idle" && (
+                <div className="food-button">
+                  <Button
+                    className="primary addtocart"
+                    onClick={handeladdToCart}
+                  >
+                    Add To Cart
+                  </Button>
 
-              <Button onClick={handeladdToCart}>Order Now</Button>
-            </div>
+                  <Button onClick={handeladdToCart}>Order Now</Button>
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>

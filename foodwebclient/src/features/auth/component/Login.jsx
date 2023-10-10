@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUserAsync, selectLoggedInUser } from "../authSlice";
 import Button from "../../../ui/Button";
+import Loader from "../../../ui/Loader";
 
 const initialState = {
   email: "",

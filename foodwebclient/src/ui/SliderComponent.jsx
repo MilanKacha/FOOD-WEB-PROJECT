@@ -15,6 +15,7 @@ import {
   selectItems,
   updateCartAsync,
 } from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   const sliderRef = useRef(null);
@@ -71,6 +72,10 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
   const cartItems = useSelector(selectItems);
   const dispatch = useDispatch();
 
+  const handlePopUp = () => {
+    toast.success("Item added to cart successfully");
+  };
+
   const handeladdToCart = async (product, user) => {
     if (user) {
       if (product) {
@@ -102,7 +107,9 @@ const SliderComponent = ({ heading, data, handleOrderNowClick }) => {
             quantity: 1,
             user: user._id,
           };
-          await dispatch(addToCartAsync(newItem)); // Dispatch the action to add to cart
+          await dispatch(addToCartAsync(newItem)).then(() => {
+            handlePopUp();
+          }); // Dispatch the action to add to cart
           // After successfully adding, fetch the updated cart
           dispatch(fetchItemsByUserIdAsync());
         }

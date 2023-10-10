@@ -1,22 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import "./App.css";
-
 import { useDispatch, useSelector } from "react-redux";
 import { logInUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
 import { useEffect, useState } from "react";
-
-import {
-  fetchLoggedInUserAsync,
-  selectUserInfo,
-} from "./features/user/userSlice";
-
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
-
 import { fetchAllProductAsync } from "./features/delivery/RestorantSlice";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
-
 import CartPage from "./pages/CartPage";
 import CheckOutPage from "./pages/CheckOutPage";
 import LayOut from "./ui/LayOut";
@@ -26,24 +17,14 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import Protected from "./features/auth/component/Protected";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MyOrders from "./features/order/component/MyOrders";
 import MyOrderPage from "./pages/MyOrderPage";
-import Navbar from "./features/Navbar/Navbar";
 import Loader from "./ui/Loader";
 import ErrorPage from "./ui/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
-  console.log(user);
+  const user = useSelector(selectLoggedInUser);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
 
   useEffect(() => {
     if (user) {
@@ -52,7 +33,14 @@ function App() {
       dispatch(fetchItemsByUserIdAsync());
     }
     dispatch(fetchAllProductAsync());
-  }, [dispatch]);
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
 
   const router = createBrowserRouter([
     {
