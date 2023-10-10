@@ -7,7 +7,7 @@ router
   .route("/")
   .get(restorantController.getAllRestorant)
   .post(async (req, res) => {
-    console.log(req.files); // Log the entire files object
+    // console.log(req.files); // Log the entire files object
     try {
       // Call your controller function here
       await restorantController.createRestorant(req, res);

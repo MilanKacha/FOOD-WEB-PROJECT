@@ -10,7 +10,6 @@ const initialState = {
   products: [],
   restorants: [],
   status: "idle",
-
   selectedRestaurant: [],
   productsByRestorantId: [],
 };

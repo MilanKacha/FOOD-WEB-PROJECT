@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createOrder, fetchOrderByUserId } from "./orderApi";
-import Cookies from "js-cookie";
 
 const initialState = {
   orders: [],
@@ -51,9 +50,6 @@ export const orderSlice = createSlice({
       });
   },
 });
-
-// export const { resetOrder } = orderSlice.actions;
-//direct thunk vagar dispatch thay
 
 export const selectCurrentOrder = (state) => state.order.currentOrder;
 export const selectOrders = (state) => state.order.orders;

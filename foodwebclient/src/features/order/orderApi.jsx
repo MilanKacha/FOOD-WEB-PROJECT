@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export function createOrder(order) {
   return new Promise(async (resolve) => {
-    const res = await fetch("/api/v1/order", {
+    const res = await fetch("http://localhost:8081/api/v1/order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
@@ -14,8 +14,8 @@ export function createOrder(order) {
 
 export function fetchOrderByUserId() {
   return new Promise(async (resolve) => {
-    const token = Cookies.get("jwt") || null;
-    const res = await fetch("/api/v1/order", {
+    const token = Cookies.get("jwt") || localStorage.getItem("jwt");
+    const res = await fetch("http://localhost:8081/api/v1/order", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

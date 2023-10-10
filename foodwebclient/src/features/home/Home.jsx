@@ -85,11 +85,11 @@ const Home = () => {
 
   // for PopularSweet filter data
   const PopularSweet = product?.data?.filter((item) => item.popularSweet);
-  console.log(PopularSweet);
+  // console.log(PopularSweet);
 
   // for PopularItemfilter data
   const PopularItem = product?.data?.filter((item) => item.popularItems);
-  console.log(PopularItem);
+  // console.log(PopularItem);
 
   const data = restaurants.filter((item) => item.isHome);
 

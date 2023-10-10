@@ -40,7 +40,7 @@ const SingUp = ({ closeModal }) => {
       .catch((error) => {
         console.error("Signup failed:", error);
       });
-    // console.log(signUpData);
+
     dispatched({ type: "RESET_FORM" });
   };
 
@@ -59,7 +59,6 @@ const SingUp = ({ closeModal }) => {
             value={signUpData.email}
             onChange={(e) => handelInputChange("email", e.target.value)}
           />
-          {/* {errors.email && <span className="error">{errors.email}</span>} */}
         </div>
         <div>
           <label>Password:</label>

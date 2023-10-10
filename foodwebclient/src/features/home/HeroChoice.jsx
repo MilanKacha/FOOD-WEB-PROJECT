@@ -2,7 +2,6 @@ import "../../style/herochoice.css";
 import Button from "../../ui/Button";
 
 const HeroChoice = ({ data, handleClickError }) => {
-  // const { img, heading, description } = props.data;
   return (
     <div>
       <div className="choice-card-wrapper">

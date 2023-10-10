@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 export function fetchLoggedInUser() {
   return new Promise(async (resolve, reject) => {
     try {
-      const token = Cookies.get("jwt");
+      const token = Cookies.get("jwt") || localStorage.getItem("jwt");
 
       const res = await fetch("http://localhost:8081/api/v1/users/me", {
         headers: {
@@ -26,7 +26,7 @@ export function fetchLoggedInUser() {
 
 export function updateUser(update) {
   return new Promise(async (resolve) => {
-    const token = Cookies.get("jwt") || null;
+    const token = Cookies.get("jwt") || localStorage.getItem("jwt");
     const res = await fetch("http://localhost:8081/api/v1/users/updateMe", {
       method: "PATCH",
       body: JSON.stringify(update),

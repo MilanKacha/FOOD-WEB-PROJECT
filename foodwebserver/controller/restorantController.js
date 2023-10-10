@@ -5,7 +5,7 @@ const cloudinary = require("../utils/cloudinaryConfig");
 
 exports.getAllRestorant = catchAsync(async (req, res, next) => {
   const subcategory = req.query.subcategory;
-  console.log(subcategory);
+  // console.log(subcategory);
 
   if (subcategory) {
     // If the subcategory query parameter is provided, filter the data based on it

@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import "../../src/style/fooditem.css";
 import Button from "./Button";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +12,6 @@ import {
   selectUserInfo,
 } from "../features/user/userSlice";
 import { useEffect, useState } from "react";
-import { fetchItemsByUserId } from "../features/cart/cartApi";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
 
@@ -89,7 +87,6 @@ const FoodItem = ({ product }) => {
           </div>
           <div className="food-content">
             <h3 style={{ color: "black" }}>
-              {/* {item.foodtitle} */}
               <span className="food-rating">{product.itemname}</span>
             </h3>
             <span className="food-rating ">

@@ -3,7 +3,7 @@ import { createUser, logOut, logIn } from "./authApi";
 import Cookies from "js-cookie";
 
 const initialState = {
-  loggedInUserToken: Cookies.get("jwt"),
+  loggedInUserToken: Cookies.get("jwt") || localStorage.getItem("jwt"),
   status: "idle",
   error: null,
   user: [],
@@ -53,18 +53,18 @@ export const authSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUserToken = action.payload;
-        console.log(action.payload);
-        Cookies.set("jwt", action.payload.token);
+        state.loggedInUserToken = action.payload.token;
+        state.user = action.payload;
+        localStorage.setItem("jwt", action.payload.token);
       })
       .addCase(logInUserAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(logInUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUserToken = action.payload;
+        state.loggedInUserToken = action.payload.token;
         state.user = action.payload;
-        Cookies.set("jwt", action.payload.token);
+        localStorage.setItem("jwt", action.payload.token);
       })
       .addCase(logInUserAsync.rejected, (state, action) => {
         state.status = "error";

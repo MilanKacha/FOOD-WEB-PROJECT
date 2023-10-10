@@ -1,14 +1,11 @@
 import "../../../style/ordercheckout.css";
 import CartDetails from "../../cart/component/CartDetails";
 import UserDetailsUpdateForm from "../../user/component/UserDetailsUpdateForm";
-import UserDetails from "../../user/component/UserDetails";
 import { useSelector } from "react-redux";
 import { selectUserInfo } from "../../user/userSlice";
-import { useEffect } from "react";
 
 const OrderCheckOut = () => {
   const user = useSelector(selectUserInfo);
-  console.log(user);
 
   return (
     <div className="ordercheckout-container">

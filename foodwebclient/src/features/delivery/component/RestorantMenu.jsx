@@ -11,7 +11,6 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
   const filterProductByRestaurantShowInMenu = showVegOnly
     ? ProductsByrestaurant.filter((item) => item.isVegetarian)
     : ProductsByrestaurant;
-  // console.log(ProductsByrestaurant);
 
   const filterProductByRestaurantId = ProductsByrestaurant?.filter(
     (product) => {
@@ -90,7 +89,6 @@ const RestorantMenu = ({ ProductsByrestaurant }) => {
         </div>
       </div>
       <div className="restorant-menu">
-        {/* {console.log(filterProductByRestaurantId)} */}
         {filterProductByRestaurantId.map((product, index) => (
           <FoodItem key={index} product={product} />
         ))}

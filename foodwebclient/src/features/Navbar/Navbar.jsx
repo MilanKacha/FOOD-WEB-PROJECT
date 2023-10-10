@@ -42,10 +42,6 @@ const Navbar = () => {
       : setToggleIcon("nav_toggler");
   };
 
-  // const openModalSignUp = () => {
-  //   setSignUpOpen(true);
-  // };
-
   const openModalSignUp = () => {
     setSignUpOpen(true);
     // Close the navbar on small devices

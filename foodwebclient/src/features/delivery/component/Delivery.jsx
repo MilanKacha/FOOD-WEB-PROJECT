@@ -10,7 +10,6 @@ const Delivery = () => {
   // get data of restaurant
   const restaurantData = useSelector(selectAllRestorants);
   const dispatch = useDispatch();
-  // console.log(restaurantData);
 
   // for home page data (choise)
   const location = useLocation();

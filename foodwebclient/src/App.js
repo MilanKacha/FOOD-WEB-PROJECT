@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUserAsync, selectLoggedInUser } from "./features/auth/authSlice";
 import { useEffect, useState } from "react";
@@ -23,17 +22,9 @@ import ErrorPage from "./ui/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(fetchLoggedInUserAsync());
-      dispatch(logInUserAsync());
-      dispatch(fetchItemsByUserIdAsync());
-    }
-    dispatch(fetchAllProductAsync());
-  }, [dispatch, user]);
+  const user = useSelector(selectLoggedInUser);
+  // console.log(user);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,6 +32,15 @@ function App() {
       setIsLoading(false);
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(logInUserAsync());
+      dispatch(fetchLoggedInUserAsync());
+      dispatch(fetchItemsByUserIdAsync());
+    }
+    dispatch(fetchAllProductAsync());
+  }, [dispatch, user]);
 
   const router = createBrowserRouter([
     {

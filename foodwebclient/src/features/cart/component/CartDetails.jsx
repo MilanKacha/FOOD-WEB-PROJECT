@@ -16,15 +16,11 @@ import { createOrderAsync } from "../../order/orderSlice";
 
 const CartDetails = () => {
   const cartByUserId = useSelector(selectItems);
-  console.log(cartByUserId);
 
-  // console.log(cartByUserId.length);
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const location = useLocation();
-  // const product = useSelector(selectedAllProducts);
 
-  // console.log(location.pathname);
   useEffect(() => {
     dispatch(fetchItemsByUserIdAsync());
   }, [dispatch]);
@@ -53,8 +49,6 @@ const CartDetails = () => {
     dispatch(deleteItemFromCartAsync(id));
   };
 
-  // console.log(cartByUserId);
-
   const handelOrder = async () => {
     const order = {
       product: cartByUserId,
@@ -67,7 +61,6 @@ const CartDetails = () => {
     await dispatch(resetCartAsync());
   };
 
-  // console.log(totalAmount);
   return (
     <>
       <div className="cart-wrapper">

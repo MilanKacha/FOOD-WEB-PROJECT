@@ -15,7 +15,6 @@ const UserDetails = () => {
   useEffect(() => {
     fetchLoggedInUserAsync();
   }, [dispatch]);
-  console.log(user);
 
   const openModal = () => {
     setUpdateformOpen(true);

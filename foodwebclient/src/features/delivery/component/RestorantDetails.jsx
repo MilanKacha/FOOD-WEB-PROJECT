@@ -24,7 +24,7 @@ const RestorantDetails = () => {
 
   // fetch restaurant by Id
   const RestaurantById = useSelector(selectRestaurantById);
-  // console.log(RestaurantById);
+
   useEffect(() => {
     dispatch(fetchRestaurantByIdAsync(params.id));
   }, [dispatch, params.id]);

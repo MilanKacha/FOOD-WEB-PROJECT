@@ -10,7 +10,7 @@ const OrderSuccess = () => {
   const currentOrder =
     useSelector(selectCurrentOrder) ||
     JSON.parse(localStorage.getItem("currentOrder"));
-  console.log(currentOrder);
+
   const goToHomePage = () => {
     navigate("/");
   };

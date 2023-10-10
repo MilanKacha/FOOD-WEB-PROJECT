@@ -5,7 +5,7 @@ dotenv.config();
 
 // listen server
 server.listen(process.env.PORT, () => {
-  console.log("server started successfully");
+  console.log(`server started successfully`);
 });
 // connect mongoose
 main().catch((err) => console.log(err));

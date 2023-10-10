@@ -9,7 +9,8 @@ export function createUser(userData) {
     });
     const data = await res.json();
     // Set the JWT token in the cookie
-    Cookies.set("jwt", data.token);
+    // console.log(data);
+    Cookies.set("jwt", data.token, { secure: true });
     resolve({ data });
   });
 }
@@ -45,6 +46,8 @@ export function logOut() {
       if (response.ok) {
         // If the server confirms the logout, remove the JWT token cookie
         Cookies.remove("jwt");
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("currentOrder");
         resolve({ data: "success" });
       } else {
         const error = await response.text();

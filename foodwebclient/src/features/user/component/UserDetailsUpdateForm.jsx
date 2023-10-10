@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import "../../../style/userdetailsupdateform.css";
 import Button from "../../../ui/Button";
 import { State } from "country-state-city";
@@ -36,7 +36,7 @@ const UserDetailsUpdateForm = ({ closeModal }) => {
   const user = useSelector(selectUserInfo);
   const userUpdateFormdispatch = useDispatch();
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
   const handelInputChange = (field, value) => {
     dispatch({ type: "UPDATE_FIELD", field, value });

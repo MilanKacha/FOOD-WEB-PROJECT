@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export function addToCart(item) {
   return new Promise(async (resolve) => {
-    const token = Cookies.get("jwt") || null;
+    const token = Cookies.get("jwt") || localStorage.getItem("jwt");
     const res = await fetch("http://localhost:8081/api/v1/cart", {
       method: "POST",
       body: JSON.stringify(item),
@@ -16,29 +16,9 @@ export function addToCart(item) {
   });
 }
 
-// export function fetchItemsByUserId() {
-//   return new Promise(async (resolve) => {
-//     const token = Cookies.get("jwt") || null;
-//     const res = await fetch("http://localhost:8081/api/v1/cart", {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//       withCredentials: true,
-//     });
-//     const data = await res.json();
-//     resolve({ data });
-//   });
-// }
-
 export async function fetchItemsByUserId() {
   try {
-    const token = Cookies.get("jwt") || null;
-    console.log(token);
-
-    if (!token) {
-      // throw new Error("User is not logged in");
-      console.log("User is not logged in");
-    }
+    const token = Cookies.get("jwt") || localStorage.getItem("jwt");
 
     const res = await fetch("http://localhost:8081/api/v1/cart", {
       headers: {
@@ -78,8 +58,8 @@ export function deleteItemFromCart(itemId) {
 
 export async function resetCart() {
   return new Promise(async (resolve) => {
-    const token = Cookies.get("jwt") || null;
-    const res = await fetch("/api/v1/cart", {
+    const token = Cookies.get("jwt") || localStorage.getItem("jwt");
+    const res = await fetch("http://localhost:8081/api/v1/cart", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -99,13 +79,11 @@ export async function resetCart() {
 
 export function updateCart(update) {
   return new Promise(async (resolve) => {
-    // const token = Cookies.get("jwt") || null;
     const res = await fetch("http://localhost:8081/api/v1/cart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: {
         "content-type": "application/json",
-        // Authorization: `Bearer ${token}`,
       },
     });
     const data = await res.json();
