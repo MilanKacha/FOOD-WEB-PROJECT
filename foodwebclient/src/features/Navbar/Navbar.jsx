@@ -79,28 +79,41 @@ const Navbar = () => {
             <ul className={active}>
               <li>
                 {userToken && (
-                  <span onClick={() => navigate("/myorder")}>My Orders</span>
+                  <span
+                    className="nav-span"
+                    onClick={() => navigate("/myorder")}
+                  >
+                    My Orders
+                  </span>
                 )}
               </li>
               <li>
                 {userToken && (
-                  <span onClick={() => navigate("/user")}>My Profile</span>
+                  <span className="nav-span" onClick={() => navigate("/user")}>
+                    My Profile
+                  </span>
                 )}
               </li>
               {!userToken && (
                 <li>
-                  <span onClick={openModalSignUp}>Sign up</span>
+                  <span className="nav-span" onClick={openModalSignUp}>
+                    Sign up
+                  </span>
                 </li>
               )}
               {!userToken ? (
-                <li onClick={openModalLogin}>Log in</li>
+                <li className="nav-span" onClick={openModalLogin}>
+                  Log in
+                </li>
               ) : (
-                <li onClick={() => handalLogOut()}>Logout</li>
+                <li className="nav-span" onClick={() => handalLogOut()}>
+                  Logout
+                </li>
               )}
 
               {userToken && (
                 <li>
-                  <span>
+                  <span className="nav-span">
                     <PiBagBold onClick={() => navigate("/cart")} />
                     {cart?.length > 0 && (
                       <span className="cart-length">{cartItem}</span>

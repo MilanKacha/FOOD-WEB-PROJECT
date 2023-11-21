@@ -39,6 +39,9 @@
   cursor: pointer;
   display: none;
 }
+.nav-span {
+  cursor: pointer;
+}
 
 .cart-length {
   background-color: #ff5722;
